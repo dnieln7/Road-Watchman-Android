@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".ui.reportes.Reportes">
 
     <Space
         android:layout_width="wrap_content"
@@ -21,16 +18,12 @@
         android:src="@drawable/background_icon"
         android:tint="@android:color/darker_gray" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="+ Nuevo reporte"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="15sp" />
+        android:visibility="invisible"/>
+
+    <include layout="@layout/reportes_new" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
