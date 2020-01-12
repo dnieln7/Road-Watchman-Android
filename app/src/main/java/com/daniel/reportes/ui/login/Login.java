@@ -44,12 +44,16 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view) {
-
-    }
-
-    public void loginFake(View view) {
         Intent intent = new Intent(getBaseContext(), Reportes.class);
 
         startActivity(intent);
+    }
+
+    public void forgotPassword(View view) {
+
+    }
+
+    public void goToSignUp(View view) {
+
     }
 }

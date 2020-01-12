@@ -5,17 +5,6 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textColor="@android:color/black"
-        android:textSize="40sp" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="30dp" />
-
     <EditText
         android:id="@+id/usernameIn"
         android:layout_width="wrap_content"
@@ -40,7 +29,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="20dp" />
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,21 +38,30 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/login"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:onClick="login"
-            android:text="Ingresar" />
+            android:text="Ingresar"
+            android:textColor="@color/colorPrimary" />
 
         <Button
-            android:id="@+id/signUp"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:background="@color/colorPrimary"
             android:onClick="loginFake"
-            android:text="Invitado" />
+            android:text="Registro"
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Olvidé mi contraseña"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
