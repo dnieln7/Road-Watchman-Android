@@ -50,18 +50,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:onClick="loginFake"
+            android:onClick="goToSignUp"
             android:text="Registro"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="5dp" />
+        android:layout_height="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olvidé mi contraseña"/>
+        android:text="Olvidé mi contraseña"
+        android:onClick="forgotPassword"/>
+
+    <FrameLayout
+        android:id="@+id/forgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

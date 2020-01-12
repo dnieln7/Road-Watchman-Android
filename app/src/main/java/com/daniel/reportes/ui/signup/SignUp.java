@@ -14,8 +14,6 @@ public class SignUp extends AppCompatActivity {
     // Objects
 
     // Widgets
-    EditText usernameIn;
-    EditText passwordIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +30,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void initWidgets() {
-        usernameIn = findViewById(R.id.usernameIn);
-        passwordIn = findViewById(R.id.passwordIn);
+
     }
 
     private void initListeners() {
