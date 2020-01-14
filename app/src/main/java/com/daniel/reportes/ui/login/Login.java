@@ -23,10 +23,6 @@ import com.google.android.gms.tasks.Task;
 
 public class Login extends AppCompatActivity {
 
-    // Var
-
-    // Objects
-
     // Widgets
     EditText emailIn;
     EditText passwordIn;
@@ -56,7 +52,8 @@ public class Login extends AppCompatActivity {
                 );
 
                 login(user);
-            } catch (ApiException e) {
+            }
+            catch (ApiException e) {
                 Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
             }
         }
@@ -73,7 +70,7 @@ public class Login extends AppCompatActivity {
         User user = null;
 
 
-        if(user != null && !token.equals("")) {
+        if (user != null && !token.equals("")) {
             Intent intent = new Intent(getBaseContext(), Reportes.class);
 
             intent.putExtra("user", user);
@@ -115,7 +112,7 @@ public class Login extends AppCompatActivity {
                     account.getEmail(),
                     account.getId(),
                     "user"
-                    );
+            );
 
             login(user);
         }

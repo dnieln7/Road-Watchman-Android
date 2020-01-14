@@ -41,7 +41,7 @@ public class ResetPassword extends Fragment {
     }
 
     private void reset() {
-        if(code.getText().toString().trim().equals("")) {
+        if (code.getText().toString().trim().equals("")) {
             code.setError("Requerido!");
         }
         else {
