@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
-        android:hint="Usuario"
+        android:hint="Email"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -41,7 +41,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="login"
+            android:onClick="loginWithEmail"
             android:text="Ingresar"
             android:textColor="@color/colorPrimary" />
 
@@ -50,8 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:onClick="goToSignUp"
-            android:text="Registro"
+            android:drawableStart="@drawable/google_logo"
+            android:drawableTint="@color/colorPrimary"
+            android:onClick="loginWithGoogle"
+            android:text="  Ingresar"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
@@ -62,13 +64,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olvidé mi contraseña"
-        android:onClick="forgotPassword"/>
+        android:onClick="goToSignUp"
+        android:text="Registrarse" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="forgotPassword"
+        android:text="Olvidé mi contraseña" />
 
     <FrameLayout
         android:id="@+id/forgotPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
+        android:layout_height="wrap_content"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
