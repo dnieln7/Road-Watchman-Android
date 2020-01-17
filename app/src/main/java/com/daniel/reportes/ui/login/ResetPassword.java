@@ -15,10 +15,17 @@ public class ResetPassword extends Fragment {
 
     private View root;
 
+    //Var
+    private String code;
+
     // Widgets
-    private EditText code;
+    private EditText codeIn;
 
     private Button restore;
+
+    public ResetPassword(String code) {
+        this.code = code;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,9 +38,9 @@ public class ResetPassword extends Fragment {
     }
 
     private void initWidgets() {
-        code = root.findViewById(R.id.restoreCode);
+        codeIn = root.findViewById(R.id.codeIn);
 
-        restore = root.findViewById(R.id.restore);
+        restore = root.findViewById(R.id.verify);
     }
 
     private void initListeners() {
@@ -41,11 +48,20 @@ public class ResetPassword extends Fragment {
     }
 
     private void reset() {
-        if (code.getText().toString().trim().equals("")) {
-            code.setError("Requerido!");
+
+        String code = codeIn.getText().toString();
+
+        if (code.trim().isEmpty()) {
+            codeIn.setError("Requerido!");
         }
         else {
-            this.getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            if(code.equals(this.code)) {
+
+                this.getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            }
+            else {
+                codeIn.setError("Código incorrecto!");
+            }
         }
     }
 }

@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.daniel.reportes.R;
+import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
+import com.daniel.reportes.task.user.GetUser;
+import com.daniel.reportes.task.user.LoginUser;
+import com.daniel.reportes.task.user.PostUser;
 import com.daniel.reportes.ui.reportes.Reportes;
 import com.daniel.reportes.ui.signup.SignUp;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -20,6 +25,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Login extends AppCompatActivity {
 
@@ -45,16 +54,13 @@ public class Login extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                User user = new User(
-                        account.getEmail(),
-                        account.getId(),
-                        "user"
-                );
-
-                login(user);
+                manageAccount(account, true);
             }
             catch (ApiException e) {
                 Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -64,36 +70,78 @@ public class Login extends AppCompatActivity {
         passwordIn = findViewById(R.id.passwordIn);
     }
 
-    private void login(User userIn) {
+    private void goToApp(AppSession session) {
 
-        String token = "";
-        User user = null;
+        Intent intent = new Intent(getBaseContext(), Reportes.class);
 
+        intent.putExtra("session", session);
 
-        if (user != null && !token.equals("")) {
-            Intent intent = new Intent(getBaseContext(), Reportes.class);
+        startActivity(intent);
+    }
 
-            intent.putExtra("user", user);
-            intent.putExtra("token", token);
+    private void manageAccount(GoogleSignInAccount account, boolean newUser) throws ExecutionException, InterruptedException {
 
-            startActivity(intent);
+        AppSession session;
+        User user;
+
+        if (newUser) {
+            user = new User(
+                    account.getDisplayName(),
+                    account.getEmail(),
+                    account.getId(),
+                    account.getId(),
+                    "user"
+            );
+
+            new PostUser().execute(user).get();
+
+            session = (AppSession) new LoginUser("google").execute(user).get();
+            session.setUser(new GetUser().execute(String.valueOf(session.getUserId())).get());
         }
+        else {
+            user = new User(
+                    account.getEmail(),
+                    account.getId(),
+                    "user"
+            );
+
+            session = (AppSession) new LoginUser("google").execute(user).get();
+            session.setUser(new GetUser().execute(String.valueOf(session.getUserId())).get());
+        }
+
+        goToApp(session);
     }
 
     public void loginWithEmail(View view) {
 
-        User user = new User(
-                emailIn.getText().toString(),
-                passwordIn.getText().toString(),
-                "user"
-        );
+        try {
+            User user = new User(
+                    emailIn.getText().toString(),
+                    passwordIn.getText().toString(),
+                    "user"
+            );
 
-        login(user);
+            Object result = new LoginUser("default").execute(user).get();
+
+            if (result instanceof AppSession) {
+
+                ((AppSession) result).setUser(new GetUser().execute(String.valueOf(((AppSession) result).getUserId())).get());
+
+                goToApp((AppSession) result);
+            }
+            else {
+                Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch (InterruptedException | ExecutionException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     public void loginWithGoogle(View view) {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
 
         if (account == null) {
             GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -102,19 +150,17 @@ public class Login extends AppCompatActivity {
                     .build();
 
             GoogleSignInClient signIn = GoogleSignIn.getClient(this, options);
-
             Intent signInIntent = signIn.getSignInIntent();
 
             startActivityForResult(signInIntent, 100);
         }
         else {
-            User user = new User(
-                    account.getEmail(),
-                    account.getId(),
-                    "user"
-            );
-
-            login(user);
+            try {
+                manageAccount(account, false);
+            }
+            catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -124,7 +170,7 @@ public class Login extends AppCompatActivity {
             emailIn.setError("Requerido!");
         }
         else {
-            Fragment mFragment = new ResetPassword();
+            Fragment mFragment = new ResetPassword("");
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.forgotPassword, mFragment).commit();
         }
