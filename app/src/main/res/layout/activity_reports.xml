@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.reportes.Reportes">
+    tools:context=".ui.fake.Reports">
 
     <Space
         android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:contentDescription="Background"
-        android:src="@drawable/background_icon"
+        android:src="@drawable/new_icon"
         android:tint="@android:color/darker_gray" />
 
     <ListView
@@ -24,6 +24,5 @@
         android:layout_height="wrap_content"
         android:visibility="invisible" />
 
-    <include layout="@layout/reportes_new" />
-
+    <include layout="@layout/fab_reportes" />
 </androidx.appcompat.widget.LinearLayoutCompat>

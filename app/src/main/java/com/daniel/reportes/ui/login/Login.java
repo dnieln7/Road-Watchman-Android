@@ -15,7 +15,7 @@ import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.task.user.PostUser;
-import com.daniel.reportes.ui.reportes.Reportes;
+import com.daniel.reportes.ui.app.AppActivity;
 import com.daniel.reportes.ui.signup.SignUp;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
 
     private void goToApp(AppSession session) {
 
-        Intent intent = new Intent(getBaseContext(), Reportes.class);
+        Intent intent = new Intent(getBaseContext(), AppActivity.class);
 
         intent.putExtra("session", session);
 
@@ -113,9 +113,15 @@ public class Login extends AppCompatActivity {
     public void loginWithEmail(View view) {
 
         try {
-            User user = new User(
+/*            User user = new User(
                     emailIn.getText().toString(),
                     passwordIn.getText().toString(),
+                    "user"
+            );*/
+
+            User user = new User(
+                    "dnieln7@gmail.com",
+                    "nolasco123",
                     "user"
             );
 
