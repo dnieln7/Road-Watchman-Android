@@ -67,19 +67,4 @@
         android:onClick="goToSignUp"
         android:text="Registrarse" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="forgotPassword"
-        android:text="Olvidé mi contraseña" />
-
-    <FrameLayout
-        android:id="@+id/forgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
@@ -60,7 +58,7 @@ public class Login extends AppCompatActivity {
                 Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
             }
             catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
         }
     }
@@ -142,7 +140,6 @@ public class Login extends AppCompatActivity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-
         if (account == null) {
             GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestProfile()
@@ -159,20 +156,8 @@ public class Login extends AppCompatActivity {
                 manageAccount(account, false);
             }
             catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
-        }
-    }
-
-    public void forgotPassword(View view) {
-
-        if (emailIn.getText().toString().trim().equals("")) {
-            emailIn.setError("Requerido!");
-        }
-        else {
-            Fragment mFragment = new ResetPassword("");
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.forgotPassword, mFragment).commit();
         }
     }
 

@@ -10,8 +10,6 @@ import com.dnieln7.httprequest.response.ErrorResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.sql.SQLException;
-
 public class LoginUser extends AsyncTask<User, Void, Object> {
 
     private HttpSession session;
