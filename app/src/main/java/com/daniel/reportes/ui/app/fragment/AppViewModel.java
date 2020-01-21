@@ -9,16 +9,12 @@ public class AppViewModel extends ViewModel {
 
     private MutableLiveData<AppSession> appSession;
 
-    public void setAppSession(MutableLiveData<AppSession> appSession) {
-        this.appSession = appSession;
+    public AppViewModel() {
+        appSession = new MutableLiveData<>();
     }
 
-    public void setAppSessionValue(AppSession appSession) {
+    public void setAppSession(AppSession appSession) {
         this.appSession.setValue(appSession);
-    }
-
-    public void updateToken(String token) {
-        this.appSession.getValue().setToken(token);
     }
 
     public MutableLiveData<AppSession> getAppSession() {

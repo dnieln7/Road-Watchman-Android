@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
@@ -37,11 +36,6 @@ public class ReportesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_reportes, container, false);
         appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
 
-        if(appViewModel.getAppSession() == null) {
-            appViewModel.setAppSession(new MutableLiveData<>());
-            appViewModel.setAppSessionValue((AppSession) getActivity().getIntent().getSerializableExtra("session"));
-        }
-
         init();
         initObjects();
         initWidgets();
@@ -55,7 +49,12 @@ public class ReportesFragment extends Fragment {
     }
 
     private void initObjects() {
-        appViewModel.getAppSession().observe(this, session -> appSession = session);
+        appViewModel.getAppSession().observe(getActivity(), session -> appSession = session);
+
+        if(appSession == null) {
+            appSession = (AppSession) getActivity().getIntent().getSerializableExtra("session");
+            appViewModel.setAppSession(appSession);
+        }
     }
 
     private void initWidgets() {

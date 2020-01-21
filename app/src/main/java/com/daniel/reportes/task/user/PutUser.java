@@ -7,11 +7,11 @@ import com.daniel.reportes.task.API;
 import com.dnieln7.httprequest.HttpSession;
 import com.google.gson.Gson;
 
-public class UpdateUser extends AsyncTask<User, Void, User> {
+public class PutUser extends AsyncTask<User, Void, User> {
 
     private HttpSession session;
 
-    public UpdateUser(String id) {
+    public PutUser(String id) {
         this.session = new HttpSession(API.MAIN + "user/" + id);
     }
 

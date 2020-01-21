@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SignUpViewModel extends ViewModel {
+
     private MutableLiveData<String> code;
     private MutableLiveData<Boolean> verified;
 
