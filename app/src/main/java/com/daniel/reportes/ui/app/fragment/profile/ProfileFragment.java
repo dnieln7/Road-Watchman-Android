@@ -135,11 +135,13 @@ public class ProfileFragment extends Fragment {
         try {
             user = new PutUser(String.valueOf(appSession.getUser().getId())).execute(user).get();
 
-            if(user != null) {
+            if (user != null) {
                 Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
                 profileUsername.setEnabled(false);
                 profileEmail.setEnabled(false);
                 profilePassword.setEnabled(false);
+                appSession.setUser(user);
+                appViewModel.setAppSession(appSession);
             }
         }
         catch (ExecutionException | InterruptedException e) {

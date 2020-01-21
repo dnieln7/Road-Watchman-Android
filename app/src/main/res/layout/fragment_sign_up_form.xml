@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@color/backgroundMaterial"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/newUsername"
@@ -14,6 +15,7 @@
         android:importantForAutofill="no"
         android:inputType="text"
         android:textAlignment="center"
+        android:textColor="@color/textColor100"
         android:textSize="20sp" />
 
     <EditText
@@ -25,6 +27,7 @@
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        android:textColor="@color/textColor100"
         android:textSize="20sp" />
 
     <EditText
@@ -36,6 +39,7 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColor="@color/textColor100"
 
         android:textSize="20sp" />
 
@@ -44,8 +48,8 @@
         android:layout_height="20dp" />
 
     <Button
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/next"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Siguiente"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     android:gravity="top"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -14,8 +14,8 @@
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:contentDescription="@string/nav_header_desc"
-        android:src="@drawable/profile_icon" />
+        android:src="@drawable/profile_icon"
+        android:tint="@color/backgroundMaterial" />
 
     <TextView
         android:id="@+id/headerUsername"
@@ -23,12 +23,15 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Nombre"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/textColor100" />
 
     <TextView
         android:id="@+id/headerEmail"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Correo" />
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="Correo"
+        android:textColor="@color/textColor50" />
+
 </LinearLayout>

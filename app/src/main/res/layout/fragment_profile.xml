@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundMaterial"
     android:orientation="vertical">
 
     <ImageView
@@ -12,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/circle_background"
         android:src="@drawable/profile_icon"
-        android:tint="@android:color/black" />
+        android:tint="@color/backgroundMaterial" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,10 +34,10 @@
                 android:id="@+id/profileUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
                 android:background="@android:color/transparent"
                 android:enabled="false"
                 android:inputType="textMultiLine"
+                android:textAlignment="center"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,7 +47,7 @@
             android:layout_height="20dp"
             android:layout_weight="0.5"
             android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <View
@@ -67,13 +68,14 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:src="@drawable/email_icon"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/colorPrimaryDark" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:hint="Email">
+            android:hint="Email"
+            android:textColorHint="@color/textColor25">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profileEmail"
@@ -93,7 +95,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <Space
@@ -112,7 +114,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/password_icon"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/colorPrimaryDark" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutPassword"
@@ -120,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:hint="Contraseña"
+            android:textColorHint="@color/textColor25"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@android:color/transparent">
 
@@ -141,7 +144,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <View
@@ -157,4 +160,5 @@
         android:layout_gravity="center|bottom"
         android:text="Guardar"
         android:textColor="@color/colorPrimary" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

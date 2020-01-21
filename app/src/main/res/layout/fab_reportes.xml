@@ -21,6 +21,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="12dp"
             android:text="Sin foto"
+            android:textColor="@color/textColor100"
             android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,9 +32,9 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/no_camera"
-            android:tint="@android:color/white"
+            android:tint="@color/textColor100"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorPrimaryDark"
+            app:backgroundTint="@color/colorPrimary"
             app:borderWidth="0dp"
             app:elevation="0dp"
             app:fabSize="mini" />
@@ -53,6 +54,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:text="Con foto"
+            android:textColor="@color/textColor100"
             android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -63,9 +65,9 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/camera"
-            android:tint="@android:color/white"
+            android:tint="@color/textColor100"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorPrimaryDark"
+            app:backgroundTint="@color/colorPrimary"
             app:borderWidth="0dp"
             app:elevation="0dp"
             app:fabSize="mini" />
@@ -84,9 +86,10 @@
             android:layout_margin="@dimen/fab_margin"
             android:onClick="expandMenu"
             android:src="@drawable/new_icon"
-            android:tint="@android:color/white"
+            android:tint="@color/textColor100"
             app:backgroundTint="@color/colorPrimary"
             app:borderWidth="0dp"
             app:elevation="0dp" />
     </LinearLayout>
+
 </FrameLayout>

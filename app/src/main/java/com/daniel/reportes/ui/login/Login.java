@@ -1,6 +1,7 @@
 package com.daniel.reportes.ui.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
@@ -30,6 +32,9 @@ import java.util.logging.Logger;
 
 public class Login extends AppCompatActivity {
 
+    //Objects
+    private SharedPreferences sharedPreferences;
+
     // Widgets
     EditText emailIn;
     EditText passwordIn;
@@ -39,6 +44,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        loadPreferences();
         initWidgets();
     }
 
@@ -60,6 +66,17 @@ public class Login extends AppCompatActivity {
             catch (InterruptedException | ExecutionException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
+        }
+    }
+
+    private void loadPreferences() {
+        sharedPreferences = getSharedPreferences("com.daniel.reportes.settings", MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("DarkTheme", false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 
