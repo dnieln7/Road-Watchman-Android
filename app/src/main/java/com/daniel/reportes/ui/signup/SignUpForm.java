@@ -6,8 +6,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,9 @@ import com.daniel.reportes.task.email.ExistsEmail;
 import com.daniel.reportes.task.email.SendEmail;
 import com.daniel.reportes.task.user.PostUser;
 import com.daniel.reportes.ui.other.IFragmentListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -28,19 +28,19 @@ import java.util.logging.Logger;
 
 public class SignUpForm extends Fragment {
 
-    //Var
-    boolean validEmail;
-
     //Objects
-    private View root;
+    private boolean validEmail;
     private SignUpViewModel viewModel;
     private IFragmentListener listener;
 
     // Widgets
-    private EditText newUsername;
-    private EditText newEmail;
-    private EditText newPassword;
-    private Button next;
+    private View root;
+
+    private TextInputEditText signUsername;
+    private TextInputEditText signEmail;
+    private TextInputEditText signPassword;
+
+    private MaterialButton signNext;
 
     public SignUpForm(IFragmentListener listener) {
         this.listener = listener;
@@ -65,9 +65,9 @@ public class SignUpForm extends Fragment {
         viewModel.getVerified().observe(this, aBoolean -> {
             if (aBoolean) {
                 Object object = new PostUser().execute(new User(
-                        newUsername.getText().toString(),
-                        newEmail.getText().toString(),
-                        newPassword.getText().toString(),
+                        signUsername.getText().toString(),
+                        signEmail.getText().toString(),
+                        signPassword.getText().toString(),
                         "",
                         "user"
                 ));
@@ -81,15 +81,16 @@ public class SignUpForm extends Fragment {
     }
 
     private void initWidgets() {
-        newUsername = root.findViewById(R.id.newUsername);
-        newEmail = root.findViewById(R.id.newEmail);
-        newPassword = root.findViewById(R.id.newPassword);
-        next = root.findViewById(R.id.next);
+        signUsername = root.findViewById(R.id.signUsername);
+        signEmail = root.findViewById(R.id.signEmail);
+        signPassword = root.findViewById(R.id.signPassword);
+
+        signNext = root.findViewById(R.id.signNext);
     }
 
     private void initListeners() {
-        next.setOnClickListener(v -> next());
-        newEmail.addTextChangedListener(new TextWatcher() {
+        signNext.setOnClickListener(v -> next());
+        signEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -103,10 +104,10 @@ public class SignUpForm extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.toString().equals("")) {
-                    newEmail.setError("Inválido!");
+                    signEmail.setError("Inválido!");
                 }
                 else if(!Utils.isEmailValid(s.toString())) {
-                    newEmail.setError("Inválido!");
+                    signEmail.setError("Inválido!");
                     validEmail = false;
                 }
                 else {
@@ -118,12 +119,12 @@ public class SignUpForm extends Fragment {
 
     private void next() {
 
-        String email = newEmail.getText().toString();
+        String email = signEmail.getText().toString();
         String code = Utils.generateCode();
 
         if (validEmail) {
             try {
-                if(new ExistsEmail().execute(newEmail.getText().toString()).get()) {
+                if(new ExistsEmail().execute(signEmail.getText().toString()).get()) {
                     Snackbar.make(root, "El usuario ya existe! olvido su contraseña?", Snackbar.LENGTH_SHORT).show();
                 }
                 else {

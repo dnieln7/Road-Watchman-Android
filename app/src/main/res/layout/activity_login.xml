@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,35 +9,53 @@
     android:orientation="vertical"
     tools:context=".ui.login.Login">
 
-    <EditText
-        android:id="@+id/usernameIn"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="5"
         android:hint="Email"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:textAlignment="center"
-        android:textColor="@color/textColor100"
-        android:textColorHint="@color/textColor25"
-        android:textSize="20sp" />
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary">
 
-    <EditText
-        android:id="@+id/passwordIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="5"
-        android:hint="Contraseña"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:textColor="@color/textColor100"
-        android:textColorHint="@color/textColor25"
-        android:textSize="20sp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/textColor100"
+            android:textSize="20sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="10dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/textColor100"
+            android:textSize="20sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,35 +63,39 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="loginWithEmail"
             android:text="Ingresar"
-            android:textColor="@color/colorPrimary" />
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/textColor100" />
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:drawableStart="@drawable/google_logo"
-            android:drawableTint="@color/colorAccent"
             android:onClick="loginWithGoogle"
-            android:text="  Ingresar"
-            android:textColor="@color/colorPrimary" />
+            android:text="Sign up"
+            android:textColor="@color/colorPrimary"
+            app:icon="@drawable/google_logo"
+            app:iconPadding="10dp"
+            app:iconTint="@color/colorAccent"
+            app:strokeColor="@color/colorPrimary" />
     </LinearLayout>
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="10dp" />
+        android:layout_height="20dp" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToSignUp"
         android:text="Registrarse"
-        android:textColor="@color/textColor50" />
+        android:textColor="@color/colorPrimaryDark" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

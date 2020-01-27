@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -37,8 +37,8 @@ public class Login extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     // Widgets
-    EditText emailIn;
-    EditText passwordIn;
+    TextInputEditText loginEmail;
+    TextInputEditText loginPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +84,13 @@ public class Login extends AppCompatActivity {
             loginWithGoogle(null);
         }
         else {
-            emailIn.setText(sharedPreferences.getString("email", ""));
+            loginEmail.setText(sharedPreferences.getString("email", ""));
         }
     }
 
     private void initWidgets() {
-        emailIn = findViewById(R.id.usernameIn);
-        passwordIn = findViewById(R.id.passwordIn);
+        loginEmail = findViewById(R.id.loginEmail);
+        loginPassword = findViewById(R.id.loginPassword);
     }
 
     private void goToApp(AppSession session) {
@@ -141,8 +141,8 @@ public class Login extends AppCompatActivity {
 
         try {
             User user = new User(
-                    emailIn.getText().toString(),
-                    passwordIn.getText().toString(),
+                    loginEmail.getText().toString(),
+                    loginPassword.getText().toString(),
                     "user"
             );
 

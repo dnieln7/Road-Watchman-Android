@@ -4,30 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.ui.other.IFragmentListener;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Verify extends Fragment {
 
-
-    //Var
+    //Objects
     private String code;
 
-    //Objects
-    private View root;
     private SignUpViewModel viewModel;
     private IFragmentListener listener;
 
     // Widgets
-    private EditText codeIn;
-    private Button verify;
-    private Button back;
+    private View root;
+
+    private TextInputEditText verifyCode;
+
+    private MaterialButton verifyOk;
+    private MaterialButton verifyBack;
 
     public Verify(String code, IFragmentListener listener) {
         this.code = code;
@@ -39,34 +39,35 @@ public class Verify extends Fragment {
         root = inflater.inflate(R.layout.fragment_verify, container, false);
         viewModel = ViewModelProviders.of(getActivity()).get(SignUpViewModel.class);
 
-        initVar();
+        initObjects();
         initWidgets();
         initListeners();
 
         return root;
     }
 
-    private void initVar() {
+    private void initObjects() {
         viewModel.getCode().observe(this, s -> code = s);
     }
 
     private void initWidgets() {
-        codeIn = root.findViewById(R.id.codeIn);
-        verify = root.findViewById(R.id.verify);
-        back = root.findViewById(R.id.back);
+        verifyCode = root.findViewById(R.id.verifyCode);
+
+        verifyOk = root.findViewById(R.id.verifyOk);
+        verifyBack = root.findViewById(R.id.verifyBack);
     }
 
     private void initListeners() {
-        verify.setOnClickListener(v -> verify());
-        back.setOnClickListener(v -> goBack());
+        verifyOk.setOnClickListener(v -> verify());
+        verifyBack.setOnClickListener(v -> goBack());
     }
 
     private void verify() {
 
-        String code = codeIn.getText().toString();
+        String code = verifyCode.getText().toString();
 
         if (code.trim().isEmpty()) {
-            codeIn.setError("Requerido!");
+            verifyCode.setError("Requerido!");
         }
         else {
             if (code.equals(this.code)) {
@@ -74,7 +75,7 @@ public class Verify extends Fragment {
                 listener.showFragment(1);
             }
             else {
-                codeIn.setError("Código incorrecto!");
+                verifyCode.setError("Código incorrecto!");
             }
         }
     }
