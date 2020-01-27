@@ -49,7 +49,6 @@ public class ReportesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_reportes, container, false);
         appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
 
-        init();
         initObjects();
         initWidgets();
         initListeners();
@@ -58,11 +57,9 @@ public class ReportesFragment extends Fragment {
         return root;
     }
 
-    private void init() {
-        expanded = false;
-    }
-
     private void initObjects() {
+        expanded = false;
+
         appViewModel.getAppSession().observe(getActivity(), session -> appSession = session);
 
         if (appSession == null) {
@@ -116,12 +113,7 @@ public class ReportesFragment extends Fragment {
     private void refresh() {
         expandMenu();
 
-        try {
-            reportes = new GetAllReportes(String.valueOf(appSession.getUser().getId())).execute().get();
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-        }
+        initList();
 
         adapter.notifyDataSetChanged();
         reportesList.invalidateViews();

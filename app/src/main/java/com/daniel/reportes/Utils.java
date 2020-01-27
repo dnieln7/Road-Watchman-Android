@@ -1,16 +1,10 @@
 package com.daniel.reportes;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import org.joda.time.LocalDateTime;
 
