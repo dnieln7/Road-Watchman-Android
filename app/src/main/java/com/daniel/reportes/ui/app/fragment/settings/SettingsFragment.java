@@ -17,10 +17,10 @@ import com.daniel.reportes.R;
 public class SettingsFragment extends Fragment {
 
     // Objects
-    private View root;
-    private SharedPreferences sp;
+    private SharedPreferences sharedPreferences;
 
     // Widgets
+    private View root;
     private Switch darkTheme;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void initObjects() {
-        sp = getActivity().getSharedPreferences("com.daniel.reportes.settings", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("com.daniel.reportes.settings", Context.MODE_PRIVATE);
 
     }
 
@@ -47,11 +47,11 @@ public class SettingsFragment extends Fragment {
         darkTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                sp.edit().putBoolean("DarkTheme", true).apply();
+                sharedPreferences.edit().putBoolean("DarkTheme", true).apply();
             }
             else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                sp.edit().putBoolean("DarkTheme", false).apply();
+                sharedPreferences.edit().putBoolean("DarkTheme", false).apply();
             }
         });
     }

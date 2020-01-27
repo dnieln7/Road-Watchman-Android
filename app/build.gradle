@@ -31,18 +31,30 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.1.0'
     implementation 'androidx.navigation:navigation-ui:2.1.0'
+    // Firebase
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    // Google auth
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    // Http Request
+    implementation files('C:\\Users\\dniel\\Documents\\Lib\\Java\\HttpRequest-1.2.jar')
+    // Gson
+    implementation "com.google.code.gson:gson:2.8.5"
+    // Email
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
+    // ViewModel
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    // Date
+    implementation 'joda-time:joda-time:2.10.5'
+    // Other
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    // Google auth
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
-    //Http Request
-    implementation files('C:\\Users\\dniel\\Documents\\Lib\\Java\\HttpRequest-1.2.jar')
-    //Gson
-    implementation "com.google.code.gson:gson:2.8.5"
-    //Email
-    implementation 'com.sun.mail:android-mail:1.5.5'
-    implementation 'com.sun.mail:android-activation:1.5.5'
-    //ViewModel
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    // Plugin
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.google.gms.google-services'
 }

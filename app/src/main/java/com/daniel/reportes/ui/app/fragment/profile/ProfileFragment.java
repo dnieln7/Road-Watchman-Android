@@ -30,14 +30,13 @@ import java.util.logging.Logger;
 
 public class ProfileFragment extends Fragment {
 
-    // Var
-
     // Objects
-    private View root;
     private AppViewModel appViewModel;
     private AppSession appSession;
 
     // Widgets
+    private View root;
+
     private EditText profileUsername;
     private TextInputEditText profileEmail;
     private TextInputEditText profilePassword;
@@ -52,16 +51,11 @@ public class ProfileFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
         appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
 
-        initVar();
         initObjects();
         initWidgets();
         initListeners();
 
         return root;
-    }
-
-    private void initVar() {
-
     }
 
     private void initObjects() {

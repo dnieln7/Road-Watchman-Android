@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
+import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.user.GetUser;
@@ -44,15 +45,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loadPreferences();
         initWidgets();
+        loadPreferences();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 100) {
+        if (requestCode == Utils.GOOGLE_SIGN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
@@ -78,6 +79,13 @@ public class Login extends AppCompatActivity {
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
+        if(sharedPreferences.getBoolean("google", false)) {
+            loginWithGoogle(null);
+        }
+        else {
+            emailIn.setText(sharedPreferences.getString("email", ""));
+        }
     }
 
     private void initWidgets() {
@@ -90,6 +98,8 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), AppActivity.class);
 
         intent.putExtra("session", session);
+        sharedPreferences.edit().putBoolean("google", !session.getUser().getGoogleId().equals("")).apply();
+        sharedPreferences.edit().putString("email", session.getUser().getEmail()).apply();
 
         startActivity(intent);
     }
@@ -130,15 +140,9 @@ public class Login extends AppCompatActivity {
     public void loginWithEmail(View view) {
 
         try {
-/*            User user = new User(
+            User user = new User(
                     emailIn.getText().toString(),
                     passwordIn.getText().toString(),
-                    "user"
-            );*/
-
-            User user = new User(
-                    "dnieln7@gmail.com",
-                    "nolasco123",
                     "user"
             );
 
@@ -172,7 +176,7 @@ public class Login extends AppCompatActivity {
             GoogleSignInClient signIn = GoogleSignIn.getClient(this, options);
             Intent signInIntent = signIn.getSignInIntent();
 
-            startActivityForResult(signInIntent, 100);
+            startActivityForResult(signInIntent, Utils.GOOGLE_SIGN);
         }
         else {
             try {

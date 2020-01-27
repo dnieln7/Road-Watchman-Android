@@ -1,11 +1,8 @@
 package com.daniel.reportes.ui.fake;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,12 +42,12 @@ public class Reports extends AppCompatActivity {
     }
 
     private void initWidgets() {
-        withPictureLabel = findViewById(R.id.withPictureLabel);
-        withoutPictureLabel = findViewById(R.id.withoutPictureLabel);
+        withPictureLabel = findViewById(R.id.createText);
+        withoutPictureLabel = findViewById(R.id.refreshText);
 
-        newReporte = findViewById(R.id.newReporte);
-        withPicture = findViewById(R.id.withPicture);
-        withoutPicture = findViewById(R.id.withoutPicture);
+        newReporte = findViewById(R.id.reportesMenu);
+        withPicture = findViewById(R.id.reportesCreate);
+        withoutPicture = findViewById(R.id.reportesRefresh);
     }
 
     private void initListeners() {
