@@ -82,6 +82,7 @@ public class CreateReporteStep2 extends Fragment {
         }
 
         reporte.setUserId(appSession.getUser().getId());
+        uploadStatus.setVisibility(View.VISIBLE);
 
         hideKeyboard(getActivity());
         postReporte();
@@ -100,11 +101,14 @@ public class CreateReporteStep2 extends Fragment {
     }
 
     private void postReporte() {
+        uploadStatus.setProgress(25);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference reference = storage
                 .getReference("Reportes/")
                 .child(appSession.getUser().getUsername() + "_" + pictureName);
+
+        uploadStatus.setProgress(50);
 
         reference.putFile(pictureUri)
                 .addOnFailureListener(error -> Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, error))
@@ -114,6 +118,8 @@ public class CreateReporteStep2 extends Fragment {
     }
 
     private void postReport(Uri uri) {
+        uploadStatus.setProgress(75);
+
         String pictureUrl = uri == null ? "" : uri.toString();
 
         try {
@@ -122,6 +128,8 @@ public class CreateReporteStep2 extends Fragment {
         catch (ExecutionException | InterruptedException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
+
+        uploadStatus.setProgress(100);
 
         getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }

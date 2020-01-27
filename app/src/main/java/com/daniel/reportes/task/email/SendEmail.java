@@ -1,7 +1,6 @@
 package com.daniel.reportes.task.email;
 
 import android.os.AsyncTask;
-import android.widget.ProgressBar;
 
 import java.util.Properties;
 
