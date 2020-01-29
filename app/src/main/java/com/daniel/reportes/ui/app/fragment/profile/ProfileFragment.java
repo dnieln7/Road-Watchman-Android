@@ -2,6 +2,7 @@ package com.daniel.reportes.ui.app.fragment.profile;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,11 @@ import com.daniel.reportes.R;
 import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
+import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.PutUser;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
+import com.daniel.reportes.ui.login.Login;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -127,19 +131,39 @@ public class ProfileFragment extends Fragment {
         );
 
         try {
-            user = new PutUser(String.valueOf(appSession.getUser().getId())).execute(user).get();
+            PutListener listener = new PutListener();
 
-            if (user != null) {
+            if(new PutUser(String.valueOf(appSession.getUser().getId()), listener).execute(user).get().success()) {
                 Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
+
+                user = listener.getResult();
+
                 profileUsername.setEnabled(false);
                 profileEmail.setEnabled(false);
                 profilePassword.setEnabled(false);
                 appSession.setUser(user);
                 appViewModel.setAppSession(appSession);
+
+                profileUsername.setText(appSession.getUser().getUsername());
+                profileEmail.setText(appSession.getUser().getEmail());
             }
         }
         catch (ExecutionException | InterruptedException e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    // Class
+
+    private class PutListener extends TaskListener<User> {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Utils.toast(ProfileFragment.this.getContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -5,7 +5,11 @@ import android.os.AsyncTask;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.API;
 import com.dnieln7.httprequest.HttpSession;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.gson.Gson;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GetReporte extends AsyncTask<String, Void, Reporte> {
 
@@ -17,6 +21,12 @@ public class GetReporte extends AsyncTask<String, Void, Reporte> {
 
     @Override
     protected Reporte doInBackground(String... params) {
-        return new Gson().fromJson(session.getById(params[0]), Reporte.class);
+        try {
+            return new Gson().fromJson(session.getById(params[0]), Reporte.class);
+        }
+        catch (ResponseException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getCode() + " " + e.getDescription(), e);
+            return null;
+        }
     }
 }

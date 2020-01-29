@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -14,6 +13,7 @@ import com.daniel.reportes.R;
 import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
+import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.task.user.PostUser;
@@ -35,10 +35,11 @@ public class Login extends AppCompatActivity {
 
     //Objects
     private SharedPreferences sharedPreferences;
+    private AppSession appSession;
 
     // Widgets
-    TextInputEditText loginEmail;
-    TextInputEditText loginPassword;
+    private TextInputEditText loginEmail;
+    private TextInputEditText loginPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class Login extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        if(sharedPreferences.getBoolean("google", false)) {
+        if (sharedPreferences.getBoolean("google", false)) {
             loginWithGoogle(null);
         }
         else {
@@ -94,7 +95,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void goToApp(AppSession session) {
-
         Intent intent = new Intent(getBaseContext(), AppActivity.class);
 
         intent.putExtra("session", session);
@@ -105,8 +105,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void manageAccount(GoogleSignInAccount account, boolean newUser) throws ExecutionException, InterruptedException {
-
-        AppSession session;
         User user;
 
         if (newUser) {
@@ -118,10 +116,12 @@ public class Login extends AppCompatActivity {
                     "user"
             );
 
-            new PostUser().execute(user).get();
-
-            session = (AppSession) new LoginUser("google").execute(user).get();
-            session.setUser(new GetUser().execute(String.valueOf(session.getUserId())).get());
+            if (new PostUser(postListener).execute(user).get().success()) {
+                if (new LoginUser("google", loginListener).execute(user).get().success()) {
+                    appSession = loginListener.getResult();
+                    appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
+                }
+            }
         }
         else {
             user = new User(
@@ -130,40 +130,38 @@ public class Login extends AppCompatActivity {
                     "user"
             );
 
-            session = (AppSession) new LoginUser("google").execute(user).get();
-            session.setUser(new GetUser().execute(String.valueOf(session.getUserId())).get());
+            if (new LoginUser("google", loginListener).execute(user).get().success()) {
+                appSession = loginListener.getResult();
+                appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
+            }
         }
 
-        goToApp(session);
+        goToApp(appSession);
     }
 
     public void loginWithEmail(View view) {
+        Utils.hideKeyboard(this);
+
+        User user = new User(
+                loginEmail.getText().toString(),
+                loginPassword.getText().toString(),
+                "user"
+        );
 
         try {
-            User user = new User(
-                    loginEmail.getText().toString(),
-                    loginPassword.getText().toString(),
-                    "user"
-            );
-
-            Object result = new LoginUser("default").execute(user).get();
-
-            if (result instanceof AppSession) {
-
-                ((AppSession) result).setUser(new GetUser().execute(String.valueOf(((AppSession) result).getUserId())).get());
-
-                goToApp((AppSession) result);
-            }
-            else {
-                Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+            if (new LoginUser("default", loginListener).execute(user).get().success()) {
+                appSession = loginListener.getResult();
+                appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
+                goToApp(appSession);
             }
         }
-        catch (InterruptedException | ExecutionException e) {
+        catch (ExecutionException | InterruptedException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void loginWithGoogle(View view) {
+        Utils.hideKeyboard(this);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
@@ -193,4 +191,35 @@ public class Login extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    // Class
+
+    private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Utils.toast(Login.this, this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
+
+    private TaskListener<User> postListener = new TaskListener<User>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                if (this.exception.getCode() == 409) {
+                    return true;
+                }
+                else {
+                    Utils.toast(Login.this, this.exception.getMessage());
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
 }

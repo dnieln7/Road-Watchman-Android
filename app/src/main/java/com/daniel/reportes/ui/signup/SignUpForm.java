@@ -14,9 +14,11 @@ import androidx.lifecycle.ViewModelProviders;
 import com.daniel.reportes.R;
 import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.User;
+import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.email.ExistsEmail;
 import com.daniel.reportes.task.email.SendEmail;
 import com.daniel.reportes.task.user.PostUser;
+import com.daniel.reportes.ui.app.fragment.reportes.CreateReporteStep2;
 import com.daniel.reportes.ui.other.IFragmentListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -64,17 +66,22 @@ public class SignUpForm extends Fragment {
 
         viewModel.getVerified().observe(this, aBoolean -> {
             if (aBoolean) {
-                Object object = new PostUser().execute(new User(
+                User user = new User(
                         signUsername.getText().toString(),
                         signEmail.getText().toString(),
                         signPassword.getText().toString(),
                         "",
                         "user"
-                ));
+                );
 
-                if(object != null) {
-                    Toast.makeText(getContext(), "Registro completado!", Toast.LENGTH_SHORT).show();
-                    listener.exit();
+                try {
+                    if (new PostUser(postListener).execute(user).get().success()) {
+                        Toast.makeText(getContext(), "Registro completado!", Toast.LENGTH_SHORT).show();
+                        listener.exit();
+                    }
+                }
+                catch (ExecutionException | InterruptedException e) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
                 }
             }
         });
@@ -103,10 +110,10 @@ public class SignUpForm extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().equals("")) {
+                if (s.toString().equals("")) {
                     signEmail.setError("Inválido!");
                 }
-                else if(!Utils.isEmailValid(s.toString())) {
+                else if (!Utils.isEmailValid(s.toString())) {
                     signEmail.setError("Inválido!");
                     validEmail = false;
                 }
@@ -118,13 +125,14 @@ public class SignUpForm extends Fragment {
     }
 
     private void next() {
+        Utils.hideKeyboard(getActivity());
 
         String email = signEmail.getText().toString();
         String code = Utils.generateCode();
 
         if (validEmail) {
             try {
-                if(new ExistsEmail().execute(signEmail.getText().toString()).get()) {
+                if (new ExistsEmail().execute(signEmail.getText().toString()).get()) {
                     Snackbar.make(root, "El usuario ya existe! olvido su contraseña?", Snackbar.LENGTH_SHORT).show();
                 }
                 else {
@@ -140,4 +148,17 @@ public class SignUpForm extends Fragment {
             }
         }
     }
+
+    // Class
+    private TaskListener<User> postListener = new TaskListener<User>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Utils.toast(SignUpForm.this.getContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
 }

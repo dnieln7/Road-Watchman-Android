@@ -15,10 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
+import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.Reporte;
+import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.reporte.PostReporte;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
@@ -77,27 +80,15 @@ public class CreateReporteStep2 extends Fragment {
     }
 
     private void upload() {
-        if(!description.getText().toString().trim().equals("")) {
+        if (!description.getText().toString().trim().equals("")) {
             reporte.setDescription(description.getText().toString());
         }
 
         reporte.setUserId(appSession.getUser().getId());
         uploadStatus.setVisibility(View.VISIBLE);
 
-        hideKeyboard(getActivity());
+        Utils.hideKeyboard(getActivity());
         postReporte();
-    }
-
-    private static void hideKeyboard(Activity activity) {
-        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        View currentFocusedView = activity.getCurrentFocus();
-
-        if (currentFocusedView != null) {
-            if (inputManager != null) {
-                inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
     }
 
     private void postReporte() {
@@ -123,14 +114,29 @@ public class CreateReporteStep2 extends Fragment {
         String pictureUrl = uri == null ? "" : uri.toString();
 
         try {
-            new PostReporte(pictureUrl).execute(reporte).get();
+            if (new PostReporte(pictureUrl, reporteListener).execute(reporte).get().success()) {
+                uploadStatus.setProgress(100);
+                uploadStatus.setVisibility(View.GONE);
+            }
         }
         catch (ExecutionException | InterruptedException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
 
-        uploadStatus.setProgress(100);
-
         getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
+
+    // Class
+
+    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Utils.toast(CreateReporteStep2.this.getContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
 }

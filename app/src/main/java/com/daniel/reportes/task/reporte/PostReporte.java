@@ -4,35 +4,34 @@ import android.os.AsyncTask;
 
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.API;
+import com.daniel.reportes.task.TaskListener;
 import com.dnieln7.httprequest.HttpSession;
-import com.dnieln7.httprequest.response.ErrorResponse;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-public class PostReporte extends AsyncTask<Reporte, Integer, Object> {
+public class PostReporte extends AsyncTask<Reporte, Integer, TaskListener> {
 
     private HttpSession session;
     private String pictureUrl;
+    private TaskListener<Reporte> listener;
 
-    public PostReporte(String pictureUrl) {
-        this.session = new HttpSession(API.MAIN + "report");;
+    public PostReporte(String pictureUrl, TaskListener<Reporte> listener) {
+        this.session = new HttpSession(API.MAIN + "report");
         this.pictureUrl = pictureUrl;
+        this.listener = listener;
     }
 
     @Override
-    protected Object doInBackground(Reporte... params) {
+    protected TaskListener<Reporte> doInBackground(Reporte... params) {
+        params[0].setPicture(pictureUrl);
 
-        Reporte reporte = params[0];
-
-        reporte.setPicture(pictureUrl);
-
-        JsonObject json = session.post(reporte);
-
-        if(json.has("ERROR_CODE")) {
-            return new Gson().fromJson(json, ErrorResponse.class);
+        try {
+            listener.setResult(new Gson().fromJson(session.post(params[0]), Reporte.class));
         }
-        else {
-            return new Gson().fromJson(json, Reporte.class);
+        catch (ResponseException e) {
+            listener.setException(e);
         }
+
+        return listener;
     }
 }

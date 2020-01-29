@@ -5,6 +5,10 @@ import android.os.AsyncTask;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.API;
 import com.dnieln7.httprequest.HttpSession;
+import com.dnieln7.httprequest.exception.ResponseException;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ExistsEmail extends AsyncTask<String, Void, Boolean> {
 
@@ -16,6 +20,12 @@ public class ExistsEmail extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
-        return session.post(new User(params[0], "", "")).get("exist").getAsBoolean();
+        try {
+            return session.post(new User(params[0], "", "")).get("exist").getAsBoolean();
+        }
+        catch (ResponseException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getCode() + " " + e.getDescription(), e);
+            return true;
+        }
     }
 }

@@ -5,10 +5,14 @@ import android.os.AsyncTask;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.API;
 import com.dnieln7.httprequest.HttpSession;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GetAllUsers extends AsyncTask<Void, Void, List<User>> {
 
@@ -20,6 +24,12 @@ public class GetAllUsers extends AsyncTask<Void, Void, List<User>> {
 
     @Override
     protected List<User> doInBackground(Void... params) {
-        return Arrays.asList(new Gson().fromJson(session.get(), User[].class));
+        try {
+            return Arrays.asList(new Gson().fromJson(session.get(), User[].class));
+        }
+        catch (ResponseException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getCode() + " " + e.getDescription(), e);
+            return new ArrayList<>();
+        }
     }
 }

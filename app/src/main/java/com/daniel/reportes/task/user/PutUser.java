@@ -4,19 +4,31 @@ import android.os.AsyncTask;
 
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.API;
+import com.daniel.reportes.task.TaskListener;
 import com.dnieln7.httprequest.HttpSession;
+import com.dnieln7.httprequest.exception.ResponseException;
 import com.google.gson.Gson;
 
-public class PutUser extends AsyncTask<User, Void, User> {
+public class PutUser extends AsyncTask<User, Void, TaskListener> {
 
     private HttpSession session;
+    private TaskListener<User> listener;
 
-    public PutUser(String id) {
+    public PutUser(String id, TaskListener<User> listener) {
         this.session = new HttpSession(API.MAIN + "user/" + id);
+        this.listener = listener;
     }
 
     @Override
-    protected User doInBackground(User... params) {
-        return new Gson().fromJson(session.put(params[0]), User.class);
+    protected TaskListener<User> doInBackground(User... params) {
+
+        try {
+            listener.setResult(new Gson().fromJson(session.post(params[0]), User.class));
+        }
+        catch (ResponseException e) {
+            listener.setException(e);
+        }
+
+        return listener;
     }
 }
