@@ -80,7 +80,6 @@ public class Login extends AppCompatActivity {
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
         if (sharedPreferences.getBoolean("google", false)) {
             loginWithGoogle(null);
         }
@@ -98,7 +97,7 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), AppActivity.class);
 
         intent.putExtra("session", session);
-        sharedPreferences.edit().putBoolean("google", !session.getUser().getGoogleId().equals("")).apply();
+        sharedPreferences.edit().putBoolean("google", session.getUser().getGoogleId().length() > 0).apply();
         sharedPreferences.edit().putString("email", session.getUser().getEmail()).apply();
 
         startActivity(intent);
