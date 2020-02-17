@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "480649070006",
+    "firebase_url": "https://compact-booking-253415.firebaseio.com",
+    "project_id": "compact-booking-253415",
+    "storage_bucket": "compact-booking-253415.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480649070006:android:caa8aa0fcf9418d847ed17",
+        "android_client_info": {
+          "package_name": "com.daniel.reportes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480649070006-qbnushm3pn94444elsa947vha3bvgss8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daniel.reportes",
+            "certificate_hash": "992fa4b251c63308663abf4ac62765e8cc2ce835"
+          }
+        },
+        {
+          "client_id": "480649070006-iskh79ad43ttiqqe3apacgsp9tp3gmhv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7xaot7-8_iz16b0JoFGNYsBIbVjHFVW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480649070006-iskh79ad43ttiqqe3apacgsp9tp3gmhv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

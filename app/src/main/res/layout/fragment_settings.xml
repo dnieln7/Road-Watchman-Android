@@ -2,20 +2,50 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/backgroundMaterial">
+    android:background="@color/backgroundMaterial"
+    android:orientation="vertical">
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="20sp"/>
+        android:layout_height="20dp" />
 
     <Switch
         android:id="@+id/darkTheme"
+        style="@style/Widget.AppCompat.CompoundButton.Switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Tema oscuro   "
         android:textColor="@color/textColor100"
+        android:textSize="20sp" />
+
+    <View
+        style="@style/Divider"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <Switch
+        android:id="@+id/settingsBackgroundReportes"
+        style="@style/Widget.AppCompat.CompoundButton.Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="20sp"/>
+        android:text="Envio de reportes en segundo plano   "
+        android:textColor="@color/textColor100"
+        android:textSize="20sp" />
+
+    <View
+        style="@style/Divider"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settingsSensor"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Iniciar sensor" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

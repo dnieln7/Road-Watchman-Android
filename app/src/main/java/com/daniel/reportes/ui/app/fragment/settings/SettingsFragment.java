@@ -1,6 +1,8 @@
 package com.daniel.reportes.ui.app.fragment.settings;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +15,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.daniel.reportes.R;
+import com.daniel.reportes.ui.app.fragment.reportes.background.SensorReporte;
+import com.daniel.reportes.ui.app.fragment.reportes.background.ReportesService;
+import com.google.android.material.button.MaterialButton;
 
 public class SettingsFragment extends Fragment {
 
@@ -22,6 +27,8 @@ public class SettingsFragment extends Fragment {
     // Widgets
     private View root;
     private Switch darkTheme;
+    private Switch backgroundReportes;
+    private MaterialButton sensor;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_settings, container, false);
@@ -40,7 +47,11 @@ public class SettingsFragment extends Fragment {
 
     private void initWidgets() {
         darkTheme = root.findViewById(R.id.darkTheme);
+        backgroundReportes = root.findViewById(R.id.settingsBackgroundReportes);
+        sensor = root.findViewById(R.id.settingsSensor);
+
         darkTheme.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+        backgroundReportes.setChecked(ReportesService.instance != null);
     }
 
     private void initListeners() {
@@ -54,5 +65,31 @@ public class SettingsFragment extends Fragment {
                 sharedPreferences.edit().putBoolean("DarkTheme", false).apply();
             }
         });
+        backgroundReportes.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                startReportesService(getActivity());
+            }
+            else {
+                stopReportesService(getActivity());
+            }
+        });
+
+        sensor.setOnClickListener(v -> launchSensor());
+    }
+
+    private void launchSensor() {
+        Intent intent = new Intent(getContext(), SensorReporte.class);
+
+        startActivity(intent);
+    }
+
+    private void startReportesService(Activity activity) {
+        Intent service = new Intent(activity, ReportesService.class);
+        activity.startService(service);
+    }
+
+    private void stopReportesService(Activity activity) {
+        Intent service = new Intent(activity, ReportesService.class);
+        activity.stopService(service);
     }
 }
