@@ -1,24 +1,20 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.daniel.reportes.R;
 import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.Reporte;
+import com.daniel.reportes.utils.LocationUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -37,6 +34,9 @@ import com.squareup.picasso.Picasso;
 import org.joda.time.LocalDateTime;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreateReporteStep1 extends Fragment {
 
@@ -45,6 +45,7 @@ public class CreateReporteStep1 extends Fragment {
     private ReporteViewModel reporteViewModel;
     private String pictureName;
     private Uri pictureUri;
+    private Bitmap pictureBitmap;
 
     // Widgets
     private View root;
@@ -79,6 +80,12 @@ public class CreateReporteStep1 extends Fragment {
                 reporteViewModel.setPictureName(pictureName);
             }
 
+            try {
+                pictureBitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), pictureUri);
+            }
+            catch (IOException e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
             pictureUri = null;
             pictureName = null;
         }
@@ -125,31 +132,31 @@ public class CreateReporteStep1 extends Fragment {
     }
 
     private void toStep2() {
+        if (pictureBitmap != null) {
+            Location location = LocationUtils.getGPS(getActivity());
 
-        reporteViewModel.getPictureName().observe(getActivity(), s -> {
-            if (s != null) {
-                Location location = getLocation();
+            if (location != null) {
 
-                if (location != null) {
+                Reporte reporte = new Reporte(
+                        new LocalDateTime().toString(),
+                        new double[]{location.getLatitude(), location.getLongitude()}
+                );
 
-                    Reporte reporte = new Reporte(
-                            new LocalDateTime().toString(),
-                            new double[]{location.getLatitude(), location.getLongitude()}
-                    );
+                reporteViewModel.setReporte(reporte);
 
-                    reporteViewModel.setReporte(reporte);
+                CreateReporteStep2 step2 = new CreateReporteStep2();
 
-                    CreateReporteStep2 step2 = new CreateReporteStep2();
-
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_host_fragment, step2, step2.getTag())
-                            .commit();
-                }
-                else {
-                    Snackbar.make(root, "Debe seleccionar una foto", Snackbar.LENGTH_SHORT).show();
-                }
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment, step2, step2.getTag())
+                        .commit();
             }
-        });
+            else {
+                Snackbar.make(root, "Calculando ubicación...", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Snackbar.make(root, "Debe seleccionar una foto", Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     private Uri getUri() {
@@ -177,47 +184,6 @@ public class CreateReporteStep1 extends Fragment {
 
     private String getPictureName() {
         return pictureName = "reporte_" + new LocalDateTime() + ".jpg";
-    }
-
-    @SuppressLint("MissingPermission")
-    private Location getLocation() {
-        if (hasPermissions) {
-
-            if (isLocationEnabled()) {
-
-                LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-                Location gps = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                Location network = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-                if (gps != null) {
-                    return gps;
-                }
-                else if (network != null) {
-                    return network;
-                }
-                else {
-                    return null;
-                }
-            }
-            else {
-                Toast.makeText(getContext(), "Por favor activa la ubicación", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        }
-        else {
-            askPermissions(getActivity());
-        }
-
-        return null;
-    }
-
-    private boolean isLocationEnabled() {
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
     private void checkPermissions(Activity activity) {

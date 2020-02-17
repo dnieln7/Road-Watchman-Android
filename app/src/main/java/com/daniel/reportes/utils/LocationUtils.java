@@ -27,7 +27,6 @@ public class LocationUtils {
         if (hasPermissions(activity)) {
             if (hasGPSEnabled(activity)) {
                 LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-                knownLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 locationListener = new LocationListener();
 
                 if(knownLocation == null) {
