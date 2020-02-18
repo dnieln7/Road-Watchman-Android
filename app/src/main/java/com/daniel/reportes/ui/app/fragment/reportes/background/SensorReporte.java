@@ -121,7 +121,7 @@ public class SensorReporte extends Activity implements SensorEventListener {
     @Override
     protected void onResume() {
         super.onResume();
-        // register this class as a listener for the orientation and accelerometer sensors
+        // getMonitor this class as a listener for the orientation and accelerometer sensors
         sensorManager.registerListener(this,
                 sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
