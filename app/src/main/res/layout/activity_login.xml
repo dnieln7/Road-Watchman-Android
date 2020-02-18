@@ -67,23 +67,22 @@
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:onClick="loginWithEmail"
             android:text="Ingresar"
-            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/textColor100" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:backgroundTint="@color/colorPrimary"
             android:onClick="loginWithGoogle"
             android:text="Sign up"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textColor100"
             app:icon="@drawable/google_logo"
-            app:iconPadding="10dp"
-            app:iconTint="@color/colorAccent"
-            app:strokeColor="@color/colorPrimary" />
+            app:iconPadding="10dp" />
     </LinearLayout>
 
     <Space
@@ -91,11 +90,12 @@
         android:layout_height="20dp" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToSignUp"
         android:text="Registrarse"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimary"
+        app:strokeColor="@color/colorPrimary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

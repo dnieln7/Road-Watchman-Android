@@ -80,7 +80,22 @@ public class Login extends AppCompatActivity {
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        if (sharedPreferences.getBoolean("google", false)) {
+        if (sharedPreferences.getInt("id", 0) != 0) {
+            AppSession session = new AppSession(
+                    "",
+                    sharedPreferences.getInt("id", 0),
+                    new User(
+                            sharedPreferences.getInt("id", 0),
+                            sharedPreferences.getString("username", ""),
+                            sharedPreferences.getString("email", ""),
+                            sharedPreferences.getString("googleId", ""),
+                            sharedPreferences.getString("role", "")
+                    )
+            );
+
+            goToApp(session);
+        }
+        else if (sharedPreferences.getBoolean("google", false)) {
             loginWithGoogle(null);
         }
         else {
@@ -97,8 +112,12 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), AppActivity.class);
 
         intent.putExtra("session", session);
-        sharedPreferences.edit().putBoolean("google", session.getUser().getGoogleId().length() > 0).apply();
+
+        sharedPreferences.edit().putInt("id", session.getUser().getId()).apply();
+        sharedPreferences.edit().putString("username", session.getUser().getUsername()).apply();
         sharedPreferences.edit().putString("email", session.getUser().getEmail()).apply();
+        sharedPreferences.edit().putBoolean("google", session.getUser().getGoogleId().length() > 0).apply();
+        sharedPreferences.edit().putString("role", session.getUser().getRole()).apply();
 
         startActivity(intent);
     }

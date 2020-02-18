@@ -10,6 +10,15 @@ public class User implements Serializable {
     private String googleId;
     private String role;
 
+    public User(int id, String username, String email, String googleId, String role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = "";
+        this.googleId = googleId;
+        this.role = role;
+    }
+
     public User(String username, String email, String password, String googleId, String role) {
         this.username = username;
         this.email = email;

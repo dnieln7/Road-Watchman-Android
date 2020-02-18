@@ -7,6 +7,12 @@ public class AppSession implements Serializable {
     private int UserId;
     private User user;
 
+    public AppSession(String token, int userId, User user) {
+        this.token = token;
+        UserId = userId;
+        this.user = user;
+    }
+
     public AppSession(String token, int userId) {
         this.token = token;
         UserId = userId;
