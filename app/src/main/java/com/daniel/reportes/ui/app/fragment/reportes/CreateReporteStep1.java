@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.Utils;
+import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.utils.LocationUtils;
 import com.google.android.material.button.MaterialButton;

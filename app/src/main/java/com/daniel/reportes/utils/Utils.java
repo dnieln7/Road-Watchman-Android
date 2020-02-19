@@ -1,4 +1,4 @@
-package com.daniel.reportes;
+package com.daniel.reportes.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.daniel.reportes.R;
 
 import java.util.Random;
 

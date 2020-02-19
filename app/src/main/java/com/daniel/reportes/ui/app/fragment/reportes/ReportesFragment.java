@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.reporte.GetAllReportes;
@@ -21,7 +20,6 @@ import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.NetworkMonitor;
 import com.daniel.reportes.utils.Printer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.storage.internal.Util;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

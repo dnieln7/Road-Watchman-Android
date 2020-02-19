@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.Utils;
+import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
