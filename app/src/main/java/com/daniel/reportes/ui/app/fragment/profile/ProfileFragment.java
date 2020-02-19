@@ -2,9 +2,11 @@ package com.daniel.reportes.ui.app.fragment.profile;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,8 +24,7 @@ import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.PutUser;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
-import com.daniel.reportes.ui.login.Login;
-import com.dnieln7.httprequest.exception.ResponseException;
+import com.daniel.reportes.utils.PreferencesUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -54,12 +55,30 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
         appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
+        setHasOptionsMenu(true);
 
         initObjects();
         initWidgets();
         initListeners();
 
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_sign_out, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_signOut) {
+            PreferencesUtils.saveUser(getContext(), new User(0, "", "", "", ""));
+            appSession = null;
+            appViewModel.setAppSession(null);
+            getActivity().finish();
+        }
+
+        return true;
     }
 
     private void initObjects() {
