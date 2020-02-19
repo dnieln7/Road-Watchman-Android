@@ -16,12 +16,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.Utils;
-import com.daniel.reportes.ui.app.fragment.reportes.background.SensorReporte;
 import com.daniel.reportes.ui.app.fragment.reportes.background.ReportesService;
+import com.daniel.reportes.ui.app.fragment.reportes.background.SensorReporte;
 import com.daniel.reportes.utils.NetworkMonitor;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.storage.internal.Util;
 
 public class SettingsFragment extends Fragment {
 
@@ -77,7 +76,7 @@ public class SettingsFragment extends Fragment {
                         startReportesService(getActivity());
                     }
                     else {
-                        Utils.toast(getContext(), "Se necesita una conexión activa");
+                        Printer.toast(getContext(), "Se necesita una conexión activa");
                         backgroundReportes.setChecked(false);
                     }
                 }
@@ -86,7 +85,7 @@ public class SettingsFragment extends Fragment {
                         startReportesService(getActivity());
                     }
                     else {
-                        Utils.toast(getContext(), "Se necesita una conexión activa");
+                        Printer.toast(getContext(), "Se necesita una conexión activa");
                         backgroundReportes.setChecked(false);
                     }
                 }

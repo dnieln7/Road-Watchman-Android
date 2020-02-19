@@ -6,9 +6,6 @@ import android.content.res.TypedArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Random;
 
@@ -45,17 +42,5 @@ public class Utils {
                 inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
-    }
-
-    public static void toast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void snackBar(View view, String message) {
-        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
-    }
-
-    public static void dialog(Context context, String message) {
-
     }
 }

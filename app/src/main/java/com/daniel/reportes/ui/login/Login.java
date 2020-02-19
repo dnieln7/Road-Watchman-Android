@@ -19,6 +19,7 @@ import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.task.user.PostUser;
 import com.daniel.reportes.ui.app.AppActivity;
 import com.daniel.reportes.ui.signup.SignUp;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -217,7 +218,7 @@ public class Login extends AppCompatActivity {
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Utils.toast(Login.this, this.exception.getMessage());
+                Printer.toast(Login.this, this.exception.getMessage());
                 return false;
             }
             return true;
@@ -233,7 +234,7 @@ public class Login extends AppCompatActivity {
                     return true;
                 }
                 else {
-                    Utils.toast(Login.this, this.exception.getMessage());
+                    Printer.toast(Login.this, this.exception.getMessage());
                     return false;
                 }
             }

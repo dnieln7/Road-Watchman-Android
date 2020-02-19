@@ -18,8 +18,8 @@ import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.email.ExistsEmail;
 import com.daniel.reportes.task.email.SendEmail;
 import com.daniel.reportes.task.user.PostUser;
-import com.daniel.reportes.ui.app.fragment.reportes.CreateReporteStep2;
 import com.daniel.reportes.ui.other.IFragmentListener;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -155,7 +155,7 @@ public class SignUpForm extends Fragment {
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Utils.toast(SignUpForm.this.getContext(), this.exception.getMessage());
+                Printer.toast(SignUpForm.this.getContext(), this.exception.getMessage());
                 return false;
             }
             return true;

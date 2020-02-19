@@ -1,13 +1,10 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -21,7 +18,7 @@ import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.reporte.PostReporte;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
-import com.dnieln7.httprequest.exception.ResponseException;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
@@ -133,7 +130,7 @@ public class CreateReporteStep2 extends Fragment {
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Utils.toast(CreateReporteStep2.this.getContext(), this.exception.getMessage());
+                Printer.toast(CreateReporteStep2.this.getContext(), this.exception.getMessage());
                 return false;
             }
             return true;

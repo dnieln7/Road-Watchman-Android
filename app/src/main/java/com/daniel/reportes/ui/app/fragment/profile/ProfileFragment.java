@@ -25,6 +25,7 @@ import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.PutUser;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.PreferencesUtils;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -179,7 +180,7 @@ public class ProfileFragment extends Fragment {
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Utils.toast(ProfileFragment.this.getContext(), this.exception.getMessage());
+                Printer.toast(ProfileFragment.this.getContext(), this.exception.getMessage());
                 return false;
             }
             return true;

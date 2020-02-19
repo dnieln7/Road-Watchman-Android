@@ -19,11 +19,11 @@ import androidx.annotation.Nullable;
 
 import com.daniel.reportes.App;
 import com.daniel.reportes.R;
-import com.daniel.reportes.Utils;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.reporte.PostReporte;
 import com.daniel.reportes.ui.login.Login;
+import com.daniel.reportes.utils.Printer;
 
 import org.joda.time.LocalDateTime;
 
@@ -149,7 +149,7 @@ public class ReportesService extends Service implements SensorEventListener, Loc
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Utils.toast(getBaseContext(), this.exception.getMessage());
+                Printer.toast(getBaseContext(), this.exception.getMessage());
                 return false;
             }
             return true;
