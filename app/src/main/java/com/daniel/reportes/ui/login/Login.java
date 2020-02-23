@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
+import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
@@ -47,8 +48,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initWidgets();
-        loadPreferences();
+        Intent permissionsIntent = new Intent(this, Permissions.class);
+        startActivityForResult(permissionsIntent, Permissions.REQUEST_CODE);
     }
 
     @Override
@@ -69,6 +70,10 @@ public class Login extends AppCompatActivity {
             catch (InterruptedException | ExecutionException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
+        }
+        if(requestCode == Permissions.REQUEST_CODE) {
+            initWidgets();
+            loadPreferences();
         }
     }
 

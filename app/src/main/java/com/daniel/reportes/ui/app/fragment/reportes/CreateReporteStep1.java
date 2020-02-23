@@ -1,9 +1,7 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
@@ -19,14 +17,14 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.Reporte;
+import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.utils.LocationUtils;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -41,7 +39,6 @@ import java.util.logging.Logger;
 public class CreateReporteStep1 extends Fragment {
 
     // Objects
-    private boolean hasPermissions;
     private ReporteViewModel reporteViewModel;
     private String pictureName;
     private Uri pictureUri;
@@ -57,7 +54,6 @@ public class CreateReporteStep1 extends Fragment {
         root = inflater.inflate(R.layout.fragment_create_reporte_step_1, container, false);
         reporteViewModel = ViewModelProviders.of(getActivity()).get(ReporteViewModel.class);
 
-        checkPermissions(getActivity());
         initWidgets();
         initListeners();
 
@@ -93,8 +89,10 @@ public class CreateReporteStep1 extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 101) {
-            checkPermissions(getActivity());
+        if (requestCode == Permissions.REQUEST_CODE) {
+            if(Permissions.hasPermissions(getContext())) {
+                selectPicture();
+            }
         }
     }
 
@@ -110,7 +108,7 @@ public class CreateReporteStep1 extends Fragment {
     }
 
     private void selectPicture() {
-        if (hasPermissions) {
+        if (Permissions.hasPermissions(getContext())) {
 
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getUri());
@@ -127,7 +125,7 @@ public class CreateReporteStep1 extends Fragment {
             startActivityForResult(intentChooser, Utils.SELECT_PICTURE);
         }
         else {
-            askPermissions(getActivity());
+            askPermissions();
         }
     }
 
@@ -186,23 +184,16 @@ public class CreateReporteStep1 extends Fragment {
         return pictureName = "reporte_" + new LocalDateTime() + ".jpg";
     }
 
-    private void checkPermissions(Activity activity) {
-        hasPermissions = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void askPermissions(Activity activity) {
+    private void askPermissions() {
         ActivityCompat.requestPermissions(
-                activity,
+                getActivity(),
                 new String[]{
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION
                 },
-                101
+                Permissions.REQUEST_CODE
         );
     }
 }
