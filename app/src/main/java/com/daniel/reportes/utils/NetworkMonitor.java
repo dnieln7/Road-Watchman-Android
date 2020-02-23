@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 
 /**
  * Helper class to check network type and status.
+ *
  * @author dnieln7
  */
 public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
@@ -21,6 +22,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android N and up, Create new instance of NetworkMonitor.
+     *
      * @param context The activity context.
      * @return An instance of NetworkMonitor registered at {@link ConnectivityManager}.
      */
@@ -38,6 +40,11 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
         if (manager != null) {
             manager.registerDefaultNetworkCallback(this);
+            try {
+                Thread.sleep(500);
+            }
+            catch (InterruptedException ignored) {
+            }
         }
     }
 
@@ -47,7 +54,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
             data = true;
             wifi = false;
         }
-        else{
+        else {
             wifi = true;
             data = false;
         }
@@ -61,6 +68,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android N and up. Checks if the active network is wifi.
+     *
      * @return true if wifi is enabled and connected, false otherwise.
      */
     public boolean hasWifi() {
@@ -69,6 +77,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android N and up. Checks if the active network is mobile data.
+     *
      * @return true if mobile data is enabled and connected, false otherwise.
      */
     public boolean hasData() {
@@ -77,6 +86,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android N and up. Checks if the network is connected regardless of the type.
+     *
      * @return true if there is an enabled network, false otherwise.
      */
     public boolean hasNetwork() {
@@ -84,7 +94,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
     }
 
     /**
-     * For android N and up. Unregisters the current instance of {@link ConnectivityManager} 
+     * For android N and up. Unregisters the current instance of {@link ConnectivityManager}
      * and destroys the instance.
      */
     public void unregister() {
@@ -94,10 +104,11 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android M and lower. Checks if the active network is wifi.
+     *
      * @return true if wifi is enabled and connected, false otherwise.
      */
     public static boolean hasWifi(Context context) {
-        if(context == null) {
+        if (context == null) {
             return false;
         }
 
@@ -109,10 +120,11 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android M and lower. Checks if the active network is mobile data.
+     *
      * @return true if mobile data is enabled and connected, false otherwise.
      */
     public static boolean hasData(Context context) {
-        if(context == null) {
+        if (context == null) {
             return false;
         }
 
@@ -124,6 +136,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
 
     /**
      * For android M and lower. Checks if the network is connected regardless of the type.
+     *
      * @return true if there is an enabled network, false otherwise.
      */
     public static boolean hasNetwork(Context context) {
