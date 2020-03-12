@@ -6,60 +6,30 @@
     android:background="@color/backgroundMaterial"
     android:orientation="vertical">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="5dp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/backgroundMaterial"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:strokeWidth="0dp">
-
-        <Switch
-            android:id="@+id/darkTheme"
-            style="@style/Widget.AppCompat.CompoundButton.Switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tema oscuro   "
-            android:textColor="@color/textColor100"
-            android:textSize="20sp" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/backgroundMaterial"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:strokeWidth="0dp">
-
-        <Switch
-            android:id="@+id/settingsBackgroundReportes"
-            style="@style/Widget.AppCompat.CompoundButton.Switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Envio de reportes en segundo plano   "
-            android:textColor="@color/textColor100"
-            android:textSize="20sp" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/settingsSensor"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/settingsDarkTheme"
+        style="@style/Widget.MaterialComponents.CompoundButton.Switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Iniciar sensor"
+        android:layout_marginStart="10dp"
+        android:text="Tema oscuro"
         android:textColor="@color/textColor100"
-        app:backgroundTint="@color/colorPrimary" />
+        android:textSize="20sp"
+        app:switchPadding="20dp"
+        app:thumbTint="@color/colorPrimary" />
+
+    <LinearLayout style="@style/Divider"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/settingsReportesInBackground"
+        style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Envio de reportes en segundo plano"
+        android:textColor="@color/textColor100"
+        android:textSize="20sp"
+        app:switchPadding="20dp"
+        app:thumbTint="@color/colorPrimary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

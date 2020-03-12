@@ -43,13 +43,9 @@ public class ProfileFragment extends Fragment {
     // Widgets
     private View root;
 
-    private EditText profileUsername;
+    private TextInputEditText profileUsername;
     private TextInputEditText profileEmail;
     private TextInputEditText profilePassword;
-
-    private ImageView editUsername;
-    private ImageView editEmail;
-    private ImageView editPassword;
 
     private Button save;
 
@@ -67,19 +63,24 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_sign_out, menu);
+        inflater.inflate(R.menu.menu_profile, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.menu_signOut) {
-            PreferencesUtils.saveUser(getContext(), new User(0, "", "", "", ""));
-            appSession = null;
-            appViewModel.setAppSession(null);
-            getActivity().finish();
+        switch (item.getItemId()) {
+            case R.id.profileSignOut:
+                PreferencesUtils.saveUser(getContext(), new User(0, "", "", "", ""));
+                appSession = null;
+                appViewModel.setAppSession(null);
+                getActivity().finish();
+                return true;
+            case R.id.profileEdit:
+                edit();
+                return true;
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void initObjects() {
@@ -91,10 +92,6 @@ public class ProfileFragment extends Fragment {
         profileEmail = root.findViewById(R.id.profileEmail);
         profilePassword = root.findViewById(R.id.profilePassword);
 
-        editUsername = root.findViewById(R.id.editUsername);
-        editEmail = root.findViewById(R.id.editEmail);
-        editPassword = root.findViewById(R.id.editPassword);
-
         save = root.findViewById(R.id.save);
 
         profileUsername.setText(appSession.getUser().getUsername());
@@ -104,40 +101,27 @@ public class ProfileFragment extends Fragment {
 
     private void initListeners() {
         save.setOnClickListener(v -> save());
-        editUsername.setOnClickListener(v -> editUsername());
-        editEmail.setOnClickListener(v -> editEmail());
-        editPassword.setOnClickListener(v -> editPassword());
     }
 
-    private void editUsername() {
-
-        if (profileUsername.isEnabled()) {
-            profileUsername.setEnabled(false);
-        }
-        else {
-            profileUsername.setEnabled(true);
-        }
-    }
-
-    private void editEmail() {
-
-        if (profileEmail.isEnabled()) {
-            profileEmail.setEnabled(false);
-        }
-        else {
-            profileEmail.setEnabled(true);
-        }
-    }
-
-    private void editPassword() {
+    private void edit() {
+        profileUsername.setEnabled(!profileUsername.isEnabled());
+        profileEmail.setEnabled(!profileEmail.isEnabled());
+        profilePassword.setEnabled(!profilePassword.isEnabled());
 
         if (profilePassword.isEnabled()) {
-            profilePassword.setEnabled(false);
-            ((TextInputLayout) root.findViewById(R.id.layoutPassword)).setPasswordVisibilityToggleTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            ((TextInputLayout) root.findViewById(R.id.layoutPassword))
+                    .setEndIconTintList(ColorStateList.valueOf(Utils.GetPrimaryColor(getContext())));
         }
         else {
-            profilePassword.setEnabled(true);
-            ((TextInputLayout) root.findViewById(R.id.layoutPassword)).setPasswordVisibilityToggleTintList(ColorStateList.valueOf(Utils.GetPrimaryColor(getContext())));
+            ((TextInputLayout) root.findViewById(R.id.layoutPassword))
+                    .setEndIconTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+        }
+
+        if(save.getVisibility() == View.INVISIBLE) {
+            save.setVisibility(View.VISIBLE);
+        }
+        else {
+            save.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -153,7 +137,7 @@ public class ProfileFragment extends Fragment {
         try {
             PutListener listener = new PutListener();
 
-            if(new PutUser(String.valueOf(appSession.getUser().getId()), listener).execute(user).get().success()) {
+            if (new PutUser(String.valueOf(appSession.getUser().getId()), listener).execute(user).get().success()) {
                 Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
 
                 user = listener.getResult();

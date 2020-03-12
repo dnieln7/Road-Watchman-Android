@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Email"
+        app:helperText="user@example.com"
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary">
 
@@ -40,7 +41,7 @@
         android:textColorHint="@color/colorPrimary"
         app:boxStrokeColor="@color/colorPrimary"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/colorAccent">
+        app:passwordToggleTint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginPassword"
@@ -81,7 +82,7 @@
             android:onClick="loginWithGoogle"
             android:text="Sign up"
             android:textColor="@color/textColor100"
-            app:icon="@drawable/google_logo"
+            app:icon="@drawable/google"
             app:iconPadding="10dp" />
     </LinearLayout>
 

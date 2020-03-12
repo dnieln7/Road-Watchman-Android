@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.ui.permission.Permissions;
+import com.daniel.reportes.utils.TextMonitor;
 import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
@@ -112,6 +113,8 @@ public class Login extends AppCompatActivity {
     private void initWidgets() {
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
+
+        loginEmail.addTextChangedListener(new TextMonitor(loginEmail));
     }
 
     private void goToApp(AppSession session) {
@@ -165,6 +168,11 @@ public class Login extends AppCompatActivity {
 
     public void loginWithEmail(View view) {
         Utils.hideKeyboard(this);
+
+        if(loginEmail.getError() != null) {
+            Printer.snackBar(view, "Verifique su email");
+            return;
+        }
 
         User user = new User(
                 loginEmail.getText().toString(),

@@ -75,7 +75,7 @@ public class ReportesService extends Service implements SensorEventListener, Loc
             Notification notification = new Notification.Builder(this, App.ID)
                     .setContentTitle("Reportes")
                     .setContentText("Servicio en ejecución...")
-                    .setSmallIcon(R.drawable.reportes_icon)
+                    .setSmallIcon(R.drawable.reportes)
                     .build();
 
             startForeground(1, notification);

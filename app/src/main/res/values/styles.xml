@@ -1,12 +1,12 @@
 <resources>
 
-    <style name="LightTheme" parent="Theme.MaterialComponents.Light.Bridge">
+    <style name="MaterialTheme" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="LightTheme.NoActionBar">
+    <style name="MaterialTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -18,6 +18,8 @@
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/textColor25</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 </resources>

@@ -4,126 +4,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundMaterial"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/circle_background"
-        android:src="@drawable/profile_icon"
-        android:tint="@color/backgroundMaterial" />
+        android:src="@drawable/profile"
+        android:tint="@color/colorPrimary" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
-        android:orientation="horizontal"
-        android:weightSum="4.5">
+        app:boxBackgroundMode="none"
+        app:hintEnabled="false">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileUsername"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profileUsername"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:enabled="false"
-                android:inputType="textMultiLine"
-                android:textAlignment="center"
-                android:textColor="@color/textColor100"
-                android:textSize="20sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/editUsername"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.5"
-            android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimaryDark" />
-    </LinearLayout>
-
-    <View
-        style="@style/Divider"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" />
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="25dp"
-            android:layout_gravity="bottom"
             android:layout_weight="1"
-            android:src="@drawable/email_icon"
-            android:tint="@color/colorPrimaryDark" />
+            android:src="@drawable/email"
+            android:tint="@color/colorPrimary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="9"
             android:hint="Email"
-            android:textColorHint="@color/textColor25">
+            android:textColorHint="@color/colorPrimary"
+            app:boxBackgroundColor="@color/backgroundMaterial"
+            app:boxBackgroundMode="none">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profileEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
                 android:enabled="false"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/textColor100"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/editEmail"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimaryDark" />
     </LinearLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="25dp"
-            android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/password_icon"
-            android:tint="@color/colorPrimaryDark" />
+            android:src="@drawable/lock"
+            android:tint="@color/colorPrimary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="9"
             android:hint="Contraseña"
-            android:textColorHint="@color/textColor25"
+            android:textColorHint="@color/colorPrimary"
+            app:boxBackgroundColor="@color/backgroundMaterial"
+            app:boxBackgroundMode="none"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@android:color/transparent">
 
@@ -131,36 +92,22 @@
                 android:id="@+id/profilePassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
                 android:enabled="false"
                 android:inputType="textPassword"
-                android:textColor="@color/textColor100"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/editPassword"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/edit_icon"
-            android:tint="@color/colorPrimaryDark" />
     </LinearLayout>
 
-    <View
-        style="@style/Divider"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/save"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
+        android:layout_marginTop="20dp"
         android:text="Guardar"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"
+        android:visibility="invisible"
+        app:strokeColor="@color/colorPrimary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -29,7 +29,7 @@ public class LocationUtils {
                 LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
                 locationListener = new LocationListener();
 
-                if(knownLocation == null) {
+                if (knownLocation == null) {
                     manager.requestSingleUpdate(
                             LocationManager.GPS_PROVIDER,
                             locationListener,
@@ -42,9 +42,7 @@ public class LocationUtils {
                 }
             }
             else {
-                Toast.makeText(activity, "Por favor activa la ubicación", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                activity.startActivity(intent);
+                activateLocation(activity);
             }
         }
         else {
@@ -62,7 +60,7 @@ public class LocationUtils {
                 knownLocation = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 locationListener = new LocationListener();
 
-                if(knownLocation == null) {
+                if (knownLocation == null) {
                     manager.requestSingleUpdate(
                             LocationManager.NETWORK_PROVIDER,
                             locationListener,
@@ -106,8 +104,14 @@ public class LocationUtils {
         return ((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private static boolean hasGPSEnabled(Activity activity) {
+    public static boolean hasGPSEnabled(Activity activity) {
         return ((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    public static void activateLocation(Activity activity) {
+        Toast.makeText(activity, "Por favor activa la ubicación", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        activity.startActivity(intent);
     }
 
     private static void setLocation(Location location) {

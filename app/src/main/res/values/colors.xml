@@ -9,6 +9,5 @@
     <color name="textColor25">#40000000</color>
 
     <color name="backgroundMaterial">#FFFFFF</color>
-    <color name="backgroundLight">#80FFFFFF</color>
-    <color name="backgroundDefault">#00FFFFFF</color>
+    <color name="backgroundDefault">#FFFFFF</color>
 </resources>

@@ -20,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_margin="20dp"
-        android:src="@drawable/reportes_logo" />
+        android:src="@drawable/reportes" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/selectPicture"
@@ -30,7 +30,7 @@
         android:layout_margin="20dp"
         android:text=" Selecciona"
         android:textColor="@color/colorPrimary"
-        app:icon="@drawable/gallery_icon"
+        app:icon="@drawable/add_from_gallery"
         app:iconTint="@color/colorPrimary"
         app:strokeColor="@color/colorPrimary" />
 

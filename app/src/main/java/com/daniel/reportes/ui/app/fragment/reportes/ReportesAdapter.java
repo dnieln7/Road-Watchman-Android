@@ -63,10 +63,7 @@ public class ReportesAdapter extends BaseAdapter {
         item.description.setText(reportes.get(position).getDescription());
 
         if(reportes.get(position).getPicture() != null && !reportes.get(position).getPicture().equals("")) {
-            Picasso.with(context).load(reportes.get(position).getPicture()).placeholder(R.drawable.reportes_logo).into(item.picture);
-        }
-        else {
-            Picasso.with(context).load(R.drawable.reportes_logo).into(item.picture);
+            Picasso.with(context).load(reportes.get(position).getPicture()).into(item.picture);
         }
 
         return convertView;
