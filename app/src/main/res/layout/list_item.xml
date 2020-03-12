@@ -18,11 +18,10 @@
 
         <ImageView
             android:id="@+id/reportePicture"
-            android:layout_width="105dp"
-            android:layout_height="117dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:padding="10dp"
-            android:src="@drawable/reportes"
-            android:tint="@color/colorPrimary"/>
+            android:src="@drawable/reportes"/>
 
         <LinearLayout
             android:layout_width="match_parent"

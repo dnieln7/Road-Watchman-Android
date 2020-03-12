@@ -31,7 +31,6 @@ public class TextMonitor implements TextWatcher {
         if(!validateEmail(s.toString())) {
             container.setError("El email no es válido");
         }
-        System.out.println(container.getError());
     }
 
     private boolean validateEmail(String email) {

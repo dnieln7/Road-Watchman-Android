@@ -8,12 +8,7 @@ public class Reporte {
     private String picture;
     private int UserId;
 
-    public Reporte(String description, String date, double[] location, String picture, int userId) {
-        this.description = description;
-        this.date = date;
-        this.location = location;
-        this.picture = picture;
-        this.UserId = userId;
+    public Reporte() {
     }
 
     public Reporte(String date, double[] location) {

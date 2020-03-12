@@ -14,14 +14,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class ReportesAdapter extends BaseAdapter {
+public class ReporteAdapter extends BaseAdapter {
 
     private Context context;
     private List<Reporte> reportes;
     private LayoutInflater inflater;
 
-    public ReportesAdapter(Context context, List<Reporte> reportes) {
+    public ReporteAdapter(Context context, List<Reporte> reportes) {
         this.context = context;
         this.reportes = reportes;
     }
@@ -47,23 +49,31 @@ public class ReportesAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        if (convertView == null) {
+        if (inflater != null) {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
         }
 
-        ListItem item = new ListItem(convertView);
+        ReporteItem item = new ReporteItem(convertView);
 
-      try {
-            item.location.setText(new FindPlace(new Geocoder(convertView.getContext())).execute(reportes.get(position).getLocation()[0], reportes.get(position).getLocation()[1]).get());
+        try {
+            item.getLocation().setText(new FindPlace(new Geocoder(convertView.getContext())).execute(
+                    reportes.get(position).getLocation()[0],
+                    reportes.get(position).getLocation()[1]).get()
+            );
         }
         catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
 
-        item.description.setText(reportes.get(position).getDescription());
+        item.getDescription().setText(reportes.get(position).getDescription());
 
-        if(reportes.get(position).getPicture() != null && !reportes.get(position).getPicture().equals("")) {
-            Picasso.with(context).load(reportes.get(position).getPicture()).into(item.picture);
+        if (!reportes.get(position).getDescription().equals("Generated")) {
+            Picasso.with(context)
+                    .load(reportes.get(position).getPicture())
+                    .placeholder(R.drawable.reportes)
+                    .resize(300, 300)
+                    .onlyScaleDown()
+                    .into(item.getPicture());
         }
 
         return convertView;

@@ -32,7 +32,7 @@ public class ReportesFragment extends Fragment {
     private boolean expanded;
     private AppViewModel appViewModel;
     private AppSession appSession;
-    private ReportesAdapter adapter;
+    private ReporteAdapter adapter;
     private List<Reporte> reportes;
 
     // Widgets
@@ -107,7 +107,7 @@ public class ReportesFragment extends Fragment {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
 
-            adapter = new ReportesAdapter(getContext(), reportes);
+            adapter = new ReporteAdapter(getContext(), reportes);
             reportesList.setAdapter(adapter);
             showList();
         }
