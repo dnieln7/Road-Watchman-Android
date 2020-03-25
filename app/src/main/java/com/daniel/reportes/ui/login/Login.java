@@ -126,6 +126,7 @@ public class Login extends AppCompatActivity {
         sharedPreferences.edit().putString("username", session.getUser().getUsername()).apply();
         sharedPreferences.edit().putString("email", session.getUser().getEmail()).apply();
         sharedPreferences.edit().putBoolean("google", session.getUser().getGoogleId().length() > 0).apply();
+        sharedPreferences.edit().putString("googleId", session.getUser().getGoogleId()).apply();
         sharedPreferences.edit().putString("role", session.getUser().getRole()).apply();
 
         startActivity(intent);

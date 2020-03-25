@@ -9,8 +9,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
@@ -48,9 +49,16 @@ public class ReportesFragment extends Fragment {
     private FloatingActionButton reportesCreate;
     private FloatingActionButton reportesRefresh;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        System.out.println("------");
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_reportes, container, false);
-        appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
 
         initObjects();
         initWidgets();

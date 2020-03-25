@@ -10,6 +10,15 @@ public class User implements Serializable {
     private String googleId;
     private String role;
 
+    public User(int id, String username, String email, String password, String googleId, String role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.googleId = googleId;
+        this.role = role;
+    }
+
     public User(int id, String username, String email, String googleId, String role) {
         this.id = id;
         this.username = username;
@@ -33,8 +42,15 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public User() {
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -65,11 +81,27 @@ public class User implements Serializable {
         return googleId;
     }
 
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", googleId='" + googleId + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.reporte.PostReporte;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.Printer;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;

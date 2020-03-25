@@ -10,15 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
@@ -26,6 +24,7 @@ import com.daniel.reportes.task.user.PutUser;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.PreferencesUtils;
 import com.daniel.reportes.utils.Printer;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,7 +37,6 @@ public class ProfileFragment extends Fragment {
 
     // Objects
     private AppViewModel appViewModel;
-    private AppSession appSession;
 
     // Widgets
     private View root;
@@ -49,12 +47,17 @@ public class ProfileFragment extends Fragment {
 
     private Button save;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_profile, container, false);
-        appViewModel = ViewModelProviders.of(getActivity()).get(AppViewModel.class);
-        setHasOptionsMenu(true);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         initObjects();
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_profile, container, false);
+        setHasOptionsMenu(true);
+
         initWidgets();
         initListeners();
 
@@ -70,9 +73,7 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profileSignOut:
-                PreferencesUtils.saveUser(getContext(), new User(0, "", "", "", ""));
-                appSession = null;
-                appViewModel.setAppSession(null);
+                PreferencesUtils.saveUser(getActivity(), new User(0, "", "", "", ""));
                 getActivity().finish();
                 return true;
             case R.id.profileEdit:
@@ -84,7 +85,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initObjects() {
-        appViewModel.getAppSession().observe(getActivity(), session -> appSession = session);
+        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
     }
 
     private void initWidgets() {
@@ -94,9 +95,11 @@ public class ProfileFragment extends Fragment {
 
         save = root.findViewById(R.id.save);
 
-        profileUsername.setText(appSession.getUser().getUsername());
-        profileEmail.setText(appSession.getUser().getEmail());
-        profilePassword.setText(appSession.getUser().getPassword());
+        appViewModel.getAppSession().observe(getActivity(), appSession -> {
+            profileUsername.setText(appSession.getUser().getUsername());
+            profileEmail.setText(appSession.getUser().getEmail());
+            profilePassword.setText(appSession.getUser().getPassword());
+        });
     }
 
     private void initListeners() {
@@ -117,39 +120,41 @@ public class ProfileFragment extends Fragment {
                     .setEndIconTintList(ColorStateList.valueOf(Color.TRANSPARENT));
         }
 
-        if(save.getVisibility() == View.INVISIBLE) {
-            save.setVisibility(View.VISIBLE);
-        }
-        else {
-            save.setVisibility(View.INVISIBLE);
-        }
+        save.setVisibility(save.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+
+        final User user = new User();
+
+        appViewModel.getAppSession().observe(getActivity(), appSession -> {
+            user.setId(appSession.getUser().getId());
+            user.setUsername(profileUsername.getText().toString());
+            user.setEmail(profileEmail.getText().toString());
+            user.setPassword(profilePassword.getText().toString());
+            user.setGoogleId(appSession.getUser().getGoogleId());
+            user.setRole(appSession.getUser().getRole());
+        });
+
+        Printer.okDialog(getContext(), "", user.toString());
     }
 
     private void save() {
-        User user = new User(
-                profileUsername.getText().toString(),
-                profileEmail.getText().toString(),
-                profilePassword.getText().toString(),
-                appSession.getUser().getGoogleId(),
-                appSession.getUser().getRole()
-        );
+        final User user = new User();
 
-        try {
+        appViewModel.getAppSession().observe(getActivity(), appSession -> {
+            user.setId(appSession.getUser().getId());
+            user.setUsername(profileUsername.getText().toString());
+            user.setEmail(profileEmail.getText().toString());
+            user.setPassword(profilePassword.getText().toString());
+            user.setGoogleId(appSession.getUser().getGoogleId());
+            user.setRole(appSession.getUser().getRole());
+        });
+
+       try {
             PutListener listener = new PutListener();
 
-            if (new PutUser(String.valueOf(appSession.getUser().getId()), listener).execute(user).get().success()) {
+            if (new PutUser(String.valueOf(user.getId()), listener).execute(user).get().success()) {
                 Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
 
-                user = listener.getResult();
-
-                profileUsername.setEnabled(false);
-                profileEmail.setEnabled(false);
-                profilePassword.setEnabled(false);
-                appSession.setUser(user);
-                appViewModel.setAppSession(appSession);
-
-                profileUsername.setText(appSession.getUser().getUsername());
-                profileEmail.setText(appSession.getUser().getEmail());
+                edit();
             }
         }
         catch (ExecutionException | InterruptedException e) {

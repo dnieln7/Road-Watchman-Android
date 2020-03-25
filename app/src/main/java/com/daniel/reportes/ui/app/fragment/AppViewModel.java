@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.daniel.reportes.data.AppSession;
+import com.daniel.reportes.data.User;
 
 public class AppViewModel extends ViewModel {
 
@@ -15,6 +16,10 @@ public class AppViewModel extends ViewModel {
 
     public void setAppSession(AppSession appSession) {
         this.appSession.setValue(appSession);
+    }
+
+    public void setUser(User user) {
+        this.appSession.getValue().setUser(user);
     }
 
     public MutableLiveData<AppSession> getAppSession() {
