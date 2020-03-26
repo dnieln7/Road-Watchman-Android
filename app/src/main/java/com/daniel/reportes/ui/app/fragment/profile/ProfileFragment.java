@@ -17,12 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.PutUser;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
-import com.daniel.reportes.utils.PreferencesUtils;
+import com.daniel.reportes.utils.PreferencesHelper;
 import com.daniel.reportes.utils.Printer;
 import com.daniel.reportes.utils.Utils;
 import com.google.android.material.snackbar.Snackbar;
@@ -73,7 +72,7 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profileSignOut:
-                PreferencesUtils.saveUser(getActivity(), new User(0, "", "", "", ""));
+                PreferencesHelper.getInstance(getActivity()).deleteUser();
                 getActivity().finish();
                 return true;
             case R.id.profileEdit:

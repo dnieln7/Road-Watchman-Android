@@ -1,31 +1,28 @@
 package com.daniel.reportes.ui.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.ui.permission.Permissions;
-import com.daniel.reportes.utils.TextMonitor;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
-import com.daniel.reportes.task.user.PostUser;
 import com.daniel.reportes.ui.app.AppActivity;
+import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.ui.signup.SignUp;
+import com.daniel.reportes.utils.GoogleAccountHelper;
+import com.daniel.reportes.utils.PreferencesHelper;
 import com.daniel.reportes.utils.Printer;
+import com.daniel.reportes.utils.TextMonitor;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,7 +34,6 @@ import java.util.logging.Logger;
 public class Login extends AppCompatActivity {
 
     //Objects
-    private SharedPreferences sharedPreferences;
     private AppSession appSession;
 
     // Widgets
@@ -57,56 +53,59 @@ public class Login extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Utils.GOOGLE_SIGN) {
+        if (requestCode == GoogleAccountHelper.REQUEST_CODE) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                TaskListener<User> userListener = new TaskListener<User>() {
+                    @Override
+                    public boolean success() {
+                        if (this.exception != null) {
+                            if (this.exception.getCode() == 409) {
+                                return true;
+                            }
+                            else {
+                                Printer.toast(Login.this, this.exception.getMessage());
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                };
 
-                manageAccount(account, true);
+                if (account != null) {
+                    appSession = GoogleAccountHelper.register(account, userListener, loginListener);
+                    PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
+                    goToApp();
+                }
             }
             catch (ApiException e) {
                 Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
             }
-            catch (InterruptedException | ExecutionException e) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-            }
         }
-        if(requestCode == Permissions.REQUEST_CODE) {
+        if (requestCode == Permissions.REQUEST_CODE) {
             initWidgets();
             loadPreferences();
         }
     }
 
     private void loadPreferences() {
-        sharedPreferences = getSharedPreferences("com.daniel.reportes.settings", MODE_PRIVATE);
+        PreferencesHelper helper = PreferencesHelper.getInstance(this);
+        helper.loadTheme();
 
-        if (sharedPreferences.getBoolean("DarkTheme", false)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        appSession = helper.isUserLoggedIn();
+
+        if (appSession == null) {
+            if (helper.isGoogleAccount()) {
+                loginWithGoogle(null);
+            }
+            else {
+                loginEmail.setText(helper.isEmailAccount());
+            }
         }
         else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-        if (sharedPreferences.getInt("id", 0) != 0) {
-            AppSession session = new AppSession(
-                    "",
-                    sharedPreferences.getInt("id", 0),
-                    new User(
-                            sharedPreferences.getInt("id", 0),
-                            sharedPreferences.getString("username", ""),
-                            sharedPreferences.getString("email", ""),
-                            sharedPreferences.getString("googleId", ""),
-                            sharedPreferences.getString("role", "")
-                    )
-            );
-
-            goToApp(session);
-        }
-        else if (sharedPreferences.getBoolean("google", false)) {
-            loginWithGoogle(null);
-        }
-        else {
-            loginEmail.setText(sharedPreferences.getString("email", ""));
+            goToApp();
         }
     }
 
@@ -117,60 +116,16 @@ public class Login extends AppCompatActivity {
         loginEmail.addTextChangedListener(new TextMonitor(loginEmail));
     }
 
-    private void goToApp(AppSession session) {
+    private void goToApp() {
         Intent intent = new Intent(getBaseContext(), AppActivity.class);
-
-        intent.putExtra("session", session);
-
-        sharedPreferences.edit().putInt("id", session.getUser().getId()).apply();
-        sharedPreferences.edit().putString("username", session.getUser().getUsername()).apply();
-        sharedPreferences.edit().putString("email", session.getUser().getEmail()).apply();
-        sharedPreferences.edit().putBoolean("google", session.getUser().getGoogleId().length() > 0).apply();
-        sharedPreferences.edit().putString("googleId", session.getUser().getGoogleId()).apply();
-        sharedPreferences.edit().putString("role", session.getUser().getRole()).apply();
-
+        intent.putExtra("session", appSession);
         startActivity(intent);
-    }
-
-    private void manageAccount(GoogleSignInAccount account, boolean newUser) throws ExecutionException, InterruptedException {
-        User user;
-
-        if (newUser) {
-            user = new User(
-                    account.getDisplayName(),
-                    account.getEmail(),
-                    account.getId(),
-                    account.getId(),
-                    "user"
-            );
-
-            if (new PostUser(postListener).execute(user).get().success()) {
-                if (new LoginUser("google", loginListener).execute(user).get().success()) {
-                    appSession = loginListener.getResult();
-                    appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
-                }
-            }
-        }
-        else {
-            user = new User(
-                    account.getEmail(),
-                    account.getId(),
-                    "user"
-            );
-
-            if (new LoginUser("google", loginListener).execute(user).get().success()) {
-                appSession = loginListener.getResult();
-                appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
-            }
-        }
-
-        goToApp(appSession);
     }
 
     public void loginWithEmail(View view) {
         Utils.hideKeyboard(this);
 
-        if(loginEmail.getError() != null) {
+        if (loginEmail.getError() != null) {
             Printer.snackBar(view, "Verifique su email");
             return;
         }
@@ -185,7 +140,8 @@ public class Login extends AppCompatActivity {
             if (new LoginUser("default", loginListener).execute(user).get().success()) {
                 appSession = loginListener.getResult();
                 appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
-                goToApp(appSession);
+                PreferencesHelper.getInstance(this).putUser(appSession.getUser(), false);
+                goToApp();
             }
         }
         catch (ExecutionException | InterruptedException e) {
@@ -195,27 +151,12 @@ public class Login extends AppCompatActivity {
 
     public void loginWithGoogle(View view) {
         Utils.hideKeyboard(this);
+        GoogleSignInAccount account = GoogleAccountHelper.isGoogleAccountActive(this);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
-        if (account == null) {
-            GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestProfile()
-                    .requestEmail()
-                    .build();
-
-            GoogleSignInClient signIn = GoogleSignIn.getClient(this, options);
-            Intent signInIntent = signIn.getSignInIntent();
-
-            startActivityForResult(signInIntent, Utils.GOOGLE_SIGN);
-        }
-        else {
-            try {
-                manageAccount(account, false);
-            }
-            catch (ExecutionException | InterruptedException e) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-            }
+        if (account != null) {
+            appSession = GoogleAccountHelper.login(account, loginListener);
+            PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
+            goToApp();
         }
     }
 
@@ -225,7 +166,7 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Class
+    // Listeners
 
     private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
 
@@ -234,23 +175,6 @@ public class Login extends AppCompatActivity {
             if (this.exception != null) {
                 Printer.toast(Login.this, this.exception.getMessage());
                 return false;
-            }
-            return true;
-        }
-    };
-
-    private TaskListener<User> postListener = new TaskListener<User>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                if (this.exception.getCode() == 409) {
-                    return true;
-                }
-                else {
-                    Printer.toast(Login.this, this.exception.getMessage());
-                    return false;
-                }
             }
             return true;
         }

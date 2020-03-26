@@ -54,7 +54,6 @@ public class ReportesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
-        System.out.println("------");
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

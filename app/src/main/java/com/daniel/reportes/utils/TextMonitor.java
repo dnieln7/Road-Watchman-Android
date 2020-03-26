@@ -5,9 +5,6 @@ import android.text.TextWatcher;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class TextMonitor implements TextWatcher {
 
     private TextInputEditText container;

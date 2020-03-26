@@ -13,15 +13,10 @@ import java.util.Random;
 
 public class Utils {
 
-    public static final int GOOGLE_SIGN = 1;
     public static final int SELECT_PICTURE = 3;
 
     public static String generateCode() {
         return String.valueOf(new Random().nextInt(1000));
-    }
-
-    public static boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public static int GetPrimaryColor(Context context) {
