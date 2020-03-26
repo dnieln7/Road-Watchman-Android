@@ -76,7 +76,12 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
                 return true;
             case R.id.profileEdit:
-                edit();
+                if(PreferencesHelper.getInstance(getActivity()).isGoogleAccount()) {
+                    Printer.okDialog(getContext(), "Inabilitado", "Esta función no está disponible para cuentas de google");
+                }
+                else {
+                    edit();
+                }
                 return true;
         }
 
