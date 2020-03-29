@@ -50,13 +50,13 @@ public class ReporteAdapter extends BaseAdapter {
         }
 
         if (inflater != null) {
-            convertView = inflater.inflate(R.layout.list_item, parent, false);
+            convertView = inflater.inflate(R.layout.card_reporte, parent, false);
         }
 
-        ReporteItem item = new ReporteItem(convertView);
+        ReporteCard card = new ReporteCard(convertView);
 
         try {
-            item.getLocation().setText(new FindPlace(new Geocoder(convertView.getContext())).execute(
+            card.getLocation().setText(new FindPlace(new Geocoder(convertView.getContext())).execute(
                     reportes.get(position).getLocation()[0],
                     reportes.get(position).getLocation()[1]).get()
             );
@@ -65,7 +65,7 @@ public class ReporteAdapter extends BaseAdapter {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
 
-        item.getDescription().setText(reportes.get(position).getDescription());
+        card.getDescription().setText(reportes.get(position).getDescription());
 
         if (!reportes.get(position).getDescription().equals("Generated")) {
             Picasso.with(context)
@@ -73,7 +73,7 @@ public class ReporteAdapter extends BaseAdapter {
                     .placeholder(R.drawable.reportes)
                     .resize(300, 300)
                     .onlyScaleDown()
-                    .into(item.getPicture());
+                    .into(card.getPicture());
         }
 
         return convertView;

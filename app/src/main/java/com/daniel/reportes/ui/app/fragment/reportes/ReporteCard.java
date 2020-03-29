@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.daniel.reportes.R;
 
-public class ReporteItem {
+public class ReporteCard {
 
     private ImageView picture;
     private TextView location;
@@ -15,7 +15,7 @@ public class ReporteItem {
     private CheckBox fixed;
 
 
-    public ReporteItem(View view) {
+    public ReporteCard(View view) {
         picture = view.findViewById(R.id.reportePicture);
         location = view.findViewById(R.id.reporteLocation);
         description = view.findViewById(R.id.reporteDescription);

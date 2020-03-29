@@ -1,11 +1,23 @@
 package com.daniel.reportes.data;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "reportes")
 public class Reporte {
+
+    @PrimaryKey
     private int id;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "date")
     private String date;
+    @ColumnInfo(name = "location")
     private double[] location;
+    @ColumnInfo(name = "picture")
     private String picture;
+    @ColumnInfo(name = "UserId")
     private int UserId;
 
     public Reporte() {
@@ -30,35 +42,47 @@ public class Reporte {
         return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public double[] getLocation() {
         return location;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setLocation(double[] location) {
+        this.location = location;
     }
 
     public String getPicture() {
         return picture;
     }
 
-    public void setUserId(int userId) {
-        UserId = userId;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public int getUserId() {
         return UserId;
+    }
+
+    public void setUserId(int userId) {
+        UserId = userId;
     }
 }

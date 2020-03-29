@@ -15,26 +15,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
-import com.daniel.reportes.data.Reporte;
-import com.daniel.reportes.task.reporte.GetAllReportes;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.NetworkMonitor;
 import com.daniel.reportes.utils.Printer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class ReportesFragment extends Fragment {
 
     // Objects
     private boolean expanded;
-    private AppViewModel appViewModel;
+    private ReporteDataService reporteDataService;
     private AppSession appSession;
-    private ReporteAdapter adapter;
-    private List<Reporte> reportes;
 
     // Widgets
     private View root;
@@ -53,29 +44,22 @@ public class ReportesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        expanded = false;
+        AppViewModel appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        reporteDataService = new ViewModelProvider(getActivity()).get(ReporteDataService.class);
+        appSession = (AppSession) getActivity().getIntent().getSerializableExtra("session");
+
+        appViewModel.setAppSession(appSession);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_reportes, container, false);
 
-        initObjects();
         initWidgets();
         initListeners();
-        initList();
+        loadData();
 
         return root;
-    }
-
-    private void initObjects() {
-        expanded = false;
-
-        appViewModel.getAppSession().observe(getActivity(), session -> appSession = session);
-
-        if (appSession == null) {
-            appSession = (AppSession) getActivity().getIntent().getSerializableExtra("session");
-            appViewModel.setAppSession(appSession);
-        }
     }
 
     private void initWidgets() {
@@ -96,33 +80,6 @@ public class ReportesFragment extends Fragment {
         reportesRefresh.setOnClickListener(v -> refresh());
     }
 
-    private void initList() {
-        boolean connected;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connected = NetworkMonitor.getMonitor(getContext()).hasNetwork();
-        }
-        else {
-            connected = NetworkMonitor.hasNetwork(getContext());
-        }
-
-        if (connected) {
-            try {
-                reportes = new GetAllReportes(String.valueOf(appSession.getUser().getId())).execute().get();
-            }
-            catch (ExecutionException | InterruptedException e) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-            }
-
-            adapter = new ReporteAdapter(getContext(), reportes);
-            reportesList.setAdapter(adapter);
-            showList();
-        }
-        else {
-            Printer.okDialog(getContext(), "Alerta", "Se requiere conexión a internet para vizualizar los reportes");
-        }
-    }
-
     private void createReporte() {
         expandMenu();
 
@@ -133,18 +90,39 @@ public class ReportesFragment extends Fragment {
                 .commit();
     }
 
+    private void loadData() {
+        reporteDataService.getReportes().observe(getActivity(), reportes -> {
+            reportesList.setAdapter(new ReporteAdapter(getContext(), reportes));
+            ((ReporteAdapter) reportesList.getAdapter()).notifyDataSetChanged();
+            reportesList.invalidateViews();
+            reportesList.refreshDrawableState();
+            showList(reportes.isEmpty());
+        });
+    }
+
     private void refresh() {
         expandMenu();
 
-        initList();
+        boolean connected;
 
-        adapter.notifyDataSetChanged();
-        reportesList.invalidateViews();
-        reportesList.refreshDrawableState();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connected = NetworkMonitor.getMonitor(getContext()).hasNetwork();
+        }
+        else {
+            connected = NetworkMonitor.hasNetwork(getContext());
+        }
+
+        if (connected) {
+            reporteDataService.fetchFromNetwork(String.valueOf(appSession.getUser().getId()));
+            loadData();
+        }
+        else {
+            Printer.okDialog(getContext(), "Alerta", "Se requiere conexión a internet para cargar los reportes");
+        }
     }
 
-    private void showList() {
-        if (reportes.isEmpty()) {
+    private void showList(boolean isEmpty) {
+        if (isEmpty) {
             reportesListMessage.setVisibility(View.VISIBLE);
             reportesList.setVisibility(View.GONE);
         }
