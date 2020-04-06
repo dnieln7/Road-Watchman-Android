@@ -76,8 +76,8 @@ public class ReportesFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == ReporteCreator.REQUEST_CODE) {
-            if(resultCode == Activity.RESULT_OK) {
+        if (requestCode == ReporteCreator.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
                 Printer.okDialog(getContext(), "Exito", "Su reporte se ha enviado");
                 refresh();
             }

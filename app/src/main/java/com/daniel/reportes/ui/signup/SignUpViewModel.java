@@ -13,19 +13,19 @@ public class SignUpViewModel extends ViewModel {
         verified = new MutableLiveData<>();
     }
 
-    public void setCode(String code) {
-        this.code.setValue(code);
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified.setValue(verified);
-    }
-
     public MutableLiveData<String> getCode() {
         return code;
     }
 
+    public void setCode(String code) {
+        this.code.setValue(code);
+    }
+
     public MutableLiveData<Boolean> getVerified() {
         return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified.setValue(verified);
     }
 }

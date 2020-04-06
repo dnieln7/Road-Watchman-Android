@@ -11,6 +11,7 @@ public class AppearanceController {
 
     /**
      * Goes full screen by hiding the status bar. Needs to be called before Activity.setContentView
+     *
      * @param activity - The app activity
      */
     public static void goFullScreen(Activity activity) {

@@ -26,6 +26,25 @@ public class Permissions extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 100;
 
+    public static boolean hasPermissions(Context context) {
+        return ContextCompat.checkSelfPermission(context, CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static void askPermissions(Activity activity) {
+        ActivityCompat.requestPermissions(
+                activity,
+                new String[]{
+                        CAMERA,
+                        WRITE_EXTERNAL_STORAGE,
+                        ACCESS_COARSE_LOCATION,
+                        ACCESS_FINE_LOCATION
+                },
+                REQUEST_CODE
+        );
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,26 +67,6 @@ public class Permissions extends AppCompatActivity {
                 Printer.okDialog(this, "Permisos", "Debe conceder todos los permisos necesarios");
             }
         }
-    }
-
-    public static boolean hasPermissions(Context context) {
-        return ContextCompat.checkSelfPermission(context, CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    public static void askPermissions(Activity activity) {
-        ActivityCompat.requestPermissions(
-                activity,
-                new String[]{
-                        CAMERA,
-                        WRITE_EXTERNAL_STORAGE,
-                        ACCESS_COARSE_LOCATION,
-                        ACCESS_FINE_LOCATION
-                },
-                REQUEST_CODE
-        );
     }
 
     public void givePermissions(View view) {

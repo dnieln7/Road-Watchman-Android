@@ -25,7 +25,7 @@ public class TextMonitor implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(!validateEmail(s.toString())) {
+        if (!validateEmail(s.toString())) {
             container.setError("El email no es válido");
         }
     }

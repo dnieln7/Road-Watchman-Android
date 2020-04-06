@@ -83,7 +83,7 @@ public class CreateReporte extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == Permissions.REQUEST_CODE) {
-            if(Permissions.hasPermissions(getContext())) {
+            if (Permissions.hasPermissions(getContext())) {
                 selectPicture();
             }
         }

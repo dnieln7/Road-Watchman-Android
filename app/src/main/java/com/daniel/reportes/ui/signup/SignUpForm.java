@@ -42,6 +42,19 @@ public class SignUpForm extends Fragment {
 
     private MaterialButton signNext;
 
+    // Class
+    private TaskListener<User> postListener = new TaskListener<User>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Printer.toast(SignUpForm.this.getContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
+
     public SignUpForm(IFragmentListener listener) {
         this.listener = listener;
     }
@@ -125,17 +138,4 @@ public class SignUpForm extends Fragment {
         }
 
     }
-
-    // Class
-    private TaskListener<User> postListener = new TaskListener<User>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(SignUpForm.this.getContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 }

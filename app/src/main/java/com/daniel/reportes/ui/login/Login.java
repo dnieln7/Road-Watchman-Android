@@ -40,6 +40,19 @@ public class Login extends AppCompatActivity {
     private TextInputEditText loginEmail;
     private TextInputEditText loginPassword;
 
+    // Class
+    private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Printer.toast(Login.this, this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,18 +178,4 @@ public class Login extends AppCompatActivity {
 
         startActivity(intent);
     }
-
-    // Listeners
-
-    private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(Login.this, this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 }

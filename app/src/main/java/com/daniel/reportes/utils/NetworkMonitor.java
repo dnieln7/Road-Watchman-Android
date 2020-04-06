@@ -20,6 +20,20 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
     private boolean wifi;
     private boolean data;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private NetworkMonitor(Context context) {
+        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (manager != null) {
+            manager.registerDefaultNetworkCallback(this);
+            try {
+                Thread.sleep(500);
+            }
+            catch (InterruptedException ignored) {
+            }
+        }
+    }
+
     /**
      * For android N and up, Create new instance of NetworkMonitor.
      *
@@ -34,18 +48,45 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
         return monitor;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private NetworkMonitor(Context context) {
-        manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (manager != null) {
-            manager.registerDefaultNetworkCallback(this);
-            try {
-                Thread.sleep(500);
-            }
-            catch (InterruptedException ignored) {
-            }
+    /**
+     * For android M and lower. Checks if the active network is wifi.
+     *
+     * @return true if wifi is enabled and connected, false otherwise.
+     */
+    public static boolean hasWifi(Context context) {
+        if (context == null) {
+            return false;
         }
+
+        return ((ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE))
+                .getActiveNetworkInfo()
+                .getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    /**
+     * For android M and lower. Checks if the active network is mobile data.
+     *
+     * @return true if mobile data is enabled and connected, false otherwise.
+     */
+    public static boolean hasData(Context context) {
+        if (context == null) {
+            return false;
+        }
+
+        return ((ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE))
+                .getActiveNetworkInfo()
+                .getType() == ConnectivityManager.TYPE_MOBILE;
+    }
+
+    /**
+     * For android M and lower. Checks if the network is connected regardless of the type.
+     *
+     * @return true if there is an enabled network, false otherwise.
+     */
+    public static boolean hasNetwork(Context context) {
+        return NetworkMonitor.hasWifi(context) || NetworkMonitor.hasData(context);
     }
 
     @Override
@@ -100,46 +141,5 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
     public void unregister() {
         manager.unregisterNetworkCallback(this);
         monitor = null;
-    }
-
-    /**
-     * For android M and lower. Checks if the active network is wifi.
-     *
-     * @return true if wifi is enabled and connected, false otherwise.
-     */
-    public static boolean hasWifi(Context context) {
-        if (context == null) {
-            return false;
-        }
-
-        return ((ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE))
-                .getActiveNetworkInfo()
-                .getType() == ConnectivityManager.TYPE_WIFI;
-    }
-
-    /**
-     * For android M and lower. Checks if the active network is mobile data.
-     *
-     * @return true if mobile data is enabled and connected, false otherwise.
-     */
-    public static boolean hasData(Context context) {
-        if (context == null) {
-            return false;
-        }
-
-        return ((ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE))
-                .getActiveNetworkInfo()
-                .getType() == ConnectivityManager.TYPE_MOBILE;
-    }
-
-    /**
-     * For android M and lower. Checks if the network is connected regardless of the type.
-     *
-     * @return true if there is an enabled network, false otherwise.
-     */
-    public static boolean hasNetwork(Context context) {
-        return NetworkMonitor.hasWifi(context) || NetworkMonitor.hasData(context);
     }
 }

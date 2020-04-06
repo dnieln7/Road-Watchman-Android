@@ -23,7 +23,8 @@ public class Printer {
 
         builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton("Aceptar", (dialog, which) -> {});
+        builder.setPositiveButton("Aceptar", (dialog, which) -> {
+        });
         builder.show();
     }
 }

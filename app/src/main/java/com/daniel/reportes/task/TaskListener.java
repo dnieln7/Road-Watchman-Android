@@ -12,13 +12,13 @@ public abstract class TaskListener<T> {
         this.exception = exception;
     }
 
+    public T getResult() {
+        return result;
+    }
+
     public void setResult(T result) {
         this.result = result;
         this.exception = null;
-    }
-
-    public T getResult() {
-        return result;
     }
 
     public boolean success() {

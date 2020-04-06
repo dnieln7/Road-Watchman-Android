@@ -22,7 +22,7 @@ public class FindPlace extends AsyncTask<Double, Void, String> {
         try {
             List<Address> addresses = geocoder.getFromLocation(latLong[0], latLong[1], 1);
 
-            if(addresses.isEmpty()) {
+            if (addresses.isEmpty()) {
                 return "No encontrado!";
             }
             else {

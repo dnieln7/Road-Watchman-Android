@@ -15,11 +15,11 @@ import java.util.Optional;
 public interface ReporteDao {
 
     @Query("SELECT * FROM reportes")
-    public LiveData<List<Reporte>> get();
+    LiveData<List<Reporte>> get();
 
     @Query("SELECT * FROM reportes WHERE id=:id")
-    public LiveData<Optional<Reporte>> getById(int id);
+    LiveData<Optional<Reporte>> getById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(List<Reporte> reportes);
+    void insert(List<Reporte> reportes);
 }

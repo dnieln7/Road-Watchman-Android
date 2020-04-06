@@ -37,6 +37,19 @@ public class ReportesService extends Service implements SensorEventListener, Loc
     private int UserId;
     private Location location;
 
+    // Class
+    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Printer.toast(getBaseContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
+
     // Called when service is created
     @SuppressLint("MissingPermission")
     @Override
@@ -143,16 +156,4 @@ public class ReportesService extends Service implements SensorEventListener, Loc
     @Override
     public void onProviderDisabled(String provider) {
     }
-
-    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(getBaseContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 }

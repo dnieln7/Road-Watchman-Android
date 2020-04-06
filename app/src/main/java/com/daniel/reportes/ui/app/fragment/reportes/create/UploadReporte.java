@@ -39,6 +39,19 @@ public class UploadReporte extends Fragment {
     private ProgressBar status;
     private TextView message;
 
+    // Class
+    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
+
+        @Override
+        public boolean success() {
+            if (this.exception != null) {
+                Printer.toast(UploadReporte.this.getContext(), this.exception.getMessage());
+                return false;
+            }
+            return true;
+        }
+    };
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_upload_reporte, container, false);
         createViewModel = new ViewModelProvider(getActivity()).get(CreateViewModel.class);
@@ -92,6 +105,8 @@ public class UploadReporte extends Fragment {
                         .addOnCompleteListener(uriTask -> uploadReporte(uriTask.getResult())));
     }
 
+    // Class
+
     private void uploadReporte(Uri uri) {
         status.setProgress(75);
         message.setText("Subiendo reporte...");
@@ -115,18 +130,4 @@ public class UploadReporte extends Fragment {
             }
         });
     }
-
-    // Class
-
-    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(UploadReporte.this.getContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 }
