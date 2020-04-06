@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
-import com.daniel.reportes.ui.app.fragment.reportes.create.CreateReporte;
 import com.daniel.reportes.ui.app.fragment.reportes.create.ReporteCreator;
 import com.daniel.reportes.utils.NetworkMonitor;
 import com.daniel.reportes.utils.Printer;

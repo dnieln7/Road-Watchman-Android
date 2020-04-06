@@ -1,8 +1,6 @@
 package com.daniel.reportes.ui.signup;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.utils.TextMonitor;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.email.ExistsEmail;
@@ -21,6 +17,8 @@ import com.daniel.reportes.task.email.SendEmail;
 import com.daniel.reportes.task.user.PostUser;
 import com.daniel.reportes.ui.other.IFragmentListener;
 import com.daniel.reportes.utils.Printer;
+import com.daniel.reportes.utils.TextMonitor;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;

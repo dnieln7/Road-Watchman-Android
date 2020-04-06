@@ -1,6 +1,5 @@
 package com.daniel.reportes.ui.app.fragment.reportes.create;
 
-import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,12 +13,10 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.ui.app.fragment.reportes.create.CreateViewModel;
 import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;

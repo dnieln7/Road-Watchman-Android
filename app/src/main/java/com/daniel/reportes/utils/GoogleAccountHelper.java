@@ -3,14 +3,12 @@ package com.daniel.reportes.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.daniel.reportes.App;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.task.user.PostUser;
-import com.daniel.reportes.ui.login.Login;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

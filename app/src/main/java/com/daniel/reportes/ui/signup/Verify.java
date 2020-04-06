@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.utils.Utils;
 import com.daniel.reportes.ui.other.IFragmentListener;
+import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
