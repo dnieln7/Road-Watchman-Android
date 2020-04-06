@@ -118,7 +118,7 @@ public class ReportesService extends Service implements SensorEventListener, Loc
                         UserId
                 );
 
-                new PostReporte("", reporteListener).execute(reporte);
+                new PostReporte(reporteListener).execute(reporte);
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
+import com.daniel.reportes.ui.app.fragment.reportes.create.CreateReporte;
+import com.daniel.reportes.ui.app.fragment.reportes.create.ReporteCreator;
 import com.daniel.reportes.utils.NetworkMonitor;
 import com.daniel.reportes.utils.Printer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +29,7 @@ public class ReportesFragment extends Fragment {
     // Objects
     private boolean expanded;
     private ReporteDataService reporteDataService;
+    private AppViewModel appViewModel;
     private AppSession appSession;
 
     // Widgets
@@ -45,11 +50,19 @@ public class ReportesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         expanded = false;
-        AppViewModel appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         reporteDataService = new ViewModelProvider(getActivity()).get(ReporteDataService.class);
         appSession = (AppSession) getActivity().getIntent().getSerializableExtra("session");
 
-        appViewModel.setAppSession(appSession);
+        appViewModel.getAppSession().observe(getActivity(), appSession1 -> {
+            if (appSession1 != null) {
+                appSession.setUser(appSession1.getUser());
+                appSession.setToken(appSession1.getToken());
+            }
+            else {
+                appViewModel.setAppSession(appSession);
+            }
+        });
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +73,16 @@ public class ReportesFragment extends Fragment {
         loadData();
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == ReporteCreator.REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                Printer.okDialog(getContext(), "Exito", "Su reporte se ha enviado");
+                refresh();
+            }
+        }
     }
 
     private void initWidgets() {
@@ -83,11 +106,9 @@ public class ReportesFragment extends Fragment {
     private void createReporte() {
         expandMenu();
 
-        CreateReporteStep1 step1 = new CreateReporteStep1();
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment, step1, step1.getTag())
-                .commit();
+        Intent creatorIntent = new Intent(getActivity(), ReporteCreator.class);
+        creatorIntent.putExtra("user", appSession.getUser());
+        startActivityForResult(creatorIntent, ReporteCreator.REQUEST_CODE);
     }
 
     private void loadData() {

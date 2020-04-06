@@ -1,6 +1,7 @@
 package com.daniel.reportes.ui.permission;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -32,15 +33,15 @@ public class Permissions extends AppCompatActivity {
         AppearanceController.goFullScreen(this);
         setContentView(R.layout.activity_permissions);
 
-        if(hasPermissions(this)) {
+        if (hasPermissions(this)) {
             finish();
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == REQUEST_CODE) {
-            if(hasPermissions(this)){
+        if (requestCode == REQUEST_CODE) {
+            if (hasPermissions(this)) {
                 finish();
             }
             else {
@@ -56,9 +57,9 @@ public class Permissions extends AppCompatActivity {
                 ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void askPermissions(View view) {
+    public static void askPermissions(Activity activity) {
         ActivityCompat.requestPermissions(
-                this,
+                activity,
                 new String[]{
                         CAMERA,
                         WRITE_EXTERNAL_STORAGE,
@@ -67,6 +68,10 @@ public class Permissions extends AppCompatActivity {
                 },
                 REQUEST_CODE
         );
+    }
+
+    public void givePermissions(View view) {
+        Permissions.askPermissions(this);
     }
 
     public void exit(View view) {

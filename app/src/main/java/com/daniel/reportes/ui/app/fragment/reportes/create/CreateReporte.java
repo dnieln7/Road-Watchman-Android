@@ -1,9 +1,7 @@
-package com.daniel.reportes.ui.app.fragment.reportes;
+package com.daniel.reportes.ui.app.fragment.reportes.create;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,15 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.daniel.reportes.R;
-import com.daniel.reportes.data.Reporte;
+import com.daniel.reportes.ui.app.fragment.reportes.create.CreateViewModel;
 import com.daniel.reportes.ui.permission.Permissions;
-import com.daniel.reportes.utils.LocationUtils;
 import com.daniel.reportes.utils.Utils;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
@@ -36,23 +32,23 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CreateReporteStep1 extends Fragment {
+public class CreateReporte extends Fragment {
 
     // Objects
-    private ReporteViewModel reporteViewModel;
+    private CreateViewModel createViewModel;
     private String pictureName;
     private Uri pictureUri;
-    private Bitmap pictureBitmap;
 
     // Widgets
     private View root;
+
     private MaterialButton selectPicture;
-    private MaterialButton toStep2;
     private ImageView selectedPicture;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_create_reporte_step_1, container, false);
-        reporteViewModel = ViewModelProviders.of(getActivity()).get(ReporteViewModel.class);
+        root = inflater.inflate(R.layout.fragment_create_reporte, container, false);
+        createViewModel = new ViewModelProvider(getActivity()).get(CreateViewModel.class);
+
 
         initWidgets();
         initListeners();
@@ -67,17 +63,17 @@ public class CreateReporteStep1 extends Fragment {
             if (data != null) {
                 pictureUri = data.getData();
                 Picasso.with(getContext()).load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
-                reporteViewModel.setPictureUri(pictureUri);
-                reporteViewModel.setPictureName(pictureName);
+                createViewModel.setPictureUri(pictureUri);
+                createViewModel.setPictureName(pictureName);
             }
             else if (pictureUri != null) {
                 Picasso.with(getContext()).load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
-                reporteViewModel.setPictureUri(pictureUri);
-                reporteViewModel.setPictureName(pictureName);
+                createViewModel.setPictureUri(pictureUri);
+                createViewModel.setPictureName(pictureName);
             }
 
             try {
-                pictureBitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), pictureUri);
+                createViewModel.setPicture(MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), pictureUri) != null);
             }
             catch (IOException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
@@ -98,13 +94,11 @@ public class CreateReporteStep1 extends Fragment {
 
     private void initWidgets() {
         selectPicture = root.findViewById(R.id.selectPicture);
-        toStep2 = root.findViewById(R.id.toStep2);
         selectedPicture = root.findViewById(R.id.selectedPicture);
     }
 
     private void initListeners() {
         selectPicture.setOnClickListener(v -> selectPicture());
-        toStep2.setOnClickListener(v -> toStep2());
     }
 
     private void selectPicture() {
@@ -125,35 +119,7 @@ public class CreateReporteStep1 extends Fragment {
             startActivityForResult(intentChooser, Utils.SELECT_PICTURE);
         }
         else {
-            askPermissions();
-        }
-    }
-
-    private void toStep2() {
-        if (pictureBitmap != null) {
-            Location location = LocationUtils.getGPS(getActivity());
-
-            if (location != null) {
-
-                Reporte reporte = new Reporte(
-                        new LocalDateTime().toString(),
-                        new double[]{location.getLatitude(), location.getLongitude()}
-                );
-
-                reporteViewModel.setReporte(reporte);
-
-                CreateReporteStep2 step2 = new CreateReporteStep2();
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment, step2, step2.getTag())
-                        .commit();
-            }
-            else {
-                Snackbar.make(root, "Calculando ubicación...", Snackbar.LENGTH_SHORT).show();
-            }
-        }
-        else {
-            Snackbar.make(root, "Debe seleccionar una foto", Snackbar.LENGTH_SHORT).show();
+            Permissions.askPermissions(getActivity());
         }
     }
 
@@ -182,18 +148,5 @@ public class CreateReporteStep1 extends Fragment {
 
     private String getPictureName() {
         return pictureName = "reporte_" + new LocalDateTime() + ".jpg";
-    }
-
-    private void askPermissions() {
-        ActivityCompat.requestPermissions(
-                getActivity(),
-                new String[]{
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                },
-                Permissions.REQUEST_CODE
-        );
     }
 }

@@ -2,6 +2,7 @@ package com.daniel.reportes.data;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "reportes")
@@ -23,18 +24,21 @@ public class Reporte {
     public Reporte() {
     }
 
-    public Reporte(String date, double[] location) {
+    @Ignore
+    public Reporte(String date, double[] location, int UserId) {
         this.description = "";
         this.date = date;
         this.location = location;
         this.picture = "";
-        this.UserId = 0;
+        this.UserId = UserId;
     }
 
+    @Ignore
     public Reporte(String description, String date, double[] location, int userId) {
         this.description = description;
         this.date = date;
         this.location = location;
+        this.picture = "";
         this.UserId = userId;
     }
 

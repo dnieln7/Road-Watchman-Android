@@ -19,7 +19,6 @@ import com.google.android.material.navigation.NavigationView;
 public class AppActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private AppSession session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class AppActivity extends AppCompatActivity {
     }
 
     private void initHeader(View navHeader) {
-        session = (AppSession) getIntent().getSerializableExtra("session");
+        AppSession session = (AppSession) getIntent().getSerializableExtra("session");
 
         TextView headerUsername = navHeader.findViewById(R.id.headerUsername);
         TextView headerEmail = navHeader.findViewById(R.id.headerEmail);

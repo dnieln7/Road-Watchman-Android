@@ -34,14 +34,4 @@
         app:iconTint="@color/colorPrimary"
         app:strokeColor="@color/colorPrimary" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toStep2"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Siguiente"
-        android:textColor="@color/textColor100" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>
