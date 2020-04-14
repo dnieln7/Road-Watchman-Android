@@ -20,6 +20,7 @@ import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.ui.app.fragment.reportes.create.ReporteCreator;
 import com.daniel.reportes.utils.NetworkMonitor;
+import com.daniel.reportes.utils.PreferencesHelper;
 import com.daniel.reportes.utils.Printer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,17 +52,9 @@ public class ReportesFragment extends Fragment {
         expanded = false;
         appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         reporteDataService = new ViewModelProvider(getActivity()).get(ReporteDataService.class);
-        appSession = (AppSession) getActivity().getIntent().getSerializableExtra("session");
+        appSession = PreferencesHelper.getInstance(getActivity()).isUserLoggedIn();
 
-        appViewModel.getAppSession().observe(getActivity(), appSession1 -> {
-            if (appSession1 != null) {
-                appSession.setUser(appSession1.getUser());
-                appSession.setToken(appSession1.getToken());
-            }
-            else {
-                appViewModel.setAppSession(appSession);
-            }
-        });
+        appViewModel.setAppSession(appSession);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

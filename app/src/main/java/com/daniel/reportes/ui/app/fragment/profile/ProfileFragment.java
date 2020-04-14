@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initObjects();
+        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,10 +88,6 @@ public class ProfileFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initObjects() {
-        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
-    }
-
     private void initWidgets() {
         profileUsername = root.findViewById(R.id.profileUsername);
         profileEmail = root.findViewById(R.id.profileEmail);
@@ -125,19 +121,6 @@ public class ProfileFragment extends Fragment {
         }
 
         save.setVisibility(save.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
-
-        final User user = new User();
-
-        appViewModel.getAppSession().observe(getActivity(), appSession -> {
-            user.setId(appSession.getUser().getId());
-            user.setUsername(profileUsername.getText().toString());
-            user.setEmail(profileEmail.getText().toString());
-            user.setPassword(profilePassword.getText().toString());
-            user.setGoogleId(appSession.getUser().getGoogleId());
-            user.setRole(appSession.getUser().getRole());
-        });
-
-        Printer.okDialog(getContext(), "", user.toString());
     }
 
     private void save() {
@@ -157,7 +140,7 @@ public class ProfileFragment extends Fragment {
 
             if (new PutUser(String.valueOf(user.getId()), listener).execute(user).get().success()) {
                 Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
-
+                PreferencesHelper.getInstance(getActivity()).putUser(user, false);
                 edit();
             }
         }

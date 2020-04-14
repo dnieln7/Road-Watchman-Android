@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
+import com.daniel.reportes.utils.PreferencesHelper;
 import com.google.android.material.navigation.NavigationView;
 
 public class AppActivity extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class AppActivity extends AppCompatActivity {
     }
 
     private void initHeader(View navHeader) {
-        AppSession session = (AppSession) getIntent().getSerializableExtra("session");
+        AppSession session = PreferencesHelper.getInstance(this).isUserLoggedIn();
 
         TextView headerUsername = navHeader.findViewById(R.id.headerUsername);
         TextView headerEmail = navHeader.findViewById(R.id.headerEmail);
