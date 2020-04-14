@@ -58,8 +58,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Intent permissionsIntent = new Intent(this, Permissions.class);
-        startActivityForResult(permissionsIntent, Permissions.REQUEST_CODE);
+        initWidgets();
     }
 
     @Override
@@ -97,42 +96,22 @@ public class Login extends AppCompatActivity {
                 Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
             }
         }
-        if (requestCode == Permissions.REQUEST_CODE) {
-            initWidgets();
-            loadPreferences();
-        }
-    }
-
-    private void loadPreferences() {
-        PreferencesHelper helper = PreferencesHelper.getInstance(this);
-        helper.loadTheme();
-
-        appSession = helper.isUserLoggedIn();
-
-        if (appSession == null) {
-            if (helper.isGoogleAccount()) {
-                loginWithGoogle(null);
-            }
-            else {
-                loginEmail.setText(helper.isEmailAccount());
-            }
-        }
-        else {
-            goToApp();
-        }
     }
 
     private void initWidgets() {
+        String email = getIntent().getStringExtra("email");
+
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
 
         loginEmail.addTextChangedListener(new TextMonitor(loginEmail));
+        loginEmail.setText(email == null ? "" : email);
     }
 
     private void goToApp() {
-        Intent intent = new Intent(getBaseContext(), AppActivity.class);
-        intent.putExtra("session", appSession);
-        startActivity(intent);
+        Intent appIntent = new Intent(getBaseContext(), AppActivity.class);
+        appIntent.putExtra("session", appSession);
+        startActivity(appIntent);
     }
 
     public void loginWithEmail(View view) {

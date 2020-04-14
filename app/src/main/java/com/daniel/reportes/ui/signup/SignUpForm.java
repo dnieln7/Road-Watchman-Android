@@ -123,7 +123,7 @@ public class SignUpForm extends Fragment {
 
         try {
             if (new ExistsEmail().execute(signEmail.getText().toString()).get()) {
-                Snackbar.make(root, "El usuario ya existe! olvido su contraseña?", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(root, "El usuario ya existe!", Snackbar.LENGTH_SHORT).show();
             }
             else {
                 new SendEmail().execute(email, code);
