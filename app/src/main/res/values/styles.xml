@@ -10,6 +10,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    
+    <style name="SplashTheme" parent="MaterialTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_reportes</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

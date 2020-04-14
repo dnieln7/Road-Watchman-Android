@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/backgroundMaterial" />
+
+    <item>
+        <bitmap android:tint="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:src="@drawable/reportes_splash_200" />
+    </item>
+</layer-list>
