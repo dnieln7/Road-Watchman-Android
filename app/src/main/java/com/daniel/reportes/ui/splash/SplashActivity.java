@@ -35,14 +35,24 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("-----------");
         if (!Permissions.hasPermissions(this)) {
             Intent permissionsIntent = new Intent(this, Permissions.class);
-            startActivity(permissionsIntent);
+            startActivityForResult(permissionsIntent, Permissions.REQUEST_CODE);
         }
+        else {
+            loadPreferences();
+            finish();
+        }
+    }
 
-        loadPreferences();
-        finish();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Permissions.REQUEST_CODE) {
+            loadPreferences();
+            finish();
+        }
     }
 
     private void loadPreferences() {
