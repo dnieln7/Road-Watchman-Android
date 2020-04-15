@@ -13,8 +13,6 @@ import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
 import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
-import com.daniel.reportes.ui.app.AppActivity;
-import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.ui.signup.SignUp;
 import com.daniel.reportes.utils.GoogleAccountHelper;
 import com.daniel.reportes.utils.PreferencesHelper;
@@ -32,6 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Login extends AppCompatActivity {
+
+    public static int REQUEST_CODE = 2;
 
     //Objects
     private AppSession appSession;
@@ -88,8 +88,7 @@ public class Login extends AppCompatActivity {
 
                 if (account != null) {
                     appSession = GoogleAccountHelper.register(account, userListener, loginListener);
-                    PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
-                    goToApp();
+                    finishLogin(true);
                 }
             }
             catch (ApiException e) {
@@ -108,10 +107,10 @@ public class Login extends AppCompatActivity {
         loginEmail.setText(email == null ? "" : email);
     }
 
-    private void goToApp() {
-        Intent appIntent = new Intent(getBaseContext(), AppActivity.class);
-        appIntent.putExtra("session", appSession);
-        startActivity(appIntent);
+    private void finishLogin(boolean googleAccount) {
+        PreferencesHelper.getInstance(this).putUser(appSession.getUser(), googleAccount);
+        setResult(RESULT_OK);
+        super.onBackPressed();
     }
 
     public void loginWithEmail(View view) {
@@ -132,8 +131,7 @@ public class Login extends AppCompatActivity {
             if (new LoginUser("default", loginListener).execute(user).get().success()) {
                 appSession = loginListener.getResult();
                 appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
-                PreferencesHelper.getInstance(this).putUser(appSession.getUser(), false);
-                goToApp();
+                finishLogin(false);
             }
         }
         catch (ExecutionException | InterruptedException e) {
@@ -147,8 +145,10 @@ public class Login extends AppCompatActivity {
 
         if (account != null) {
             appSession = GoogleAccountHelper.login(account, loginListener);
-            PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
-            goToApp();
+            finishLogin(true);
+        }
+        else {
+            GoogleAccountHelper.showSignIn(this);
         }
     }
 

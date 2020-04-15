@@ -34,21 +34,23 @@ public class GoogleAccountHelper {
      * @return An {@link GoogleSignInAccount} instance; null if there is no account.
      */
     public static GoogleSignInAccount isGoogleAccountActive(Activity activity) {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(activity);
+        return GoogleSignIn.getLastSignedInAccount(activity);
+    }
 
-        if (account == null) {
-            GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestProfile()
-                    .requestEmail()
-                    .build();
+    /**
+     * Shows signIn window to user
+     * @param activity - The activity from witch the window is shown.
+     */
+    public static void showSignIn(Activity activity) {
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestProfile()
+                .requestEmail()
+                .build();
 
-            GoogleSignInClient signIn = GoogleSignIn.getClient(activity, options);
-            Intent signInIntent = signIn.getSignInIntent();
+        GoogleSignInClient signIn = GoogleSignIn.getClient(activity, options);
+        Intent signInIntent = signIn.getSignInIntent();
 
-            activity.startActivityForResult(signInIntent, REQUEST_CODE);
-        }
-
-        return account;
+        activity.startActivityForResult(signInIntent, REQUEST_CODE);
     }
 
     /**

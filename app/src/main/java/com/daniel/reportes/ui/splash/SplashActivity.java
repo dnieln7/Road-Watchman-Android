@@ -41,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
         }
         else {
             loadPreferences();
-            finish();
         }
     }
 
@@ -51,8 +50,22 @@ public class SplashActivity extends AppCompatActivity {
 
         if (requestCode == Permissions.REQUEST_CODE) {
             loadPreferences();
-            finish();
         }
+        else if (requestCode == Login.REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                loadPreferences();
+            }
+            else {
+                finish();
+            }
+        }
+    }
+
+    private void openApp() {
+        Intent appIntent = new Intent(this, AppActivity.class);
+        appIntent.putExtra("session", appSession);
+        startActivity(appIntent);
+        finish();
     }
 
     private void loadPreferences() {
@@ -68,13 +81,11 @@ public class SplashActivity extends AppCompatActivity {
             else {
                 Intent loginIntent = new Intent(this, Login.class);
                 loginIntent.putExtra("email", helper.isEmailAccount());
-                startActivity(loginIntent);
+                startActivityForResult(loginIntent, Login.REQUEST_CODE);
             }
         }
         else {
-            Intent appIntent = new Intent(this, AppActivity.class);
-            appIntent.putExtra("session", appSession);
-            startActivity(appIntent);
+            openApp();
         }
     }
 
@@ -84,10 +95,7 @@ public class SplashActivity extends AppCompatActivity {
         if (account != null) {
             appSession = GoogleAccountHelper.login(account, loginListener);
             PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
-
-            Intent appIntent = new Intent(this, AppActivity.class);
-            appIntent.putExtra("session", appSession);
-            startActivity(appIntent);
+            openApp();
         }
     }
 }
