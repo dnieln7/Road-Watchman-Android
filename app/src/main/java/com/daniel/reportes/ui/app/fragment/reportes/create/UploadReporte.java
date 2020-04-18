@@ -111,8 +111,6 @@ public class UploadReporte extends Fragment {
         status.setProgress(75);
         message.setText("Subiendo reporte...");
 
-        Printer.okDialog(getContext(), "PUri", uri.toString());
-
         createViewModel.getReporte().observe(getActivity(), reporte -> {
             reporte.setPicture(uri == null ? "" : uri.toString());
 

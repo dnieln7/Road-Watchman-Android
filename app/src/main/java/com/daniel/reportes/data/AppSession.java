@@ -4,18 +4,11 @@ import java.io.Serializable;
 
 public class AppSession implements Serializable {
     private String token;
-    private int UserId;
     private User user;
 
-    public AppSession(String token, int userId, User user) {
+    public AppSession(String token, User user) {
         this.token = token;
-        UserId = userId;
         this.user = user;
-    }
-
-    public AppSession(String token, int userId) {
-        this.token = token;
-        UserId = userId;
     }
 
     public String getToken() {
@@ -24,10 +17,6 @@ public class AppSession implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public int getUserId() {
-        return UserId;
     }
 
     public User getUser() {

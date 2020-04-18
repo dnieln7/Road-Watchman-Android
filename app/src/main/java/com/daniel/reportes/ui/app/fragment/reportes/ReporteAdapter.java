@@ -1,7 +1,6 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
 import android.content.Context;
-import android.location.Geocoder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,9 @@ import android.widget.BaseAdapter;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.Reporte;
-import com.daniel.reportes.task.reporte.FindPlace;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ReporteAdapter extends BaseAdapter {
 
@@ -55,19 +50,11 @@ public class ReporteAdapter extends BaseAdapter {
 
         ReporteCard card = new ReporteCard(convertView);
 
-        try {
-            card.getLocation().setText(new FindPlace(new Geocoder(convertView.getContext())).execute(
-                    reportes.get(position).getLocation()[0],
-                    reportes.get(position).getLocation()[1]).get()
-            );
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-        }
-
+        card.getLocation().setText(reportes.get(position).getLocation_description());
         card.getDescription().setText(reportes.get(position).getDescription());
+        card.getFixed().setActivated(reportes.get(position).isFixed());
 
-        if (!reportes.get(position).getDescription().equals("Generated")) {
+        if (!reportes.get(position).getPicture().equals("")) {
             Picasso.with(context)
                     .load(reportes.get(position).getPicture())
                     .placeholder(R.drawable.reportes)

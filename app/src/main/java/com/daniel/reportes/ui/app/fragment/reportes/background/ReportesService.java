@@ -125,11 +125,12 @@ public class ReportesService extends Service implements SensorEventListener, Loc
             if (acceleration >= 4) {
                 lastTime = actualTime;
                 Reporte reporte = new Reporte(
-                        "Generated",
                         new LocalDateTime().toString(),
                         new double[]{location.getLatitude(), location.getLongitude()},
                         UserId
                 );
+
+                reporte.setDescription("Auto-Generado");
 
                 new PostReporte(reporteListener).execute(reporte);
             }

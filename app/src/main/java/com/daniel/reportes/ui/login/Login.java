@@ -130,7 +130,6 @@ public class Login extends AppCompatActivity {
         try {
             if (new LoginUser("default", loginListener).execute(user).get().success()) {
                 appSession = loginListener.getResult();
-                appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
                 finishLogin(false);
             }
         }

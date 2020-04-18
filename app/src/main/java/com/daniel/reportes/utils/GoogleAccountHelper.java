@@ -6,7 +6,6 @@ import android.content.Intent;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
-import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.task.user.PostUser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -72,7 +71,6 @@ public class GoogleAccountHelper {
         try {
             if (new LoginUser("google", loginListener).execute(user).get().success()) {
                 appSession = loginListener.getResult();
-                appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
             }
         }
         catch (ExecutionException | InterruptedException e) {
@@ -105,7 +103,6 @@ public class GoogleAccountHelper {
             if (new PostUser(userListener).execute(user).get().success()) {
                 if (new LoginUser("google", loginListener).execute(user).get().success()) {
                     appSession = loginListener.getResult();
-                    appSession.setUser(new GetUser().execute(String.valueOf(appSession.getUserId())).get());
                 }
             }
         }

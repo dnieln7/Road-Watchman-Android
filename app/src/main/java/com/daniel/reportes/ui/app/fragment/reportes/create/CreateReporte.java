@@ -121,7 +121,6 @@ public class CreateReporte extends Fragment {
     }
 
     private Uri getUri() {
-
         return pictureUri = Uri.fromFile(getOutputMediaFile());
     }
 

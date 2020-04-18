@@ -14,10 +14,14 @@ public class Reporte {
     private String description;
     @ColumnInfo(name = "date")
     private String date;
-    @ColumnInfo(name = "location")
-    private double[] location;
+    @ColumnInfo(name = "fixed")
+    private boolean fixed;
     @ColumnInfo(name = "picture")
     private String picture;
+    @ColumnInfo(name = "location")
+    private double[] location;
+    @ColumnInfo(name = "location_description")
+    private String location_description;
     @ColumnInfo(name = "UserId")
     private int UserId;
 
@@ -28,18 +32,11 @@ public class Reporte {
     public Reporte(String date, double[] location, int UserId) {
         this.description = "";
         this.date = date;
-        this.location = location;
+        this.fixed = false;
         this.picture = "";
+        this.location = location;
+        this.location_description = "";
         this.UserId = UserId;
-    }
-
-    @Ignore
-    public Reporte(String description, String date, double[] location, int userId) {
-        this.description = description;
-        this.date = date;
-        this.location = location;
-        this.picture = "";
-        this.UserId = userId;
     }
 
     public int getId() {
@@ -66,12 +63,12 @@ public class Reporte {
         this.date = date;
     }
 
-    public double[] getLocation() {
-        return location;
+    public boolean isFixed() {
+        return fixed;
     }
 
-    public void setLocation(double[] location) {
-        this.location = location;
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 
     public String getPicture() {
@@ -80,6 +77,22 @@ public class Reporte {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public double[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(double[] location) {
+        this.location = location;
+    }
+
+    public String getLocation_description() {
+        return location_description;
+    }
+
+    public void setLocation_description(String location_description) {
+        this.location_description = location_description;
     }
 
     public int getUserId() {

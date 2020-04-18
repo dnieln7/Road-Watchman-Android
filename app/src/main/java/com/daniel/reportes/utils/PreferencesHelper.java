@@ -63,7 +63,6 @@ public class PreferencesHelper {
         if (sharedPreferences.getBoolean("Logged", false)) {
             appSession = new AppSession(
                     "",
-                    sharedPreferences.getInt("Id", 0),
                     new User(
                             sharedPreferences.getInt("Id", 0),
                             sharedPreferences.getString("Username", ""),
