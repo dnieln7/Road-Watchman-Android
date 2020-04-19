@@ -123,7 +123,7 @@ public class PreferencesHelper {
      * Deletes all the user data of shared preferences and destroys the current {@link PreferencesHelper} instance.
      */
     public void deleteUser() {
-        sharedPreferences.edit().putBoolean("Logged", true).apply();
+        sharedPreferences.edit().putBoolean("Logged", false).apply();
         sharedPreferences.edit().putBoolean("GoogleAccount", false).apply();
         sharedPreferences.edit().putBoolean("EmailAccount", false).apply();
 
