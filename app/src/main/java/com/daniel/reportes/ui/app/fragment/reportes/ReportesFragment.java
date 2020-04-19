@@ -105,7 +105,7 @@ public class ReportesFragment extends Fragment {
 
     private void loadData() {
         reporteDataService.getReportes().observe(getActivity(), reportes -> {
-            reportesList.setAdapter(new ReporteAdapter(getContext(), reportes));
+            reportesList.setAdapter(new ReporteAdapter(getActivity(), reportes));
             ((ReporteAdapter) reportesList.getAdapter()).notifyDataSetChanged();
             reportesList.invalidateViews();
             reportesList.refreshDrawableState();

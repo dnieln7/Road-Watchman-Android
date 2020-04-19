@@ -18,8 +18,8 @@
         android:background="@color/backgroundMaterial"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_reportes"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/textColor50"
+        app:itemIconTint="@color/primary"
+        app:itemTextColor="@color/inverted100"
         app:menu="@menu/activity_app_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

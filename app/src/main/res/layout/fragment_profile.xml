@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/profile"
-        android:tint="@color/colorPrimary" />
+        android:tint="@color/primaryLight" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
@@ -41,14 +41,14 @@
             android:layout_height="25dp"
             android:layout_weight="1"
             android:src="@drawable/email"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/primary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:hint="Email"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
             app:boxBackgroundMode="none">
 
@@ -74,7 +74,7 @@
             android:layout_height="25dp"
             android:layout_weight="1"
             android:src="@drawable/lock"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/primary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutPassword"
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:hint="Contraseña"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
             app:boxBackgroundMode="none"
             app:passwordToggleEnabled="true"
@@ -106,8 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Guardar"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary"
         android:visibility="invisible"
-        app:strokeColor="@color/colorPrimary" />
+        app:strokeColor="@color/primary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

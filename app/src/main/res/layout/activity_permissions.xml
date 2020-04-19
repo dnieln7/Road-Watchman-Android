@@ -16,9 +16,9 @@
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/reportes"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/textColor100"
+        android:drawableTint="@color/inverted100"
         android:text="Reportes"
-        android:textColor="@color/textColor100"
+        android:textColor="@color/inverted100"
         android:textSize="25sp" />
 
     <Space
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Bienvenido, antes de comenzar necesitamos su permiso"
         android:textAlignment="center"
-        android:textColor="@color/textColor100"
+        android:textColor="@color/inverted100"
         android:textSize="20sp" />
 
     <Space
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Se requieren los permisos de almacenamiento, acceso a ubicación y cámara para guardar y enviar reportes"
         android:textAlignment="center"
-        android:textColor="@color/textColor100"
+        android:textColor="@color/inverted100"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -57,13 +57,11 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/primary"
             android:onClick="givePermissions"
             android:text="Conceder permiso"
-            android:textColor="@color/textColor100"
             android:textSize="20sp"
-            app:icon="@drawable/check"
-            app:iconTint="@color/textColor100" />
+            app:icon="@drawable/check" />
 
         <Space
             android:layout_width="wrap_content"
@@ -76,9 +74,9 @@
             android:layout_height="wrap_content"
             android:onClick="exit"
             android:text="Salir"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:textSize="20sp"
-            app:strokeColor="@color/colorPrimary" />
+            app:strokeColor="@color/primary" />
 
     </LinearLayout>
 

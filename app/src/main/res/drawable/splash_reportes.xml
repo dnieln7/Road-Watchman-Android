@@ -3,7 +3,7 @@
     <item android:drawable="@color/backgroundMaterial" />
 
     <item>
-        <bitmap android:tint="@color/colorPrimaryDark"
+        <bitmap android:tint="@color/primaryDark"
             android:gravity="center"
             android:src="@drawable/reportes_splash_200" />
     </item>

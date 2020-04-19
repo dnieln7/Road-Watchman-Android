@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Código"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary">
+        android:textColorHint="@color/primary"
+        app:boxStrokeColor="@color/primary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/verifyCode"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textColor="@color/textColor100"
+            android:textColor="@color/inverted100"
             android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Regresar"
-            android:textColor="@color/colorPrimary"
-            app:strokeColor="@color/colorPrimary" />
+            android:textColor="@color/primary"
+            app:strokeColor="@color/primary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/verifyOk"
@@ -53,9 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Verificar"
-            android:textColor="@color/textColor100" />
+            android:backgroundTint="@color/primary"
+            android:text="Verificar" />
     </LinearLayout>
 
 </LinearLayout>

@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Tema oscuro"
-        android:textColor="@color/textColor100"
+        android:textColor="@color/inverted100"
         android:textSize="20sp"
         app:switchPadding="20dp"
-        app:thumbTint="@color/colorPrimary" />
+        app:thumbTint="@color/secondary" />
 
     <LinearLayout style="@style/Divider"/>
 
@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Envio de reportes en segundo plano"
-        android:textColor="@color/textColor100"
+        android:textColor="@color/inverted100"
         android:textSize="20sp"
         app:switchPadding="20dp"
-        app:thumbTint="@color/colorPrimary" />
+        app:thumbTint="@color/secondary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

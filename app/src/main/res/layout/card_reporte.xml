@@ -6,8 +6,8 @@
     card_view:cardUseCompatPadding="true"
     card_view:cardBackgroundColor="@color/backgroundMaterial"
     card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="0dp"
-    card_view:strokeColor="@color/colorPrimary"
+    card_view:cardElevation="5dp"
+    card_view:strokeColor="@color/secondaryDark"
     card_view:strokeWidth="1dp">
 
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:padding="10dp"
                 android:text="Address"
                 android:textAlignment="textStart"
-                android:textColor="@color/textColor100"
+                android:textColor="@color/inverted100"
                 android:textSize="20sp" />
 
             <TextView
@@ -45,20 +45,19 @@
                 android:padding="10dp"
                 android:text="Description"
                 android:textAlignment="textStart"
-                android:textColor="@color/textColor100"
+                android:textColor="@color/inverted100"
                 android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/reporteFixed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/colorPrimary"
-                android:checked="false"
-                android:enabled="false"
+                android:buttonTint="@color/secondaryDark"
                 android:padding="10dp"
+                android:enabled="false"
                 android:text="Reparado"
                 android:textAlignment="textStart"
-                android:textColor="@color/textColor100"
+                android:textColor="@color/inverted100"
                 android:textSize="20sp" />
         </LinearLayout>
 

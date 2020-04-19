@@ -12,7 +12,7 @@
         android:layout_gravity="center|top"
         android:layout_margin="20dp"
         android:text="Los reportes que subas aparecerán aquí"
-        android:textColor="@color/textColor50"
+        android:textColor="@color/inverted50"
         android:textSize="20sp"
         android:visibility="gone"/>
 
