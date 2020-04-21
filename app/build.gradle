@@ -47,7 +47,7 @@ dependencies {
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     // Picasso
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     // Date
     implementation 'joda-time:joda-time:2.10.5'
     // Room (SQLite)

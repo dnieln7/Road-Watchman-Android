@@ -101,8 +101,9 @@ public class UploadReporte extends Fragment {
         reference.child(pictureName.toString())
                 .putFile(Uri.parse(pictureUri.toString()))
                 .addOnFailureListener(error -> Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, error))
-                .addOnSuccessListener(snapshot -> reference.getDownloadUrl()
-                        .addOnCompleteListener(uriTask -> uploadReporte(uriTask.getResult())));
+                .addOnSuccessListener(snapshot -> reference.child(pictureName.toString()).getDownloadUrl()
+                        .addOnCompleteListener(task -> uploadReporte(task.getResult()))
+                );
     }
 
     // Class

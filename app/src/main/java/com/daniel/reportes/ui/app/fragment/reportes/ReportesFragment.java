@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
@@ -29,13 +30,12 @@ public class ReportesFragment extends Fragment {
     // Objects
     private boolean expanded;
     private ReporteDataService reporteDataService;
-    private AppViewModel appViewModel;
     private AppSession appSession;
 
     // Widgets
     private View root;
 
-    private ListView reportesList;
+    private RecyclerView reportesView;
 
     private TextView reportesListMessage;
     private TextView createText;
@@ -50,7 +50,7 @@ public class ReportesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         expanded = false;
-        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        AppViewModel appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         reporteDataService = new ViewModelProvider(getActivity()).get(ReporteDataService.class);
         appSession = PreferencesHelper.getInstance(getActivity()).isUserLoggedIn();
 
@@ -78,7 +78,7 @@ public class ReportesFragment extends Fragment {
     }
 
     private void initWidgets() {
-        reportesList = root.findViewById(R.id.reportesList);
+        reportesView = root.findViewById(R.id.reportes_view);
         reportesListMessage = root.findViewById(R.id.reportesListMessage);
 
         createText = root.findViewById(R.id.createText);
@@ -87,6 +87,9 @@ public class ReportesFragment extends Fragment {
         reportesMenu = root.findViewById(R.id.reportesMenu);
         reportesCreate = root.findViewById(R.id.reportesCreate);
         reportesRefresh = root.findViewById(R.id.reportesRefresh);
+
+        reportesView.setHasFixedSize(true);
+        reportesView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void initListeners() {
@@ -105,10 +108,7 @@ public class ReportesFragment extends Fragment {
 
     private void loadData() {
         reporteDataService.getReportes().observe(getActivity(), reportes -> {
-            reportesList.setAdapter(new ReporteAdapter(getActivity(), reportes));
-            ((ReporteAdapter) reportesList.getAdapter()).notifyDataSetChanged();
-            reportesList.invalidateViews();
-            reportesList.refreshDrawableState();
+            reportesView.setAdapter(new ReporteAdapter(reportes));
             showList(reportes.isEmpty());
         });
     }
@@ -137,11 +137,11 @@ public class ReportesFragment extends Fragment {
     private void showList(boolean isEmpty) {
         if (isEmpty) {
             reportesListMessage.setVisibility(View.VISIBLE);
-            reportesList.setVisibility(View.GONE);
+            reportesView.setVisibility(View.GONE);
         }
         else {
             reportesListMessage.setVisibility(View.GONE);
-            reportesList.setVisibility(View.VISIBLE);
+            reportesView.setVisibility(View.VISIBLE);
         }
     }
 

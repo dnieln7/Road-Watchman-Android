@@ -32,6 +32,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -48,13 +49,18 @@
         <activity
             android:name=".ui.app.AppActivity"
             android:parentActivityName=".ui.login.Login"
-            android:theme="@style/MaterialTheme.NoActionBar">
-        </activity>
+            android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
             android:name=".ui.app.fragment.reportes.create.ReporteCreator"
             android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity
+            android:name=".ui.app.fragment.reportes.detail.ReporteDetail"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/MaterialTheme.NoActionBar" />
+
         <service
             android:name=".ui.app.fragment.reportes.background.ReportesService"
             android:theme="@style/MaterialTheme.NoActionBar" />
     </application>
+
 </manifest>

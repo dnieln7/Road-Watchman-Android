@@ -11,17 +11,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
         android:layout_margin="20dp"
-        android:text="Los reportes que subas aparecerán aquí"
+        android:text="No hay reportes"
         android:textColor="@color/inverted50"
         android:textSize="20sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/reportesList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reportes_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="top|center"
         android:layout_marginTop="10dp"
+        android:scrollbars="vertical"
         android:visibility="gone" />
 
     <include

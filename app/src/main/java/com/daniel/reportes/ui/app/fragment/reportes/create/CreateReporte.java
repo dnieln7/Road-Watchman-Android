@@ -59,12 +59,12 @@ public class CreateReporte extends Fragment {
         if (requestCode == Utils.SELECT_PICTURE) {
             if (data != null) {
                 pictureUri = data.getData();
-                Picasso.with(getContext()).load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
+                Picasso.get().load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
                 createViewModel.setPictureUri(pictureUri);
                 createViewModel.setPictureName(pictureName);
             }
             else if (pictureUri != null) {
-                Picasso.with(getContext()).load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
+                Picasso.get().load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
                 createViewModel.setPictureUri(pictureUri);
                 createViewModel.setPictureName(pictureName);
             }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.app.fragment.reportes.detail.ReporteDetail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/detail_app_bar"
+            layout="@layout/app_bar_custom" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <ImageView
+            android:id="@+id/detail_picture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/reportes" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:helperText="Fecha"
+            app:helperTextTextColor="@color/primary">
+
+            <TextView
+                android:id="@+id/detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19 de abril del 2020"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:helperText="Descripción"
+            app:helperTextTextColor="@color/primary">
+
+            <TextView
+                android:id="@+id/detail_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reporte elaborado el 19 de abril del 2020 en la calle pascual de los santos # 4 de la ciudad de amatlna de los reyes del estado de veracruz ignacio de la llave"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:helperText="Ubicación"
+            app:helperTextTextColor="@color/primary">
+
+            <TextView
+                android:id="@+id/detail_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calle pascual de los santos #4"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:helperText="Reparado"
+            app:helperTextTextColor="@color/primary">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/detail_fixed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp"
+                app:buttonTint="@color/primary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="back"
+            android:text="Regresar"
+            android:textColor="@color/primary"
+            android:textSize="15sp" />
+    </LinearLayout>
+</ScrollView>

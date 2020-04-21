@@ -1,66 +1,75 @@
 package com.daniel.reportes.ui.app.fragment.reportes;
 
-import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.Reporte;
+import com.daniel.reportes.ui.app.fragment.reportes.detail.ReporteDetail;
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.LocalDateTime;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
-public class ReporteAdapter extends ArrayAdapter<Reporte> {
+public class ReporteAdapter extends RecyclerView.Adapter<ReporteViewHolder> {
 
-    private Context context;
-    private List<Reporte> reportes;
-    private LayoutInflater inflater;
+    private List<Reporte> data;
+    private DateFormat dateFormat;
 
-    public ReporteAdapter(Context context, List<Reporte> reportes) {
-        super(context, R.layout.card_reporte, reportes);
-        this.context = context;
-        this.reportes = reportes;
+    public ReporteAdapter(List<Reporte> data) {
+        this.data = data;
+        dateFormat = new SimpleDateFormat("dd MMMM, yyyy", Locale.forLanguageTag("MX"));
     }
 
     @NonNull
     @Override
-    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-        if (inflater == null) {
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public ReporteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_reporte, parent, false);
+
+        return new ReporteViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ReporteViewHolder holder, int position) {
+        holder.getFixed().setActivated(data.get(position).isFixed());
+        holder.getFixed().setText(holder.getFixed().isActivated() ? "Reparado" : "Sin reparar");
+        holder.getDate().setText(
+                new LocalDateTime(data.get(position).getDate())
+                        .toString("dd MMMM, yyyy", Locale.forLanguageTag("MX"))
+        );
+
+        if (!data.get(position).getPicture().equals("")) {
+            Picasso.get()
+                    .load(data.get(position).getPicture())
+                    .error(R.drawable.reportes)
+                    .resize(250, 250)
+                    .onlyScaleDown()
+                    .tag(holder)
+                    .into(holder.getPicture());
         }
 
-        View view = convertView;
-        ReporteCard card;
+        holder.itemView.setOnClickListener(v -> {
 
-        if(view == null) {
-            view = inflater.inflate(R.layout.card_reporte, parent, false);
-            card = new ReporteCard(view);
-            view.setTag(card);
-        }
-        else {
-            card = (ReporteCard) view.getTag();
-        }
+            Intent detailIntent = new Intent(holder.itemView.getContext(), ReporteDetail.class);
+            detailIntent.putExtra("reporte", data.get(position));
 
-        Reporte reporte = reportes.get(position);
+            holder.itemView.getContext().startActivity(detailIntent);
+        });
+    }
 
-        card.getLocation().setText(reporte.getLocation_description());
-        card.getDescription().setText(reporte.getDescription());
-        card.getFixed().setActivated(reporte.isFixed());
-
-        /*if (!reporte.getPicture().equals("")) {
-        Picasso.with(context)
-                .load(reporte.getPicture())
-                .error(R.drawable.reportes)
-                .placeholder(R.drawable.reportes)
-                .resize(300, 300)
-                .onlyScaleDown()
-                .into(card.getPicture());
-        }*/
-
-        return view;
+    @Override
+    public int getItemCount() {
+        return data.size();
     }
 }
