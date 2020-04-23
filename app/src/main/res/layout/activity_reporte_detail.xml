@@ -4,18 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundMaterial"
     android:fillViewport="true"
     tools:context=".ui.app.fragment.reportes.detail.ReporteDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/detail_app_bar"
-            layout="@layout/app_bar_custom" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Reportes"
+                app:subtitle="Detalles"
+                app:subtitleTextColor="@android:color/white"
+                app:titleTextColor="@android:color/white" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <Space
             android:layout_width="match_parent"
@@ -95,14 +109,5 @@
                 android:textSize="20sp"
                 app:buttonTint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="back"
-            android:text="Regresar"
-            android:textColor="@color/primary"
-            android:textSize="15sp" />
     </LinearLayout>
 </ScrollView>

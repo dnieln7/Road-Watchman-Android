@@ -55,7 +55,8 @@ public class ReporteDetail extends AppCompatActivity {
     }
 
     private void initWidgets() {
-        MaterialToolbar materialToolbar = findViewById(R.id.detail_app_bar).findViewById(R.id.custom_toolbar);
+        setSupportActionBar(findViewById(R.id.detail_toolbar));
+
         ImageView picture = findViewById(R.id.detail_picture);
         TextView date = findViewById(R.id.detail_date);
         TextView description = findViewById(R.id.detail_description);
@@ -80,18 +81,5 @@ public class ReporteDetail extends AppCompatActivity {
         location.setText(reporte.getLocation_description());
         fixed.setActivated(reporte.isFixed());
         fixed.setText(fixed.isActivated() ? "Reparado" : "Sin reparar");
-        materialToolbar.setTitle("Reportes");
-        materialToolbar.setSubtitle("Detalles");
-
-        setSupportActionBar(materialToolbar);
-    }
-
-    public void back(View view) {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

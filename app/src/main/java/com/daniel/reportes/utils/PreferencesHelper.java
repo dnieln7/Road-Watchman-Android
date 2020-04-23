@@ -44,12 +44,20 @@ public class PreferencesHelper {
      * Loads dark theme if the property "DarkTheme" is true; loads default theme otherwise.
      */
     public void loadTheme() {
-        if (sharedPreferences.getBoolean(DARK_THEME, false)) {
+        if (isDarkThemeEnabled()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+    }
+
+    public void saveTheme(boolean darkTheme) {
+        sharedPreferences.edit().putBoolean("DarkTheme", darkTheme).apply();
+    }
+
+    public boolean isDarkThemeEnabled() {
+        return sharedPreferences.getBoolean(DARK_THEME, false);
     }
 
     /**

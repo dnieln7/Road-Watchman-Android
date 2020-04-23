@@ -15,10 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="false"
         android:background="@color/backgroundMaterial"
-        android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_reportes"
-        app:itemIconTint="@color/primary"
+        app:itemIconTint="@color/secondary"
         app:itemTextColor="@color/inverted100"
         app:menu="@menu/activity_app_drawer" />
 

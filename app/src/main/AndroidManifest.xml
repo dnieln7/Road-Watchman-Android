@@ -57,6 +57,12 @@
             android:name=".ui.app.fragment.reportes.detail.ReporteDetail"
             android:screenOrientation="fullSensor"
             android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity
+            android:name=".ui.app.fragment.settings.appearance.AppearanceActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity
+            android:name=".ui.app.fragment.settings.network.NetworkActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
 
         <service
             android:name=".ui.app.fragment.reportes.background.ReportesService"

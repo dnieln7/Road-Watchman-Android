@@ -32,7 +32,6 @@ public class AppActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         View navHeader = navigationView.getHeaderView(0);
 
-        initHeader(navHeader);
         setSupportActionBar(toolbar);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -49,15 +48,5 @@ public class AppActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
-    }
-
-    private void initHeader(View navHeader) {
-        AppSession session = PreferencesHelper.getInstance(this).isUserLoggedIn();
-
-        TextView headerUsername = navHeader.findViewById(R.id.headerUsername);
-        TextView headerEmail = navHeader.findViewById(R.id.headerEmail);
-
-        headerUsername.setText(session.getUser().getUsername());
-        headerEmail.setText(session.getUser().getEmail());
     }
 }

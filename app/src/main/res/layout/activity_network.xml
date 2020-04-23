@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundMaterial"
+    android:fillViewport="true"
+    tools:context=".ui.app.fragment.settings.network.NetworkActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/network_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/primaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:subtitle="Conexión"
+                app:subtitleTextColor="@android:color/white"
+                app:title="Ajustes"
+                app:titleTextColor="@android:color/white" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/backgroundMaterial"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/network_background_reportes"
+                style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Envio de reportes en segundo plano"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp"
+                app:switchPadding="20dp"
+                app:thumbTint="@color/secondary" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

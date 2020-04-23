@@ -1,53 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/backgroundMaterial"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/profile"
-        android:tint="@color/primaryLight" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        app:hintEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/profileUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textMultiLine"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:src="@drawable/email"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/profile"
             android:tint="@color/primary" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profileUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="textMultiLine"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Email"
+            android:padding="10dp"
             android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
             app:boxBackgroundMode="none">
@@ -56,32 +48,21 @@
                 android:id="@+id/profileEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/primary"
                 android:enabled="false"
                 android:inputType="textEmailAddress"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:src="@drawable/lock"
-            android:tint="@color/primary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutPassword"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
             android:hint="Contraseña"
+            android:padding="10dp"
             android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
             app:boxBackgroundMode="none"
@@ -92,22 +73,25 @@
                 android:id="@+id/profilePassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:drawableStart="@drawable/lock"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/primary"
                 android:enabled="false"
                 android:inputType="textPassword"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Guardar"
+            android:textColor="@color/primary"
+            android:visibility="invisible"
+            app:strokeColor="@color/primary" />
+
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/save"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Guardar"
-        android:textColor="@color/primary"
-        android:visibility="invisible"
-        app:strokeColor="@color/primary" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
