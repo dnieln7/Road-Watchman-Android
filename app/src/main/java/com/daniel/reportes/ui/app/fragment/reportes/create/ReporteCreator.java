@@ -3,6 +3,8 @@ package com.daniel.reportes.ui.app.fragment.reportes.create;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -31,17 +33,31 @@ public class ReporteCreator extends AppCompatActivity {
     private CreateReporte createReporte;
     private UploadReporte uploadReporte;
 
+    private ProgressBar progressBar;
+    private TextView stepDescription;
+    private MaterialButton nextStep;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reporte);
 
-        createViewModel = new ViewModelProvider(this).get(CreateViewModel.class);
-        location = LocationUtils.getGPS(this);
         user = (User) getIntent().getSerializableExtra("user");
+        createViewModel = new ViewModelProvider(this).get(CreateViewModel.class);
+        progressBar = findViewById(R.id.create_progress);
+        stepDescription = findViewById(R.id.create_step_description);
+        nextStep = findViewById(R.id.create_next);
+
+        if (LocationUtils.hasGPSEnabled(this)) {
+            location = LocationUtils.getGPS(this);
+        }
+        else {
+            LocationUtils.activateLocation(this);
+            location = LocationUtils.getGPS(this);
+        }
 
         initFragments();
+        switchFragment(1);
     }
 
     private void initFragments() {
@@ -51,45 +67,69 @@ public class ReporteCreator extends AppCompatActivity {
         uploadReporte = new UploadReporte();
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment, uploadReporte)
-                .add(R.id.fragment, createReporte)
+                .add(R.id.create_fragment, uploadReporte)
+                .add(R.id.create_fragment, createReporte)
                 .commit();
     }
 
     public void next(View view) {
-        switch (currentStep) {
-            case 1:
-                createReporte(view);
-                break;
-            case 2:
-                uploadReporte();
-        }
-    }
 
-    private void createReporte(View view) {
-        createViewModel.getPicture().observe(this, hasPicture -> {
+        if (currentStep == 1) {
             if (location != null) {
-                createViewModel.setReporte(new Reporte(
-                        new LocalDateTime().toString(),
-                        new double[]{location.getLatitude(), location.getLongitude()},
-                        user.getId()
-                ));
-
-                createViewModel.appendPictureName("_" + user.getId());
-
-                getSupportFragmentManager().beginTransaction().hide(createReporte).show(uploadReporte).commit();
-                ((MaterialButton) findViewById(R.id.create_reporte_next)).setText("Subir");
-                currentStep = 2;
+                createReporte();
+                switchFragment(2);
             }
             else {
                 Snackbar.make(view, "Calculando ubicación...", Snackbar.LENGTH_SHORT).show();
                 location = LocationUtils.getGPS(this);
             }
-        });
+        }
+        else if (currentStep == 2) {
+            uploadReporte.upload();
+        }
     }
 
-    public void uploadReporte() {
-        uploadReporte.upload();
+    private void updateProgress(int progress) {
+        switch (progress) {
+            case 1:
+                progressBar.setProgress(33);
+                break;
+            case 2:
+                progressBar.setProgress(66);
+                break;
+            case 3:
+                progressBar.setProgress(99);
+                break;
+        }
+    }
+
+    private void switchFragment(int fragment) {
+        if (fragment == 1) {
+            getSupportFragmentManager().beginTransaction().hide(uploadReporte).show(createReporte).commit();
+            nextStep.setText("Siguiente");
+            stepDescription.setText("Toma o selecciona una foto");
+            currentStep = 1;
+            updateProgress(1);
+        }
+        if (fragment == 2) {
+            getSupportFragmentManager().beginTransaction().hide(createReporte).show(uploadReporte).commit();
+            nextStep.setText("Subir");
+            stepDescription.setText("Agrega una breve descripción");
+            currentStep = 2;
+            updateProgress(2);
+        }
+    }
+
+    private void createReporte() {
+        createViewModel.getPicture().observe(this, hasPicture -> {
+            createViewModel.setReporte(new Reporte(
+                    new LocalDateTime().toString(),
+                    new double[]{location.getLatitude(), location.getLongitude()},
+                    user.getId()
+            ));
+
+            createViewModel.appendUserId(user.getId());
+        });
     }
 
     @Override
@@ -105,9 +145,7 @@ public class ReporteCreator extends AppCompatActivity {
             }).show();
         }
         else if (currentStep == 2) {
-            getSupportFragmentManager().beginTransaction().hide(uploadReporte).show(createReporte).commit();
-            ((MaterialButton) findViewById(R.id.create_reporte_next)).setText("Siguiente");
-            currentStep = 1;
+            switchFragment(1);
         }
     }
 }

@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -34,10 +33,8 @@ public class UploadReporte extends Fragment {
 
     // Widgets
     private View root;
-
     private TextInputEditText description;
-    private ProgressBar status;
-    private TextView message;
+    private AlertDialog progressDialog;
 
     // Class
     private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
@@ -63,29 +60,20 @@ public class UploadReporte extends Fragment {
 
     private void initWidgets() {
         description = root.findViewById(R.id.upload_reporte_description);
-        status = root.findViewById(R.id.upload_reporte_status);
-        message = root.findViewById(R.id.upload_reporte_message);
+        progressDialog = Printer.progressDialog(getActivity(), "Por favor espere...", "Subiendo reporte");
     }
 
     public void upload() {
         Utils.hideKeyboard(getActivity());
 
-        if (this.description.getText() != null) {
-            String description = this.description.getText().toString().trim();
+        progressDialog.show();
+        String description = this.description.getText() != null ? this.description.getText().toString().trim() : "";
+        createViewModel.getReporte().observe(getActivity(), reporte -> reporte.setDescription(description));
 
-            createViewModel.getReporte().observe(getActivity(), reporte -> reporte.setDescription(description));
-
-            status.setVisibility(View.VISIBLE);
-            message.setVisibility(View.VISIBLE);
-
-            uploadPicture();
-        }
+        uploadPicture();
     }
 
     private void uploadPicture() {
-        status.setProgress(25);
-        message.setText("Preparando foto...");
-
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference reference = storage.getReference("Reportes/");
 
@@ -95,9 +83,6 @@ public class UploadReporte extends Fragment {
         createViewModel.getPictureName().observe(getActivity(), pictureName::append);
         createViewModel.getPictureUri().observe(getActivity(), pictureUri::append);
 
-        status.setProgress(50);
-        message.setText("Subiendo foto...");
-
         reference.child(pictureName.toString())
                 .putFile(Uri.parse(pictureUri.toString()))
                 .addOnFailureListener(error -> Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, error))
@@ -106,20 +91,13 @@ public class UploadReporte extends Fragment {
                 );
     }
 
-    // Class
-
     private void uploadReporte(Uri uri) {
-        status.setProgress(75);
-        message.setText("Subiendo reporte...");
-
         createViewModel.getReporte().observe(getActivity(), reporte -> {
             reporte.setPicture(uri == null ? "" : uri.toString());
 
             try {
                 if (new PostReporte(reporteListener).execute(reporte).get().success()) {
-                    status.setProgress(100);
-                    message.setText("Completado");
-
+                    progressDialog.dismiss();
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -128,5 +106,7 @@ public class UploadReporte extends Fragment {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             }
         });
+
+        progressDialog.dismiss();
     }
 }

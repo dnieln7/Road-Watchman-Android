@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.daniel.reportes.R;
 import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.utils.Utils;
-import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
@@ -39,13 +38,11 @@ public class CreateReporte extends Fragment {
     // Widgets
     private View root;
 
-    private MaterialButton selectPicture;
     private ImageView selectedPicture;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_create_reporte, container, false);
         createViewModel = new ViewModelProvider(getActivity()).get(CreateViewModel.class);
-
 
         initWidgets();
         initListeners();
@@ -90,12 +87,11 @@ public class CreateReporte extends Fragment {
     }
 
     private void initWidgets() {
-        selectPicture = root.findViewById(R.id.selectPicture);
         selectedPicture = root.findViewById(R.id.selectedPicture);
     }
 
     private void initListeners() {
-        selectPicture.setOnClickListener(v -> selectPicture());
+        selectedPicture.setOnClickListener(v -> selectPicture());
     }
 
     private void selectPicture() {

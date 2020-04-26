@@ -53,7 +53,15 @@ public class CreateViewModel extends ViewModel {
         this.pictureName.setValue(pictureName);
     }
 
-    public void appendPictureName(String text) {
-        this.pictureName.setValue(this.pictureName.getValue() + text);
+    public void appendUserId(int id) {
+        String name = pictureName.getValue();
+
+        if (name != null) {
+            String[] nameSplit = name.split("\\.");
+            String type = nameSplit[nameSplit.length - 1];
+            String formattedName = name.replace("." + type, "_" + id + "." + type);
+
+            this.pictureName.setValue(formattedName);
+        }
     }
 }
