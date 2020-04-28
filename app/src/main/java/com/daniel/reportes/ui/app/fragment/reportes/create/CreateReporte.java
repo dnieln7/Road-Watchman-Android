@@ -1,7 +1,10 @@
 package com.daniel.reportes.ui.app.fragment.reportes.create;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -37,7 +40,6 @@ public class CreateReporte extends Fragment {
 
     // Widgets
     private View root;
-
     private ImageView selectedPicture;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,20 +56,25 @@ public class CreateReporte extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (requestCode == Utils.SELECT_PICTURE) {
-            if (data != null) {
+
+            if (data != null && data.getData() != null) {
                 pictureUri = data.getData();
-                Picasso.get().load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
+                Picasso.get().load(pictureUri).error(R.drawable.reportes).into(selectedPicture);
                 createViewModel.setPictureUri(pictureUri);
                 createViewModel.setPictureName(pictureName);
             }
-            else if (pictureUri != null) {
-                Picasso.get().load(pictureUri).placeholder(R.drawable.reportes).into(selectedPicture);
-                createViewModel.setPictureUri(pictureUri);
-                createViewModel.setPictureName(pictureName);
+            else {
+                if (pictureUri != null) {
+                    Picasso.get().load(pictureUri).error(R.drawable.reportes).into(selectedPicture);
+                    createViewModel.setPictureUri(pictureUri);
+                    createViewModel.setPictureName(pictureName);
+                }
             }
 
             try {
-                createViewModel.setPicture(MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), pictureUri) != null);
+                if (pictureUri != null) {
+                    createViewModel.setPicture(MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), pictureUri) != null);
+                }
             }
             catch (IOException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
@@ -96,9 +103,8 @@ public class CreateReporte extends Fragment {
 
     private void selectPicture() {
         if (Permissions.hasPermissions(getContext())) {
-
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getUri());
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, createPictureUri());
 
             Intent intentContent = new Intent(Intent.ACTION_GET_CONTENT);
             intentContent.setType("image/*");
@@ -116,29 +122,38 @@ public class CreateReporte extends Fragment {
         }
     }
 
-    private Uri getUri() {
-        return pictureUri = Uri.fromFile(getOutputMediaFile());
-    }
+    private Uri createPictureUri() {
+        pictureName = "reporte_" + new LocalDateTime() + ".jpg";
 
-    private File getOutputMediaFile() {
-        File mediaStorageDir = new File(
-                Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES
-                ),
-                "Reportes"
-        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("Reportes", "failed to create directory");
-                return null;
+            ContentResolver resolver = getContext().getContentResolver();
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, pictureName);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Reportes/");
+
+            pictureUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+        }
+        else {
+            File mediaStorageDir = new File(
+                    Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_DCIM
+                    ),
+                    "Reportes"
+            );
+
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d("Reportes", "failed to create directory");
+                    pictureUri = null;
+                }
             }
+
+            pictureUri = Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + pictureName));
         }
 
-        return new File(mediaStorageDir.getPath() + File.separator + getPictureName());
-    }
-
-    private String getPictureName() {
-        return pictureName = "reporte_" + new LocalDateTime() + ".jpg";
+        return pictureUri;
     }
 }
