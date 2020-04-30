@@ -1,89 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_weight="1"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom|end">
+        android:gravity="bottom|end">
 
         <TextView
-            android:id="@+id/refreshText"
+            android:id="@+id/fab_refresh_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="12dp"
+            android:layout_toStartOf="@id/fab_refresh"
             android:text="Actualizar"
             android:textColor="@color/inverted100"
             android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/reportesRefresh"
+            android:id="@+id/fab_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/refresh"
-            android:tint="@color/inverted100"
             android:visibility="invisible"
             app:backgroundTint="@color/secondary"
             app:elevation="5dp"
             app:fabSize="mini" />
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom|end">
+        android:gravity="bottom|end">
 
         <TextView
-            android:id="@+id/createText"
+            android:id="@+id/fab_create_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_toStartOf="@id/fab_create"
             android:text="Nuevo reporte"
             android:textColor="@color/inverted100"
             android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/reportesCreate"
+            android:id="@+id/fab_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/camera"
-            android:tint="@color/inverted100"
             android:visibility="invisible"
             app:backgroundTint="@color/secondary"
             app:elevation="5dp"
             app:fabSize="mini" />
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom|end">
+        android:gravity="bottom|end">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/reportesMenu"
+            android:id="@+id/fab_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:onClick="expandMenu"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/add"
             app:backgroundTint="@color/secondary"
             app:elevation="5dp" />
-    </LinearLayout>
-
-</FrameLayout>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

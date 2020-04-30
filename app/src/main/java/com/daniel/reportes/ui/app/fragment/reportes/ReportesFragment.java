@@ -2,6 +2,7 @@ package com.daniel.reportes.ui.app.fragment.reportes;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,15 +36,15 @@ public class ReportesFragment extends Fragment {
     // Widgets
     private View root;
 
-    private RecyclerView reportesView;
+    private RecyclerView listView;
 
-    private TextView reportesListMessage;
-    private TextView createText;
-    private TextView refreshText;
+    private TextView listMessage;
+    private TextView createLabel;
+    private TextView refreshLabel;
 
-    private FloatingActionButton reportesMenu;
-    private FloatingActionButton reportesCreate;
-    private FloatingActionButton reportesRefresh;
+    private FloatingActionButton menu;
+    private FloatingActionButton create;
+    private FloatingActionButton refresh;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,24 +79,24 @@ public class ReportesFragment extends Fragment {
     }
 
     private void initWidgets() {
-        reportesView = root.findViewById(R.id.reportes_view);
-        reportesListMessage = root.findViewById(R.id.reportesListMessage);
+        listView = root.findViewById(R.id.reportes_view);
+        listMessage = root.findViewById(R.id.reportesListMessage);
 
-        createText = root.findViewById(R.id.createText);
-        refreshText = root.findViewById(R.id.refreshText);
+        createLabel = root.findViewById(R.id.fab_create_label);
+        refreshLabel = root.findViewById(R.id.fab_refresh_label);
 
-        reportesMenu = root.findViewById(R.id.reportesMenu);
-        reportesCreate = root.findViewById(R.id.reportesCreate);
-        reportesRefresh = root.findViewById(R.id.reportesRefresh);
+        menu = root.findViewById(R.id.fab_menu);
+        create = root.findViewById(R.id.fab_create);
+        refresh = root.findViewById(R.id.fab_refresh);
 
-        reportesView.setHasFixedSize(true);
-        reportesView.setLayoutManager(new LinearLayoutManager(getContext()));
+        listView.setHasFixedSize(true);
+        listView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void initListeners() {
-        reportesMenu.setOnClickListener(v -> expandMenu());
-        reportesCreate.setOnClickListener(v -> createReporte());
-        reportesRefresh.setOnClickListener(v -> refresh());
+        menu.setOnClickListener(v -> expandMenu());
+        create.setOnClickListener(v -> createReporte());
+        refresh.setOnClickListener(v -> refresh());
     }
 
     private void createReporte() {
@@ -108,7 +109,7 @@ public class ReportesFragment extends Fragment {
 
     private void loadData() {
         reporteDataService.getReportes().observe(getActivity(), reportes -> {
-            reportesView.setAdapter(new ReporteAdapter(reportes));
+            listView.setAdapter(new ReporteAdapter(reportes));
             showList(reportes.isEmpty());
         });
     }
@@ -136,42 +137,52 @@ public class ReportesFragment extends Fragment {
 
     private void showList(boolean isEmpty) {
         if (isEmpty) {
-            reportesListMessage.setVisibility(View.VISIBLE);
-            reportesView.setVisibility(View.GONE);
+            listMessage.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
         }
         else {
-            reportesListMessage.setVisibility(View.GONE);
-            reportesView.setVisibility(View.VISIBLE);
+            listMessage.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
         }
     }
 
     private void expandMenu() {
+        Point point = new Point();
+
+        getActivity().getWindowManager().getDefaultDisplay().getSize(point);
+
+        float createHeight = point.y * 0.10F;
+        float refreshHeight = point.y * 0.18F;
 
         if (expanded) {
-            reportesMenu.animate().rotationBy(-180);
-            reportesCreate.animate().translationY(0);
-            reportesRefresh.animate().translationY(0);
-            createText.animate().translationY(0);
-            refreshText.animate().translationY(0);
+            menu.animate().rotationBy(-180);
 
-            reportesCreate.hide();
-            reportesRefresh.hide();
-            createText.setVisibility(View.INVISIBLE);
-            refreshText.setVisibility(View.INVISIBLE);
+            create.animate().translationY(0);
+            createLabel.animate().translationY(0);
+
+            refresh.animate().translationY(0);
+            refreshLabel.animate().translationY(0);
+
+            create.hide();
+            refresh.hide();
+            createLabel.setVisibility(View.INVISIBLE);
+            refreshLabel.setVisibility(View.INVISIBLE);
 
             expanded = false;
         }
         else {
-            reportesMenu.animate().rotationBy(180);
-            reportesCreate.animate().translationY(-150);
-            reportesRefresh.animate().translationY(-300);
-            createText.animate().translationY(-150);
-            refreshText.animate().translationY(-300);
+            menu.animate().rotationBy(180);
 
-            reportesCreate.show();
-            reportesRefresh.show();
-            createText.setVisibility(View.VISIBLE);
-            refreshText.setVisibility(View.VISIBLE);
+            create.animate().translationY(-createHeight);
+            createLabel.animate().translationY(-createHeight);
+
+            refresh.animate().translationY(-refreshHeight);
+            refreshLabel.animate().translationY(-refreshHeight);
+
+            create.show();
+            refresh.show();
+            createLabel.setVisibility(View.VISIBLE);
+            refreshLabel.setVisibility(View.VISIBLE);
 
             expanded = true;
         }
