@@ -62,17 +62,21 @@ public class LanguageHelper {
 
     /**
      * Loads the current  language setting.
+     *
      * @param activity Activity to obtain an {@link PreferencesHelper} instance.
      */
     public static void loadLanguage(Activity activity) {
         String languageCode = PreferencesHelper.getInstance(activity).getLanguage();
-        Locale locale = new Locale(languageCode);
-        Resources resources = activity.getResources();
-        Configuration configuration = resources.getConfiguration();
 
-        Locale.setDefault(locale);
-        configuration.locale = locale;
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        if (!languageCode.equals("")) {
+            Locale locale = new Locale(languageCode);
+            Resources resources = activity.getResources();
+            Configuration configuration = resources.getConfiguration();
+
+            Locale.setDefault(locale);
+            configuration.locale = locale;
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        }
     }
 
     /**

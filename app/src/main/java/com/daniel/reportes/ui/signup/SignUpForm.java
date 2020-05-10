@@ -102,7 +102,7 @@ public class SignUpForm extends Fragment {
         signEmail = root.findViewById(R.id.signEmail);
         signPassword = root.findViewById(R.id.signPassword);
 
-        signNext = root.findViewById(R.id.signNext);
+        signNext = root.findViewById(R.id.sign_up_next);
     }
 
     private void initListeners() {
@@ -116,26 +116,30 @@ public class SignUpForm extends Fragment {
         String email = signEmail.getText().toString();
         String code = Utils.generateCode();
 
-        if (signEmail.getError() != null) {
+        if (!email.equals("")) {
+            if (signEmail.getError() != null) {
+                Printer.snackBar(root, getString(R.string.login_wrong_email));
+                return;
+            }
+
+            try {
+                if (new ExistsEmail().execute(signEmail.getText().toString()).get()) {
+                    Snackbar.make(root, R.string.sign_up_duplicated_email, Snackbar.LENGTH_SHORT).show();
+                }
+                else {
+                    new SendEmail().execute(email, code);
+
+                    viewModel.setCode(code);
+                    viewModel.setVerified(false);
+                    listener.showFragment(2);
+                }
+            }
+            catch (ExecutionException | InterruptedException e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        else{
             Printer.snackBar(root, getString(R.string.login_wrong_email));
-            return;
         }
-
-        try {
-            if (new ExistsEmail().execute(signEmail.getText().toString()).get()) {
-                Snackbar.make(root, R.string.sign_up_duplicated_email, Snackbar.LENGTH_SHORT).show();
-            }
-            else {
-                new SendEmail().execute(email, code);
-
-                viewModel.setCode(code);
-                viewModel.setVerified(false);
-                listener.showFragment(2);
-            }
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-        }
-
     }
 }

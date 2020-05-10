@@ -24,13 +24,14 @@
     <string name="login_login">Ingresar</string>
     <string name="login_google_login">Ingresar con Google</string>
     <string name="login_sign_up">Registrarse</string>
-    <string name="login_wrong_email">Favor de verificar su correo</string>
+    <string name="login_wrong_email">Su correo esta incorrecto</string>
     <!--Login-->
 
     <!--Sign up-->
     <string name="sign_up_name">Nombre</string>
     <string name="sign_up_next">Siguiente</string>
     <string name="sign_up_duplicated_email">El correo ya existe!</string>
+    <string name="sign_up_create">Crea tu cuenta</string>
     <!--Sign up-->
 
     <!--Verify-->
