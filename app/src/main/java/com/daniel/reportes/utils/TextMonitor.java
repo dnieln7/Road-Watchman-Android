@@ -8,9 +8,11 @@ import com.google.android.material.textfield.TextInputEditText;
 public class TextMonitor implements TextWatcher {
 
     private TextInputEditText container;
+    private String textError;
 
-    public TextMonitor(TextInputEditText container) {
+    public TextMonitor(TextInputEditText container, String textError) {
         this.container = container;
+        this.textError = textError;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class TextMonitor implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         if (!validateEmail(s.toString())) {
-            container.setError("El email no es válido");
+            container.setError(textError);
         }
     }
 

@@ -12,6 +12,7 @@ import com.daniel.reportes.ui.app.AppActivity;
 import com.daniel.reportes.ui.login.Login;
 import com.daniel.reportes.ui.permission.Permissions;
 import com.daniel.reportes.utils.GoogleAccountHelper;
+import com.daniel.reportes.utils.LanguageHelper;
 import com.daniel.reportes.utils.PreferencesHelper;
 import com.daniel.reportes.utils.Printer;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -70,6 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void loadPreferences() {
         PreferencesHelper helper = PreferencesHelper.getInstance(this);
+        LanguageHelper.loadLanguage(this);
         helper.loadTheme();
 
         appSession = helper.isUserLoggedIn();

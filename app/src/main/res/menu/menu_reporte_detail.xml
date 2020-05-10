@@ -6,5 +6,5 @@
         android:id="@+id/detail_back"
         android:icon="@drawable/arrow_back"
         app:showAsAction="always"
-        android:title="Regresar" />
+        android:title="@string/menu_back" />
 </menu>

@@ -38,7 +38,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/profile_email"
             android:padding="10dp"
             android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
@@ -61,7 +61,7 @@
             android:id="@+id/layoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/profile_password"
             android:padding="10dp"
             android:textColorHint="@color/primary"
             app:boxBackgroundColor="@color/backgroundMaterial"
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Guardar"
+            android:text="@string/profile_save"
             android:textColor="@color/primary"
             android:visibility="invisible"
             app:strokeColor="@color/primary" />

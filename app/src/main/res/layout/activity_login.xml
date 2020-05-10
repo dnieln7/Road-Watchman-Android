@@ -13,7 +13,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/login_email"
         app:helperTextTextColor="@color/primary"
         app:helperText="user@example.com"
         android:textColorHint="@color/primary"
@@ -38,7 +38,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
+        android:hint="@string/login_password"
         android:textColorHint="@color/primary"
         app:boxStrokeColor="@color/primary"
         app:passwordToggleEnabled="true"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primary"
             android:onClick="loginWithEmail"
-            android:text="Ingresar"/>
+            android:text="@string/login_login"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
@@ -80,7 +80,7 @@
             android:layout_marginStart="20dp"
             android:backgroundTint="@color/primary"
             android:onClick="loginWithGoogle"
-            android:text="Sign up"
+            android:text="@string/login_google_login"
             app:icon="@drawable/google"
             app:iconPadding="10dp" />
     </LinearLayout>
@@ -94,8 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToSignUp"
-        android:text="Registrarse"
+        android:text="@string/login_sign_up"
         android:textColor="@color/primary"
         app:strokeColor="@color/primary" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>

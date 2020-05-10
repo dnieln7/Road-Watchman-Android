@@ -16,7 +16,7 @@ import com.daniel.reportes.data.User;
  */
 public class PreferencesHelper {
 
-    public static final String DARK_THEME = "DarkTheme";
+    private static final String DARK_THEME = "DarkTheme";
     private static final String NAME = "com.daniel.reportes.settings";
 
     private static PreferencesHelper instance;
@@ -29,7 +29,7 @@ public class PreferencesHelper {
     /**
      * Creates a new instance of {@link PreferencesHelper} if there is none.
      *
-     * @param activity - Activity to crate shared preferences file.
+     * @param activity Activity to crate shared preferences file.
      * @return An instance of {@link PreferencesHelper}
      */
     public static PreferencesHelper getInstance(Activity activity) {
@@ -52,12 +52,40 @@ public class PreferencesHelper {
         }
     }
 
+    /**
+     * Saves the desired theme option.
+     *
+     * @param darkTheme Enable dark theme
+     */
     public void saveTheme(boolean darkTheme) {
         sharedPreferences.edit().putBoolean("DarkTheme", darkTheme).apply();
     }
 
+    /**
+     * Checks if the dark theme is enabled
+     *
+     * @return true if the dark theme is enabled; false otherwise.
+     */
     public boolean isDarkThemeEnabled() {
         return sharedPreferences.getBoolean(DARK_THEME, false);
+    }
+
+    /**
+     * Saves the desired language code.
+     *
+     * @param languageCode Language code.
+     */
+    public void saveLanguage(String languageCode) {
+        sharedPreferences.edit().putString("Language", languageCode).apply();
+    }
+
+    /**
+     * Gets the current language code.
+     *
+     * @return A string with the language code; empty string otherwise.
+     */
+    public String getLanguage() {
+        return sharedPreferences.getString("Language", "");
     }
 
     /**
@@ -85,7 +113,7 @@ public class PreferencesHelper {
     }
 
     /**
-     * Checks if the current logged account.
+     * Checks the current logged account type.
      *
      * @return True if there is an active google account.
      */
@@ -94,7 +122,7 @@ public class PreferencesHelper {
     }
 
     /**
-     * Checks if the current logged account.
+     * Checks the current logged account type.
      *
      * @return The email of current user; null if the current logged account is not an email account.
      */
@@ -111,8 +139,8 @@ public class PreferencesHelper {
     /**
      * Saves the desired user into shared preferences.
      *
-     * @param user          - The user to be saved.
-     * @param googleAccount - A boolean indicating if the user uses a google account.
+     * @param user          The user to be saved.
+     * @param googleAccount A boolean indicating if the user uses a google account.
      */
     public void putUser(User user, boolean googleAccount) {
 
@@ -130,7 +158,7 @@ public class PreferencesHelper {
     /**
      * Deletes all the user data of shared preferences and destroys the current {@link PreferencesHelper} instance.
      */
-    public void deleteUser() {
+    public void destroy() {
         sharedPreferences.edit().putBoolean("Logged", false).apply();
         sharedPreferences.edit().putBoolean("GoogleAccount", false).apply();
         sharedPreferences.edit().putBoolean("EmailAccount", false).apply();
@@ -140,6 +168,9 @@ public class PreferencesHelper {
         sharedPreferences.edit().putString("Email", "").apply();
         sharedPreferences.edit().putString("GoogleId", "").apply();
         sharedPreferences.edit().putString("Role", "").apply();
+
+        saveLanguage("");
+        saveTheme(false);
 
         instance = null;
     }

@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_toStartOf="@id/fab_refresh"
-            android:text="Actualizar"
+            android:text="@string/reports_refresh"
             android:textColor="@color/inverted100"
             android:visibility="invisible" />
 
@@ -47,7 +47,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_toStartOf="@id/fab_create"
-            android:text="Nuevo reporte"
+            android:text="@string/reports_new"
             android:textColor="@color/inverted100"
             android:visibility="invisible" />
 

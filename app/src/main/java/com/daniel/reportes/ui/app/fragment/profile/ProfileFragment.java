@@ -24,7 +24,6 @@ import com.daniel.reportes.ui.app.fragment.AppViewModel;
 import com.daniel.reportes.utils.PreferencesHelper;
 import com.daniel.reportes.utils.Printer;
 import com.daniel.reportes.utils.Utils;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -72,12 +71,12 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profileSignOut:
-                PreferencesHelper.getInstance(getActivity()).deleteUser();
+                PreferencesHelper.getInstance(getActivity()).destroy();
                 getActivity().finish();
                 return true;
             case R.id.profileEdit:
                 if (PreferencesHelper.getInstance(getActivity()).isGoogleAccount()) {
-                    Printer.okDialog(getContext(), "Inabilitado", "Esta función no está disponible para cuentas de google");
+                    Printer.okDialog(getContext(), getString(R.string.profile_warning), getString(R.string.profile_warning_message));
                 }
                 else {
                     edit();
@@ -139,7 +138,7 @@ public class ProfileFragment extends Fragment {
             PutListener listener = new PutListener();
 
             if (new PutUser(String.valueOf(user.getId()), listener).execute(user).get().success()) {
-                Snackbar.make(root, "Los cambios se han guardado!", Snackbar.LENGTH_SHORT).show();
+                Printer.snackBar(root, getString(R.string.profile_save_message));
                 PreferencesHelper.getInstance(getActivity()).putUser(user, false);
                 edit();
             }

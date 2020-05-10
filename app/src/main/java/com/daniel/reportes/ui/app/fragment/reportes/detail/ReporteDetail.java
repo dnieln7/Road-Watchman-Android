@@ -1,21 +1,17 @@
 package com.daniel.reportes.ui.app.fragment.reportes.detail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.daniel.reportes.R;
 import com.daniel.reportes.data.Reporte;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.squareup.picasso.Picasso;
 
@@ -80,6 +76,9 @@ public class ReporteDetail extends AppCompatActivity {
         description.setText(reporte.getDescription());
         location.setText(reporte.getLocation_description());
         fixed.setActivated(reporte.isFixed());
-        fixed.setText(fixed.isActivated() ? "Reparado" : "Sin reparar");
+        fixed.setText(fixed.isActivated()
+                ? getString(R.string.reports_fixed)
+                : getString(R.string.reports_awaiting)
+        );
     }
 }

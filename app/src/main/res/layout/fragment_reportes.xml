@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
         android:layout_margin="20dp"
-        android:text="No hay reportes"
+        android:text="@string/reports_empty"
         android:textColor="@color/inverted50"
         android:textSize="20sp"
         android:visibility="gone" />

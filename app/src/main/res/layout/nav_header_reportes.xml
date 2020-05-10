@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:textSize="20sp"
-        android:text="Reportes"
+        android:text="@string/app_name"
         android:textColor="@color/inverted100" />
 
     <LinearLayout
@@ -29,13 +29,4 @@
         android:layout_height="1dp"
         android:background="@color/inverted25"
         android:layout_width="match_parent"/>
-
-    <!--<TextView
-        android:id="@+id/headerEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Correo"
-        android:textColor="@color/inverted100" /> -->
-
 </LinearLayout>

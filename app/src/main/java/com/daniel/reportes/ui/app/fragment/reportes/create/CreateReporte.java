@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +111,7 @@ public class CreateReporte extends Fragment {
             Intent intentPick = new Intent(Intent.ACTION_PICK);
             intentPick.setType("image/*");
 
-            Intent intentChooser = Intent.createChooser(intentContent, "Selecciona una imagen");
+            Intent intentChooser = Intent.createChooser(intentContent, getString(R.string.create_report_select));
             intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{intentPick, cameraIntent});
 
             startActivityForResult(intentChooser, Utils.SELECT_PICTURE);
@@ -132,7 +131,7 @@ public class CreateReporte extends Fragment {
 
             contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, pictureName);
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Reportes/");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/" + getString(R.string.app_name) + "/");
 
             pictureUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         }
@@ -146,7 +145,7 @@ public class CreateReporte extends Fragment {
 
             if (!mediaStorageDir.exists()) {
                 if (!mediaStorageDir.mkdirs()) {
-                    Log.d("Reportes", "failed to create directory");
+                    Logger.getLogger(CreateReporte.class.getName()).log(Level.SEVERE, "Failed to create directory");
                     pictureUri = null;
                 }
             }

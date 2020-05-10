@@ -23,9 +23,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/primaryDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:subtitle="Apariencia"
+                app:subtitle="@string/settings_appearance"
                 app:subtitleTextColor="@android:color/white"
-                app:title="Ajustes"
+                app:title="@string/settings"
                 app:titleTextColor="@android:color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -42,11 +42,32 @@
                 style="@style/Widget.MaterialComponents.CompoundButton.Switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tema oscuro"
+                android:text="@string/settings_dark_theme"
                 android:textColor="@color/inverted100"
                 android:textSize="20sp"
-                app:switchPadding="20dp"
                 app:thumbTint="@color/secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/backgroundMaterial"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="@string/settings_language"
+                android:textColor="@color/inverted100"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/appearance_language"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

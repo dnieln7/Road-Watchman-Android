@@ -11,7 +11,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="@string/sign_up_name"
         android:textColorHint="@color/primary"
         app:boxStrokeColor="@color/primary">
 
@@ -34,7 +34,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/login_email"
         android:textColorHint="@color/primary"
         app:boxStrokeColor="@color/primary">
 
@@ -57,7 +57,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
+        android:hint="@string/login_password"
         android:textColorHint="@color/primary"
         app:boxStrokeColor="@color/primary"
         app:passwordToggleEnabled="true"
@@ -83,7 +83,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Siguiente"
+        android:text="@string/sign_up_next"
         android:textColor="@color/primary"
         app:strokeColor="@color/primary" />
 

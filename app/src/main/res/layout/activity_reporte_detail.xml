@@ -24,8 +24,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/primaryDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Reportes"
-                app:subtitle="Detalles"
+                app:title="@string/app_name"
+                app:subtitle="@string/report_details"
                 app:subtitleTextColor="@android:color/white"
                 app:titleTextColor="@android:color/white" />
 
@@ -49,14 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:helperText="Fecha"
+            app:helperText="@string/report_details_date"
             app:helperTextTextColor="@color/primary">
 
             <TextView
                 android:id="@+id/detail_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19 de abril del 2020"
                 android:textColor="@color/inverted100"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -65,14 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:helperText="Descripción"
+            app:helperText="@string/report_details_description"
             app:helperTextTextColor="@color/primary">
 
             <TextView
                 android:id="@+id/detail_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reporte elaborado el 19 de abril del 2020 en la calle pascual de los santos # 4 de la ciudad de amatlna de los reyes del estado de veracruz ignacio de la llave"
+
                 android:textColor="@color/inverted100"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -81,14 +80,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:helperText="Ubicación"
+            app:helperText="@string/report_details_location"
             app:helperTextTextColor="@color/primary">
 
             <TextView
                 android:id="@+id/detail_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calle pascual de los santos #4"
+
                 android:textColor="@color/inverted100"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:helperText="Reparado"
+            app:helperText="@string/report_details_fixed"
             app:helperTextTextColor="@color/primary">
 
             <com.google.android.material.checkbox.MaterialCheckBox

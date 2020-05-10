@@ -13,7 +13,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Código"
+        android:hint="@string/verify_code"
         android:textColorHint="@color/primary"
         app:boxStrokeColor="@color/primary">
 
@@ -43,7 +43,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Regresar"
+            android:text="@string/verify_back"
             android:textColor="@color/primary"
             app:strokeColor="@color/primary" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:backgroundTint="@color/primary"
-            android:text="Verificar" />
+            android:text="@string/verify_verify" />
     </LinearLayout>
 
 </LinearLayout>

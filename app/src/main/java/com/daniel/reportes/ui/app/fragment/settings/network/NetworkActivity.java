@@ -71,17 +71,17 @@ public class NetworkActivity extends AppCompatActivity {
             }
         }
 
-        Printer.okDialog(this, "Alerta", "Se necesita una conexión a internet activa");
+        Printer.okDialog(this, getString(R.string.settings_alert), getString(R.string.settings_warning));
         return false;
     }
 
     private void showReporteServiceWarning() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Envío de reportes en segundo plano");
-        builder.setMessage("Se enviarán reportes de manera automática cuando se detecten movimientos violentos");
-        builder.setPositiveButton("Aceptar", (dialog, which) -> backgroundReportes.setChecked(checkConnection()));
-        builder.setNegativeButton("Cancelar", (dialog, which) -> backgroundReportes.setChecked(false));
+        builder.setTitle(R.string.settings_background);
+        builder.setMessage(R.string.settings_background_warning);
+        builder.setPositiveButton(R.string.settings_continue, (dialog, which) -> backgroundReportes.setChecked(checkConnection()));
+        builder.setNegativeButton(R.string.settings_cancel, (dialog, which) -> backgroundReportes.setChecked(false));
         builder.show();
     }
 

@@ -72,7 +72,7 @@ public class ReportesFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == ReporteCreator.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Printer.okDialog(getContext(), "Exito", "Su reporte se ha enviado");
+                Printer.okDialog(getContext(), getString(R.string.reports_success), getString(R.string.reports_report_send));
                 refresh();
             }
         }
@@ -131,7 +131,7 @@ public class ReportesFragment extends Fragment {
             loadData();
         }
         else {
-            Printer.okDialog(getContext(), "Alerta", "Se requiere conexión a internet para cargar los reportes");
+            Printer.okDialog(getContext(), getString(R.string.reports_refresh), getString(R.string.reports_warning));
         }
     }
 

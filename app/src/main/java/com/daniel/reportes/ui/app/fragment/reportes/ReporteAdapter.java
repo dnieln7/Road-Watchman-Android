@@ -23,11 +23,9 @@ import java.util.Locale;
 public class ReporteAdapter extends RecyclerView.Adapter<ReporteViewHolder> {
 
     private List<Reporte> data;
-    private DateFormat dateFormat;
 
     public ReporteAdapter(List<Reporte> data) {
         this.data = data;
-        dateFormat = new SimpleDateFormat("dd MMMM, yyyy", Locale.forLanguageTag("MX"));
     }
 
     @NonNull
@@ -43,7 +41,10 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ReporteViewHolder holder, int position) {
         holder.getFixed().setActivated(data.get(position).isFixed());
-        holder.getFixed().setText(holder.getFixed().isActivated() ? "Reparado" : "Sin reparar");
+        holder.getFixed().setText(holder.getFixed().isActivated()
+                ? holder.itemView.getContext().getString(R.string.reports_fixed)
+                : holder.itemView.getContext().getString(R.string.reports_awaiting)
+        );
         holder.getDate().setText(
                 new LocalDateTime(data.get(position).getDate())
                         .toString("dd MMMM, yyyy", Locale.forLanguageTag("MX"))

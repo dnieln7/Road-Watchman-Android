@@ -64,7 +64,7 @@ public class Permissions extends AppCompatActivity {
                 finish();
             }
             else {
-                Printer.okDialog(this, "Permisos", "Debe conceder todos los permisos necesarios");
+                Printer.okDialog(this, getString(R.string.permissions), getString(R.string.permissions_warning));
             }
         }
     }

@@ -13,7 +13,7 @@
         android:id="@+id/dialog_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Por favor espere..."
+        android:text="Please wait..."
         android:textAlignment="textStart"
         android:textColor="@color/inverted100"
         android:textSize="20sp" />
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:paddingTop="10dp"
-            android:text="Enviando..."
+            android:text="Working..."
             android:textAlignment="textStart"
             android:textColor="@color/inverted100"
             android:textSize="15sp" />

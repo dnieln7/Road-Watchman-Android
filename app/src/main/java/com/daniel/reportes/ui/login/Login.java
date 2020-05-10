@@ -11,7 +11,6 @@ import com.daniel.reportes.R;
 import com.daniel.reportes.data.AppSession;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.TaskListener;
-import com.daniel.reportes.task.user.GetUser;
 import com.daniel.reportes.task.user.LoginUser;
 import com.daniel.reportes.ui.signup.SignUp;
 import com.daniel.reportes.utils.GoogleAccountHelper;
@@ -103,7 +102,7 @@ public class Login extends AppCompatActivity {
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
 
-        loginEmail.addTextChangedListener(new TextMonitor(loginEmail));
+        loginEmail.addTextChangedListener(new TextMonitor(loginEmail, getString(R.string.login_wrong_email)));
         loginEmail.setText(email == null ? "" : email);
     }
 
@@ -117,7 +116,7 @@ public class Login extends AppCompatActivity {
         Utils.hideKeyboard(this);
 
         if (loginEmail.getError() != null) {
-            Printer.snackBar(view, "Verifique su email");
+            Printer.snackBar(view, getString(R.string.login_wrong_email));
             return;
         }
 

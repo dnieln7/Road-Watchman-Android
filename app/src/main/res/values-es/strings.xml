@@ -1,0 +1,115 @@
+<resources>
+    <!--App-->
+    <string name="app_name">Reportes</string>
+    <!--App-->
+
+    <!--Menu-->
+    <string name="menu_edit">Editar</string>
+    <string name="menu_sign_out">Cerrar sessión</string>
+    <string name="menu_back">Regresar</string>
+    <!--Menu-->
+
+    <!--Permissions-->
+    <string name="permissions">Permisos</string>
+    <string name="permissions_warning">Debes conceder todos los permisos requeridos</string>
+    <string name="welcome_message">Bienvenido, antes de comenzar necesitamos su permiso</string>
+    <string name="permissions_message">Se requieren los permisos de almacenamiento, acceso a ubicación y cámara para guardar y enviar reportes</string>
+    <string name="grant_permission">Conceder permisos</string>
+    <string name="exit">Salir</string>
+    <!--Permissions-->
+
+    <!--Login-->
+    <string name="login_email">Correo electrónico</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_login">Ingresar</string>
+    <string name="login_google_login">Ingresar con Google</string>
+    <string name="login_sign_up">Registrarse</string>
+    <string name="login_wrong_email">Favor de verificar su correo</string>
+    <!--Login-->
+
+    <!--Sign up-->
+    <string name="sign_up_name">Nombre</string>
+    <string name="sign_up_next">Siguiente</string>
+    <string name="sign_up_duplicated_email">El correo ya existe!</string>
+    <!--Sign up-->
+
+    <!--Verify-->
+    <string name="verify_code">Código</string>
+    <string name="verify_back">Regresar</string>
+    <string name="verify_verify">Verificar código</string>
+    <!--Verify-->
+
+    <!--Reports-->
+    <string name="reports_saved">Guardados</string>
+    <string name="reports_success">Éxito</string>
+    <string name="reports_report_send">Su reporte fue enviado con éxito</string>
+    <string name="reports_refresh">Refrescar</string>
+    <string name="reports_warning">Se requiere conexión a internet para cargar los reportes</string>
+    <string name="reports_empty">No hay reportes seleccione + para crear un nuevo reporte</string>
+    <string name="reports_fixed">Reparado</string>
+    <string name="reports_awaiting">En espera de reparación</string>
+    <string name="reports_new">Nuevo reporte</string>
+    <!--Reports-->
+
+    <!--Create Report-->
+    <string name="create_report_select">Selecciona una imagen</string>
+    <string name="create_report_location">Estableciendo su ubicación…</string>
+    <string name="create_report_next">Siguiente</string>
+    <string name="create_report_photo">Toma o selecciona una foto</string>
+    <string name="create_report_upload">Subir</string>
+    <string name="create_report_add_description">Agrega una breve descripción</string>
+    <string name="create_report_exit">Salir</string>
+    <string name="create_report_exit_warning">El reporte no se enviará, ¿Continuar?</string>
+    <string name="create_report_yes">Sí</string>
+    <string name="create_report_no">No</string>
+    <!--Create Report-->
+
+    <!--Upload Report-->
+    <string name="upload_report_info">Por favor espere…</string>
+    <string name="upload_report_message">Subiendo reporte</string>
+    <string name="upload_report_description">Descripción</string>
+    <!--Upload Report-->
+
+    <!--Report Details-->
+    <string name="report_details">Detalles</string>
+    <string name="report_details_fixed">Reparado</string>
+    <string name="report_details_location">Ubicación</string>
+    <string name="report_details_description">Descripción</string>
+    <string name="report_details_date">Fecha</string>
+    <!--Report Details-->
+
+    <!--Profile-->
+    <string name="profile">Perfil</string>
+    <string name="profile_warning">Inabilitado</string>
+    <string name="profile_warning_message">Esta función no está disponible para cuentas de google</string>
+    <string name="profile_save_message">Los cambios se han guardado</string>
+    <string name="profile_email">Correo electrónico</string>
+    <string name="profile_password">Contraseña</string>
+    <string name="profile_save">Guardar cambios</string>
+    <!--Profile-->
+
+    <!--Settings-->
+    <string name="settings">Ajustes</string>
+    <!--Settings-->
+
+    <!--Settings Appearance-->
+    <string name="settings_appearance">Apariencia</string>
+    <string name="settings_theme">Cambiar tema</string>
+    <string name="settings_close_warning">La aplicación se cerrará para aplicar los cambios</string>
+    <string name="settings_ok">Aceptar</string>
+    <string name="settings_dark_theme">Tema oscuro</string>
+    <string name="settings_language">Idioma</string>
+    <!--Settings Appearance-->
+
+    <!--Settings Network-->
+    <string name="settings_network">Conexión</string>
+    <string name="settings_alert">Alerta</string>
+    <string name="settings_warning">Se necesita una conexión a internet activa</string>
+    <string name="settings_background">Envío de reportes en segundo plano</string>
+    <string name="settings_background_warning">Se enviarán reportes en segundo plano cuando se detecten movimientos violentos</string>
+    <string name="settings_continue">Continuar</string>
+    <string name="settings_cancel">Cancelar</string>
+    <string name="settings_background_reports">Enviar reportes en segundo plano</string>
+    <!--Settings Network-->
+
+</resources>

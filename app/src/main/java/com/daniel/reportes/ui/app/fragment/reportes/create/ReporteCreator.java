@@ -15,8 +15,8 @@ import com.daniel.reportes.R;
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.utils.LocationUtils;
+import com.daniel.reportes.utils.Printer;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.joda.time.LocalDateTime;
 
@@ -80,7 +80,7 @@ public class ReporteCreator extends AppCompatActivity {
                 switchFragment(2);
             }
             else {
-                Snackbar.make(view, "Calculando ubicación...", Snackbar.LENGTH_SHORT).show();
+                Printer.snackBar(view, getString(R.string.create_report_location));
                 location = LocationUtils.getGPS(this);
             }
         }
@@ -106,15 +106,15 @@ public class ReporteCreator extends AppCompatActivity {
     private void switchFragment(int fragment) {
         if (fragment == 1) {
             getSupportFragmentManager().beginTransaction().hide(uploadReporte).show(createReporte).commit();
-            nextStep.setText("Siguiente");
-            stepDescription.setText("Toma o selecciona una foto");
+            nextStep.setText(R.string.create_report_next);
+            stepDescription.setText(R.string.create_report_photo);
             currentStep = 1;
             updateProgress(1);
         }
         if (fragment == 2) {
             getSupportFragmentManager().beginTransaction().hide(createReporte).show(uploadReporte).commit();
-            nextStep.setText("Subir");
-            stepDescription.setText("Agrega una breve descripción");
+            nextStep.setText(R.string.create_report_upload);
+            stepDescription.setText(R.string.create_report_add_description);
             currentStep = 2;
             updateProgress(2);
         }
@@ -136,12 +136,12 @@ public class ReporteCreator extends AppCompatActivity {
     public void onBackPressed() {
         if (currentStep == 1) {
             new AlertDialog.Builder(this)
-                    .setTitle("Salir")
-                    .setMessage("El reporte no se enviará, ¿Continuar?")
-                    .setPositiveButton("Sí", (dialog, which) -> {
+                    .setTitle(R.string.create_report_exit)
+                    .setMessage(R.string.create_report_exit_warning)
+                    .setPositiveButton(R.string.create_report_yes, (dialog, which) -> {
                         setResult(RESULT_CANCELED);
                         finish();
-                    }).setNegativeButton("No", (dialog, which) -> {
+                    }).setNegativeButton(R.string.create_report_no, (dialog, which) -> {
             }).show();
         }
         else if (currentStep == 2) {

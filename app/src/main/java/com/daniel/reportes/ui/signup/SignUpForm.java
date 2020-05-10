@@ -107,7 +107,7 @@ public class SignUpForm extends Fragment {
 
     private void initListeners() {
         signNext.setOnClickListener(v -> next());
-        signEmail.addTextChangedListener(new TextMonitor(signEmail));
+        signEmail.addTextChangedListener(new TextMonitor(signEmail, getString(R.string.login_wrong_email)));
     }
 
     private void next() {
@@ -117,13 +117,13 @@ public class SignUpForm extends Fragment {
         String code = Utils.generateCode();
 
         if (signEmail.getError() != null) {
-            Printer.snackBar(root, "Verifique su email");
+            Printer.snackBar(root, getString(R.string.login_wrong_email));
             return;
         }
 
         try {
             if (new ExistsEmail().execute(signEmail.getText().toString()).get()) {
-                Snackbar.make(root, "El usuario ya existe!", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(root, R.string.sign_up_duplicated_email, Snackbar.LENGTH_SHORT).show();
             }
             else {
                 new SendEmail().execute(email, code);
