@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 
 import com.daniel.reportes.data.Reporte;
 import com.daniel.reportes.task.API;
-import com.dnieln7.httprequest.HttpSession;
-import com.dnieln7.httprequest.exception.ResponseException;
+import com.dnieln7.http.request.HttpSession;
+import com.dnieln7.http.request.exception.ResponseException;
 import com.google.gson.Gson;
 
 import java.util.logging.Level;

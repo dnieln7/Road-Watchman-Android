@@ -19,6 +19,9 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    /**
+     * Used by shared preferences.
+     */
     public User(int id, String username, String email, String googleId, String role) {
         this.id = id;
         this.username = username;
@@ -28,6 +31,9 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    /**
+     * Used by sign up.
+     */
     public User(String username, String email, String password, String googleId, String role) {
         this.username = username;
         this.email = email;
@@ -36,6 +42,9 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    /**
+     * Used by shared login.
+     */
     public User(String email, String password, String role) {
         this.email = email;
         this.password = password;

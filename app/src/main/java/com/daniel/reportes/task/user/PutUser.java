@@ -5,8 +5,8 @@ import android.os.AsyncTask;
 import com.daniel.reportes.data.User;
 import com.daniel.reportes.task.API;
 import com.daniel.reportes.task.TaskListener;
-import com.dnieln7.httprequest.HttpSession;
-import com.dnieln7.httprequest.exception.ResponseException;
+import com.dnieln7.http.request.HttpSession;
+import com.dnieln7.http.request.exception.ResponseException;
 import com.google.gson.Gson;
 
 public class PutUser extends AsyncTask<User, Void, TaskListener> {

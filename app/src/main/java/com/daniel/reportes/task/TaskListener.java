@@ -1,6 +1,6 @@
 package com.daniel.reportes.task;
 
-import com.dnieln7.httprequest.exception.ResponseException;
+import com.dnieln7.http.request.exception.ResponseException;
 
 public abstract class TaskListener<T> {
 
