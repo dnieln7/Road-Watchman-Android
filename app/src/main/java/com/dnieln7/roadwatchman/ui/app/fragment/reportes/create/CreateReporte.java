@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.ui.permission.Permissions;
-import com.dnieln7.roadwatchman.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
@@ -31,6 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CreateReporte extends Fragment {
+
+    private static final int SELECT_PICTURE = 3;
 
     // Objects
     private CreateViewModel createViewModel;
@@ -54,7 +55,7 @@ public class CreateReporte extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (requestCode == Utils.SELECT_PICTURE) {
+        if (requestCode == SELECT_PICTURE) {
 
             if (data != null && data.getData() != null) {
                 pictureUri = data.getData();
@@ -114,7 +115,7 @@ public class CreateReporte extends Fragment {
             Intent intentChooser = Intent.createChooser(intentContent, getString(R.string.create_report_select));
             intentChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{intentPick, cameraIntent});
 
-            startActivityForResult(intentChooser, Utils.SELECT_PICTURE);
+            startActivityForResult(intentChooser, SELECT_PICTURE);
         }
         else {
             Permissions.askPermissions(getActivity());

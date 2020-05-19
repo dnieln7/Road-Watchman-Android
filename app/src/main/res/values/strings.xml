@@ -4,6 +4,7 @@
     <string name="exit">Exit</string>
     <string name="ok">OK</string>
     <string name="warning">Warning</string>
+    <string name="please_wait">Please wait…</string>
     <!--Global-->
 
     <!--Menu-->
@@ -27,6 +28,7 @@
     <string name="login_google_login">Login with Google</string>
     <string name="login_sign_up">Sign up</string>
     <string name="login_wrong_email">Your email is wrong</string>
+    <string name="login_loading_message">Login in</string>
     <!--Login-->
 
     <!--Sign up-->
@@ -48,6 +50,7 @@
     <string name="reports_fixed">Fixed</string>
     <string name="reports_awaiting">Awaiting repair</string>
     <string name="reports_new">New Report</string>
+    <string name="reports_loading">Loading reports</string>
     <!--Reports-->
 
     <!--Create Report-->
@@ -63,7 +66,6 @@
     <!--Create Report-->
 
     <!--Upload Report-->
-    <string name="upload_report_info">Please wait…</string>
     <string name="upload_report_message">Uploading report</string>
     <string name="upload_report_description">Description</string>
     <!--Upload Report-->

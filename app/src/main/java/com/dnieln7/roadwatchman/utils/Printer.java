@@ -72,7 +72,7 @@ public class Printer {
         ((TextView) view.findViewById(R.id.dialog_header)).setText(title);
         ((TextView) view.findViewById(R.id.dialog_body)).setText(message);
 
-        return builder.setView(view).create();
+        return builder.setCancelable(false).setView(view).create();
     }
 
     /**
@@ -96,7 +96,6 @@ public class Printer {
         ((TextView) view.findViewById(R.id.dialog_progress_numeric)).setVisibility(numeric ? View.VISIBLE : View.GONE);
 
 
-        builder.setCancelable(false);
-        return builder.setView(view).create();
+        return builder.setCancelable(false).setView(view).create();
     }
 }

@@ -60,7 +60,7 @@ public class UploadReporte extends Fragment {
 
     private void initWidgets() {
         description = root.findViewById(R.id.upload_reporte_description);
-        progressDialog = Printer.progressDialog(getActivity(), getString(R.string.upload_report_info), getString(R.string.upload_report_message));
+        progressDialog = Printer.progressDialog(getActivity(), getString(R.string.please_wait), getString(R.string.upload_report_message));
     }
 
     void upload() {

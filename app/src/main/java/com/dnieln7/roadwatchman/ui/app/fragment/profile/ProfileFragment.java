@@ -23,7 +23,6 @@ import com.dnieln7.roadwatchman.task.user.PutUser;
 import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
-import com.dnieln7.roadwatchman.utils.Utils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -112,7 +111,7 @@ public class ProfileFragment extends Fragment {
 
         if (profilePassword.isEnabled()) {
             ((TextInputLayout) root.findViewById(R.id.layoutPassword))
-                    .setEndIconTintList(ColorStateList.valueOf(Utils.GetPrimaryColor(getContext())));
+                    .setEndIconTintList(ColorStateList.valueOf(getContext().getColor(R.color.primary)));
         }
         else {
             ((TextInputLayout) root.findViewById(R.id.layoutPassword))

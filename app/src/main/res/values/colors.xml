@@ -12,6 +12,5 @@
     <color name="inverted50">#80000000</color>
     <color name="inverted25">#40000000</color>
 
-    <color name="backgroundMaterial">#FFFFFF</color>
-    <color name="backgroundDefault">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
 </resources>

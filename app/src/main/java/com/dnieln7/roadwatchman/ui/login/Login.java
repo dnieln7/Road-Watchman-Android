@@ -2,9 +2,9 @@ package com.dnieln7.roadwatchman.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
@@ -25,8 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Login extends AppCompatActivity {
 
@@ -34,6 +32,7 @@ public class Login extends AppCompatActivity {
 
     //Objects
     private AppSession appSession;
+    private AlertDialog progressDialog;
 
     // Widgets
     private TextInputEditText loginEmail;
@@ -91,7 +90,8 @@ public class Login extends AppCompatActivity {
                 }
             }
             catch (ApiException e) {
-                Log.w("Error", "signInResult:failed code = " + e.getStatusCode());
+                Utils.logError(Login.class, e);
+                progressDialog.dismiss();
             }
         }
     }
@@ -104,12 +104,12 @@ public class Login extends AppCompatActivity {
 
         loginEmail.addTextChangedListener(new TextMonitor(loginEmail, getString(R.string.login_wrong_email)));
         loginEmail.setText(email == null ? "" : email);
-    }
 
-    private void finishLogin(boolean googleAccount) {
-        PreferencesHelper.getInstance(this).putUser(appSession.getUser(), googleAccount);
-        setResult(RESULT_OK);
-        super.onBackPressed();
+        progressDialog = Printer.progressDialog(
+                this,
+                getString(R.string.please_wait),
+                getString(R.string.login_loading_message)
+        );
     }
 
     public void loginWithEmail(View view) {
@@ -126,6 +126,8 @@ public class Login extends AppCompatActivity {
                 "user"
         );
 
+        progressDialog.show();
+
         try {
             if (new LoginUser("default", loginListener).execute(user).get().success()) {
                 appSession = loginListener.getResult();
@@ -133,13 +135,17 @@ public class Login extends AppCompatActivity {
             }
         }
         catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            Utils.logError(Login.class, e);
+            progressDialog.dismiss();
         }
     }
 
     public void loginWithGoogle(View view) {
         Utils.hideKeyboard(this);
+        progressDialog.show();
+
         GoogleSignInAccount account = GoogleAccountHelper.isGoogleAccountActive(this);
+
         if (account != null) {
             appSession = GoogleAccountHelper.login(account, loginListener);
             finishLogin(true);
@@ -147,6 +153,13 @@ public class Login extends AppCompatActivity {
         else {
             GoogleAccountHelper.showSignIn(this);
         }
+    }
+
+    private void finishLogin(boolean googleAccount) {
+        PreferencesHelper.getInstance(this).putUser(appSession.getUser(), googleAccount);
+        progressDialog.dismiss();
+        setResult(RESULT_OK);
+        super.onBackPressed();
     }
 
     public void goToSignUp(View view) {

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -131,7 +132,7 @@ public class ReportesFragment extends Fragment {
             loadData();
         }
         else {
-            Printer.okDialog(getContext(), getString(R.string.reports_refresh), getString(R.string.reports_warning));
+            Printer.okDialog(getContext(), getString(R.string.warning), getString(R.string.reports_warning));
         }
     }
 
