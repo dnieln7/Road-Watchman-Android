@@ -1,7 +1,10 @@
 <resources>
-    <!--App-->
-    <string name="app_name">Reportes</string>
-    <!--App-->
+    <!--Global-->
+    <string name="app_name">Vigilante de carretera</string>
+    <string name="exit">Salir</string>
+    <string name="ok">Aceptar</string>
+    <string name="warning">Alerta</string>
+    <!--Global-->
 
     <!--Menu-->
     <string name="menu_edit">Editar</string>
@@ -15,7 +18,6 @@
     <string name="welcome_message">Bienvenido, antes de comenzar necesitamos su permiso</string>
     <string name="permissions_message">Se requieren los permisos de almacenamiento, acceso a ubicación y cámara para guardar y enviar reportes</string>
     <string name="grant_permission">Conceder permisos</string>
-    <string name="exit">Salir</string>
     <!--Permissions-->
 
     <!--Login-->
@@ -30,15 +32,11 @@
     <!--Sign up-->
     <string name="sign_up_name">Nombre</string>
     <string name="sign_up_next">Siguiente</string>
-    <string name="sign_up_duplicated_email">El correo ya existe!</string>
     <string name="sign_up_create">Crea tu cuenta</string>
+    <string name="sign_up_verify">Verificar correo</string>
+    <string name="sign_up_wrong_code">Código incorrecto</string>
+    <string name="sign_up_completed">Registro completado</string>
     <!--Sign up-->
-
-    <!--Verify-->
-    <string name="verify_code">Código</string>
-    <string name="verify_back">Regresar</string>
-    <string name="verify_verify">Verificar código</string>
-    <!--Verify-->
 
     <!--Reports-->
     <string name="reports_saved">Guardados</string>
@@ -59,7 +57,6 @@
     <string name="create_report_photo">Toma o selecciona una foto</string>
     <string name="create_report_upload">Subir</string>
     <string name="create_report_add_description">Agrega una breve descripción</string>
-    <string name="create_report_exit">Salir</string>
     <string name="create_report_exit_warning">El reporte no se enviará, ¿Continuar?</string>
     <string name="create_report_yes">Sí</string>
     <string name="create_report_no">No</string>
@@ -97,14 +94,12 @@
     <string name="settings_appearance">Apariencia</string>
     <string name="settings_theme">Cambiar tema</string>
     <string name="settings_close_warning">La aplicación se cerrará para aplicar los cambios</string>
-    <string name="settings_ok">Aceptar</string>
     <string name="settings_dark_theme">Tema oscuro</string>
     <string name="settings_language">Idioma</string>
     <!--Settings Appearance-->
 
     <!--Settings Network-->
     <string name="settings_network">Conexión</string>
-    <string name="settings_alert">Alerta</string>
     <string name="settings_warning">Se necesita una conexión a internet activa</string>
     <string name="settings_background">Envío de reportes en segundo plano</string>
     <string name="settings_background_warning">Se enviarán reportes en segundo plano cuando se detecten movimientos violentos</string>

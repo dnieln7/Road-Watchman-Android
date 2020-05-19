@@ -6,7 +6,6 @@
     android:background="@color/backgroundMaterial">
 
     <LinearLayout
-        android:id="@+id/sign_up_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
@@ -19,7 +18,6 @@
         app:layout_constraintTop_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/login_icon"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -50,7 +48,7 @@
             app:boxStrokeColor="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUsername"
+                android:id="@+id/sign_up_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -67,7 +65,7 @@
             app:boxStrokeColor="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signEmail"
+                android:id="@+id/sign_up_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
@@ -86,7 +84,7 @@
             app:passwordToggleTint="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signPassword"
+                android:id="@+id/sign_up_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"

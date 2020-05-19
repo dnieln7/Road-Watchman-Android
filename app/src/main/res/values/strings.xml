@@ -1,7 +1,10 @@
 <resources>
-    <!--App-->
-    <string name="app_name">Reports</string>
-    <!--App-->
+    <!--Global-->
+    <string name="app_name">Road Watchman</string>
+    <string name="exit">Exit</string>
+    <string name="ok">OK</string>
+    <string name="warning">Warning</string>
+    <!--Global-->
 
     <!--Menu-->
     <string name="menu_edit">Edit</string>
@@ -15,7 +18,6 @@
     <string name="welcome_message">Welcome, before starting we need your permission</string>
     <string name="permissions_message">Storage, location and camera access permissions are required to save and send reports</string>
     <string name="grant_permission">Grant permissions</string>
-    <string name="exit">Exit</string>
     <!--Permissions-->
 
     <!--Login-->
@@ -30,15 +32,11 @@
     <!--Sign up-->
     <string name="sign_up_name">Name</string>
     <string name="sign_up_next">Next</string>
-    <string name="sign_up_duplicated_email">Email already exists!</string>
     <string name="sign_up_create">Create your account</string>
+    <string name="sign_up_verify">Verify email</string>
+    <string name="sign_up_wrong_code">Wrong code</string>
+    <string name="sign_up_completed">Sign up completed</string>
     <!--Sign up-->
-
-    <!--Verify-->
-    <string name="verify_code">Code</string>
-    <string name="verify_back">Back</string>
-    <string name="verify_verify">Verify code</string>
-    <!--Verify-->
 
     <!--Reports-->
     <string name="reports_saved">Saved</string>
@@ -59,7 +57,6 @@
     <string name="create_report_photo">Take or choose a picture</string>
     <string name="create_report_upload">Upload</string>
     <string name="create_report_add_description">Now add a short description</string>
-    <string name="create_report_exit">Exit</string>
     <string name="create_report_exit_warning">Your report will be lost, ¿Continue?</string>
     <string name="create_report_yes">Yes</string>
     <string name="create_report_no">No</string>
@@ -97,14 +94,12 @@
     <string name="settings_appearance">Appearance</string>
     <string name="settings_theme">Enable Dark Theme</string>
     <string name="settings_close_warning">The app will close to apply the changes</string>
-    <string name="settings_ok">OK</string>
     <string name="settings_dark_theme">Dark Theme</string>
     <string name="settings_language">Language</string>
     <!--Settings Appearance-->
 
     <!--Settings Network-->
     <string name="settings_network">Network</string>
-    <string name="settings_alert">Warning</string>
     <string name="settings_warning">To enable this option you need an stable network connection</string>
     <string name="settings_background">Send report in background</string>
     <string name="settings_background_warning">Report will be send in background when violent movements are detected</string>
@@ -112,14 +107,5 @@
     <string name="settings_cancel">Cancel</string>
     <string name="settings_background_reports">Send reports in background</string>
     <!--Settings Network-->
-
-    <!---->
-    <!---->
-
-    <!---->
-    <!---->
-
-    <!---->
-    <!---->
 
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundMaterial"
     android:fillViewport="true"
-    tools:context=".ui.app.fragment.settings.appearance.AppearanceActivity">
+    tools:context="com.dnieln7.roadwatchman.ui.app.fragment.settings.appearance.AppearanceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

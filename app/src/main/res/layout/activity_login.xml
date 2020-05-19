@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundMaterial"
-    tools:context=".ui.login.Login">
+    tools:context="com.dnieln7.roadwatchman.ui.login.Login">
 
     <ImageView
         android:id="@+id/login_icon"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.daniel.reportes">
+    package="com.dnieln7.roadwatchman">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -17,7 +17,7 @@
         android:required="false" />
 
     <application
-        android:name=".App"
+        android:name="com.dnieln7.roadwatchman.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.dnieln7.roadwatchman.ui.splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -37,35 +37,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.permission.Permissions"
+            android:name="com.dnieln7.roadwatchman.ui.permission.Permissions"
             android:screenOrientation="fullSensor"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.Login"
+            android:name="com.dnieln7.roadwatchman.ui.login.Login"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.signup.SignUp"
+            android:name="com.dnieln7.roadwatchman.ui.signup.SignUp"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.app.AppActivity"
-            android:parentActivityName=".ui.login.Login"
+            android:name="com.dnieln7.roadwatchman.ui.app.AppActivity"
+            android:parentActivityName="com.dnieln7.roadwatchman.ui.login.Login"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.app.fragment.reportes.create.ReporteCreator"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.ReporteCreator"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.app.fragment.reportes.detail.ReporteDetail"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.detail.ReporteDetail"
             android:screenOrientation="fullSensor"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.app.fragment.settings.appearance.AppearanceActivity"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.settings.appearance.AppearanceActivity"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name=".ui.app.fragment.settings.network.NetworkActivity"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.settings.network.NetworkActivity"
             android:theme="@style/MaterialTheme.NoActionBar" />
 
         <service
-            android:name=".ui.app.fragment.reportes.background.ReportesService"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.background.ReportesService"
             android:theme="@style/MaterialTheme.NoActionBar" />
     </application>
 

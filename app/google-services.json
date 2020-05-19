@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "480649070006",
-    "firebase_url": "https://compact-booking-253415.firebaseio.com",
-    "project_id": "compact-booking-253415",
-    "storage_bucket": "compact-booking-253415.appspot.com"
+    "project_number": "602291755182",
+    "firebase_url": "https://road-watchman.firebaseio.com",
+    "project_id": "road-watchman",
+    "storage_bucket": "road-watchman.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:480649070006:android:caa8aa0fcf9418d847ed17",
+        "mobilesdk_app_id": "1:602291755182:android:cb332d6cbb6fd04ff1b53f",
         "android_client_info": {
-          "package_name": "com.daniel.reportes"
+          "package_name": "com.dnieln7.roadwatchman"
         }
       },
       "oauth_client": [
         {
-          "client_id": "480649070006-qbnushm3pn94444elsa947vha3bvgss8.apps.googleusercontent.com",
+          "client_id": "602291755182-ne1aphs6jup4o2d1j6pb1lojos29bgat.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.daniel.reportes",
+            "package_name": "com.dnieln7.roadwatchman",
             "certificate_hash": "992fa4b251c63308663abf4ac62765e8cc2ce835"
           }
         },
         {
-          "client_id": "480649070006-iskh79ad43ttiqqe3apacgsp9tp3gmhv.apps.googleusercontent.com",
+          "client_id": "602291755182-fip1qv6kppgvrumrqnhus4j0ui1530oh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7xaot7-8_iz16b0JoFGNYsBIbVjHFVW4"
+          "current_key": "AIzaSyBGvx5hIDhnxQmjUgqGXp5d-E_xi2L4LJ8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "480649070006-iskh79ad43ttiqqe3apacgsp9tp3gmhv.apps.googleusercontent.com",
+              "client_id": "602291755182-fip1qv6kppgvrumrqnhus4j0ui1530oh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
