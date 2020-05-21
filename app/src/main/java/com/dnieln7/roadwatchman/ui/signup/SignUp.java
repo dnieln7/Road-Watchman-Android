@@ -12,6 +12,7 @@ import com.dnieln7.roadwatchman.data.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.PostUser;
 import com.dnieln7.roadwatchman.task.user.VerifyEmail;
+import com.dnieln7.roadwatchman.ui.login.Login;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.utils.TextMonitor;
 import com.dnieln7.roadwatchman.utils.Utils;
@@ -26,7 +27,7 @@ public class SignUp extends AppCompatActivity {
     //Objects
     private int code;
 
-    private TextInputEditText username;
+    private TextInputEditText name;
     private TextInputEditText email;
     private TextInputEditText password;
 
@@ -48,38 +49,51 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        initWidgets();
-        initListeners();
+        preInit();
+        init();
+        postInit();
     }
 
-    private void initWidgets() {
-        username = findViewById(R.id.sign_up_name);
+    private void preInit() {
+        code = 0;
+    }
+
+    private void init() {
+        name = findViewById(R.id.sign_up_name);
         email = findViewById(R.id.sign_up_email);
         password = findViewById(R.id.sign_up_password);
     }
 
-    private void initListeners() {
+    private void postInit() {
         email.addTextChangedListener(new TextMonitor(email, getString(R.string.login_wrong_email)));
+    }
+
+    private boolean verifyForm() {
+        String email = this.email.getText().toString();
+        String name = this.name.getText().toString();
+        String password = this.password.getText().toString();
+
+        return !name.equals("") && !email.equals("") && !password.equals("") && this.email.getError() == null;
     }
 
     public void next(View view) {
         Utils.hideKeyboard(this);
 
-        String email = this.email.getText().toString();
-        code = 20;
-
-        if (!email.equals("")) {
-            if (this.email.getError() != null) {
-                Printer.snackBar(view, getString(R.string.login_wrong_email));
-                return;
-            }
-
+        if (verifyForm()) {
             TaskListener codeListener = new TaskListener() {
+                @Override
+                public boolean success() {
+                    if (this.exception != null) {
+                        Printer.toast(SignUp.this, this.exception.getMessage());
+                        return false;
+                    }
+                    return true;
+                }
             };
 
             try {
-                if (new VerifyEmail(codeListener).execute(email).get().success()) {
-                    Printer.toast(this, codeListener.getResult().toString());
+                if (new VerifyEmail(codeListener).execute(email.getText().toString()).get().success()) {
+                    code = (int) codeListener.getResult();
                     verifyDialog(view).show();
                 }
             }
@@ -88,7 +102,7 @@ public class SignUp extends AppCompatActivity {
             }
         }
         else {
-            Printer.snackBar(view, getString(R.string.login_wrong_email));
+            Printer.snackBar(view, getString(R.string.sign_up_invalid_form));
         }
     }
 
@@ -109,7 +123,7 @@ public class SignUp extends AppCompatActivity {
             }
             else {
                 User user = new User(
-                        username.getText().toString(),
+                        name.getText().toString(),
                         email.getText().toString(),
                         password.getText().toString(),
                         "",

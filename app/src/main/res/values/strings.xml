@@ -38,6 +38,7 @@
     <string name="sign_up_verify">Verify email</string>
     <string name="sign_up_wrong_code">Wrong code</string>
     <string name="sign_up_completed">Sign up completed</string>
+    <string name="sign_up_invalid_form">Verify your information</string>
     <!--Sign up-->
 
     <!--Reports-->

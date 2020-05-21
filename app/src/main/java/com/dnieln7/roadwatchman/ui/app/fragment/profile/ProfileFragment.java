@@ -73,14 +73,14 @@ public class ProfileFragment extends Fragment {
                 PreferencesHelper.getInstance(getActivity()).destroy();
                 getActivity().finish();
                 return true;
-            case R.id.profileEdit:
+            /*case R.id.profileEdit:
                 if (PreferencesHelper.getInstance(getActivity()).isGoogleAccount()) {
                     Printer.okDialog(getContext(), getString(R.string.profile_warning), getString(R.string.profile_warning_message));
                 }
                 else {
                     edit();
                 }
-                return true;
+                return true;*/
         }
 
         return super.onOptionsItemSelected(item);

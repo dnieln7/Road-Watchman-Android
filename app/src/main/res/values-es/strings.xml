@@ -108,6 +108,7 @@
     <string name="settings_continue">Continuar</string>
     <string name="settings_cancel">Cancelar</string>
     <string name="settings_background_reports">Enviar reportes en segundo plano</string>
+    <string name="sign_up_invalid_form">Verifica tu información</string>
     <!--Settings Network-->
 
 </resources>
