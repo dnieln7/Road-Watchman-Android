@@ -51,7 +51,7 @@
             android:parentActivityName="com.dnieln7.roadwatchman.ui.login.Login"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.ReporteCreator"
+            android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.CreateReport"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
             android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.detail.ReporteDetail"

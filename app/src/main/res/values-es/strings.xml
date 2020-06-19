@@ -56,6 +56,7 @@
     <!--Create Report-->
     <string name="create_report_select">Selecciona una imagen</string>
     <string name="create_report_location">Estableciendo su ubicación…</string>
+    <string name="create_report_no_picture">Por favor seleccione una imagen</string>
     <string name="create_report_next">Siguiente</string>
     <string name="create_report_photo">Toma o selecciona una foto</string>
     <string name="create_report_upload">Subir</string>

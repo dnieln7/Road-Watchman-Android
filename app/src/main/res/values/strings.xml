@@ -57,6 +57,7 @@
     <!--Create Report-->
     <string name="create_report_select">Choose an picture</string>
     <string name="create_report_location">Setting your location…</string>
+    <string name="create_report_no_picture">Please choose a picture</string>
     <string name="create_report_next">Next</string>
     <string name="create_report_photo">Take or choose a picture</string>
     <string name="create_report_upload">Upload</string>

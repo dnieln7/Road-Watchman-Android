@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.AppSession;
 import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
-import com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.ReporteCreator;
+import com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.CreateReport;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
@@ -71,7 +70,7 @@ public class ReportesFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == ReporteCreator.REQUEST_CODE) {
+        if (requestCode == CreateReport.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 Printer.okDialog(getContext(), getString(R.string.reports_success), getString(R.string.reports_report_send));
                 refresh();
@@ -103,9 +102,9 @@ public class ReportesFragment extends Fragment {
     private void createReporte() {
         expandMenu();
 
-        Intent creatorIntent = new Intent(getActivity(), ReporteCreator.class);
+        Intent creatorIntent = new Intent(getActivity(), CreateReport.class);
         creatorIntent.putExtra("user", appSession.getUser());
-        startActivityForResult(creatorIntent, ReporteCreator.REQUEST_CODE);
+        startActivityForResult(creatorIntent, CreateReport.REQUEST_CODE);
     }
 
     private void loadData() {

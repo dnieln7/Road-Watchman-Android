@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CreateReporte extends Fragment {
+public class SelectPicture extends Fragment {
 
     private static final int SELECT_PICTURE = 3;
 
@@ -43,7 +43,7 @@ public class CreateReporte extends Fragment {
     private ImageView selectedPicture;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_create_reporte, container, false);
+        root = inflater.inflate(R.layout.fragment_select_picture, container, false);
         createViewModel = new ViewModelProvider(getActivity()).get(CreateViewModel.class);
 
         initWidgets();
@@ -146,7 +146,7 @@ public class CreateReporte extends Fragment {
 
             if (!mediaStorageDir.exists()) {
                 if (!mediaStorageDir.mkdirs()) {
-                    Logger.getLogger(CreateReporte.class.getName()).log(Level.SEVERE, "Failed to create directory");
+                    Logger.getLogger(SelectPicture.class.getName()).log(Level.SEVERE, "Failed to create directory");
                     pictureUri = null;
                 }
             }
