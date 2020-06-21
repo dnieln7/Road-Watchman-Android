@@ -23,7 +23,7 @@ public class PutUser extends AsyncTask<User, Void, TaskListener> {
     protected TaskListener<User> doInBackground(User... params) {
 
         try {
-            listener.setResult(new Gson().fromJson(session.post(params[0]), User.class));
+            listener.setResult(new Gson().fromJson(session.put(params[0]), User.class));
         }
         catch (ResponseException e) {
             listener.setException(e);

@@ -5,6 +5,12 @@
     <string name="ok">Aceptar</string>
     <string name="warning">Alerta</string>
     <string name="please_wait">Por favor espere…</string>
+    <string name="finish">Finalizar</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
     <!--Global-->
 
     <!--Menu-->
@@ -22,8 +28,6 @@
     <!--Permissions-->
 
     <!--Login-->
-    <string name="login_email">Correo electrónico</string>
-    <string name="login_password">Contraseña</string>
     <string name="login_login">Ingresar</string>
     <string name="login_google_login">Ingresar con Google</string>
     <string name="login_sign_up">Registrarse</string>
@@ -38,6 +42,7 @@
     <string name="sign_up_verify">Verificar correo</string>
     <string name="sign_up_wrong_code">Código incorrecto</string>
     <string name="sign_up_completed">Registro completado</string>
+    <string name="sign_up_dialog_verify_title">Introduzca el código que le fue enviado a su correo</string>
     <!--Sign up-->
 
     <!--Reports-->
@@ -84,9 +89,11 @@
     <string name="profile_warning">Inabilitado</string>
     <string name="profile_warning_message">Esta función no está disponible para cuentas de google</string>
     <string name="profile_save_message">Los cambios se han guardado</string>
-    <string name="profile_email">Correo electrónico</string>
-    <string name="profile_password">Contraseña</string>
-    <string name="profile_save">Guardar cambios</string>
+    <string name="profile_dialog_title">Editar información del perfil</string>
+    <string name="profile_logged_google">Logged with google</string>
+    <string name="profile_logged_email">Logged with email address</string>
+    <string name="profile_logged_user">Logged as user</string>
+    <string name="profile_logged_admin">Logged as admin</string>
     <!--Profile-->
 
     <!--Settings-->

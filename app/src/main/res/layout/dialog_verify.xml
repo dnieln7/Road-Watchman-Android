@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Introduzca el código que le fue enviado a su correo"
+        android:text="@string/sign_up_dialog_verify_title"
         android:textColor="@color/inverted100"
         android:textSize="15sp" />
 
@@ -45,13 +45,13 @@
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Completar" />
+        android:text="@string/finish" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/verify_cancel"
         style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/cancel"
         android:textColor="@color/primary" />
 </androidx.appcompat.widget.LinearLayoutCompat>

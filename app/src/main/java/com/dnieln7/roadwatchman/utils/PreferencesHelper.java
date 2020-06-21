@@ -124,7 +124,7 @@ public class PreferencesHelper {
     /**
      * Checks the current logged account type.
      *
-     * @return The email of current user; null if the current logged account is not an email account.
+     * @return The email_address of current user; null if the current logged account is not an email_address account.
      */
     public String isEmailAccount() {
         String email = "";

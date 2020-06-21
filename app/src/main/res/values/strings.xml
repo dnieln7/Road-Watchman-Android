@@ -5,6 +5,12 @@
     <string name="ok">OK</string>
     <string name="warning">Warning</string>
     <string name="please_wait">Please wait…</string>
+    <string name="finish">Finish</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
     <!--Global-->
 
     <!--Menu-->
@@ -22,8 +28,6 @@
     <!--Permissions-->
 
     <!--Login-->
-    <string name="login_email">Email</string>
-    <string name="login_password">Password</string>
     <string name="login_login">Login</string>
     <string name="login_google_login">Login with Google</string>
     <string name="login_sign_up">Sign up</string>
@@ -39,6 +43,7 @@
     <string name="sign_up_wrong_code">Wrong code</string>
     <string name="sign_up_completed">Sign up completed</string>
     <string name="sign_up_invalid_form">Verify your information</string>
+    <string name="sign_up_dialog_verify_title">Enter the code that was send to your email</string>
     <!--Sign up-->
 
     <!--Reports-->
@@ -85,9 +90,11 @@
     <string name="profile_warning">Disabled</string>
     <string name="profile_warning_message">This option is not available on Google accounts</string>
     <string name="profile_save_message">Changes saved</string>
-    <string name="profile_email">Email</string>
-    <string name="profile_password">Password</string>
-    <string name="profile_save">Save changes</string>
+    <string name="profile_dialog_title">Edit profile info</string>
+    <string name="profile_logged_google">Logged with google</string>
+    <string name="profile_logged_email">Logged with email address</string>
+    <string name="profile_logged_user">Logged as user</string>
+    <string name="profile_logged_admin">Logged as admin</string>
     <!--Profile-->
 
     <!--Settings-->

@@ -23,7 +23,7 @@ public class VerifyEmail extends AsyncTask<String, Void, TaskListener> {
         try {
             JsonObject email = new JsonObject();
 
-            email.addProperty("email", params[0]);
+            email.addProperty("email_address", params[0]);
 
             listener.setResult(session.execute(
                     email,

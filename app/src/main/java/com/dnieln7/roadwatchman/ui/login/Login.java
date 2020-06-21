@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void initWidgets() {
-        String email = getIntent().getStringExtra("email");
+        String email = getIntent().getStringExtra("email_address");
 
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);

@@ -82,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
             }
             else {
                 Intent loginIntent = new Intent(this, Login.class);
-                loginIntent.putExtra("email", helper.isEmailAccount());
+                loginIntent.putExtra("email_address", helper.isEmailAccount());
                 startActivityForResult(loginIntent, Login.REQUEST_CODE);
             }
         }
