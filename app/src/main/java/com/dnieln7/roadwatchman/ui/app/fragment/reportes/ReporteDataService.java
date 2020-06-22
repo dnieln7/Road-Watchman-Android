@@ -1,6 +1,7 @@
 package com.dnieln7.roadwatchman.ui.app.fragment.reportes;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,19 @@ public class ReporteDataService extends AndroidViewModel {
         return reporteDao.getById(id).getValue();
     }
 
+    public static void deleteAll(Context context) {
+        ReporteDao reporteDao = Room.databaseBuilder(context, ReportesDatabase.class, "Reportes-Data")
+                .build()
+                .reporteDao();
+
+        try {
+            new DeleteTask(reporteDao).execute().get();
+        }
+        catch (ExecutionException | InterruptedException e) {
+            Logger.getLogger(ReporteDataService.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
     private static class InsertTask extends AsyncTask<Void, Void, Void> {
 
         private ReporteDao reporteDao;
@@ -64,6 +78,22 @@ public class ReporteDataService extends AndroidViewModel {
         @Override
         protected final Void doInBackground(Void... params) {
             reporteDao.insert(reportes);
+
+            return null;
+        }
+    }
+
+    private static class DeleteTask extends AsyncTask<Void, Void, Void> {
+
+        private ReporteDao reporteDao;
+
+        DeleteTask(ReporteDao reporteDao) {
+            this.reporteDao = reporteDao;
+        }
+
+        @Override
+        protected final Void doInBackground(Void... params) {
+            reporteDao.delete();
 
             return null;
         }

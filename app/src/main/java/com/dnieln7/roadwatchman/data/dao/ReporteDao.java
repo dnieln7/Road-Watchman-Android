@@ -22,4 +22,7 @@ public interface ReporteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<Reporte> reportes);
+
+    @Query("DELETE FROM reportes")
+    void delete();
 }

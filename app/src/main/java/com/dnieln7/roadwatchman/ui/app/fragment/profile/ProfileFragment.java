@@ -20,6 +20,7 @@ import com.dnieln7.roadwatchman.data.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.PutUser;
 import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
+import com.dnieln7.roadwatchman.ui.app.fragment.reportes.ReporteDataService;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.textfield.TextInputEditText;
@@ -67,6 +68,7 @@ public class ProfileFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.profile_sign_out:
                 PreferencesHelper.getInstance(getActivity()).destroy();
+                ReporteDataService.deleteAll(getContext());
                 getActivity().finish();
                 return true;
             case R.id.profile_edit:
