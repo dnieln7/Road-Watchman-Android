@@ -16,7 +16,7 @@ import com.dnieln7.roadwatchman.data.User;
  */
 public class PreferencesHelper {
 
-    private static final String DARK_THEME = "DarkTheme";
+    private static final String THEME = "ThemeMode";
     private static final String NAME = "com.daniel.reportes.settings";
 
     private static PreferencesHelper instance;
@@ -41,51 +41,20 @@ public class PreferencesHelper {
     }
 
     /**
-     * Loads dark theme if the property "DarkTheme" is true; loads default theme otherwise.
+     * Loads the saved theme configuration;
+     * applies the default {@link AppCompatDelegate#MODE_NIGHT_FOLLOW_SYSTEM} if none is saved.
      */
     public void loadTheme() {
-        if (isDarkThemeEnabled()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
-        else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+        ThemeHelper.setTheme(sharedPreferences.getInt(THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM));
     }
 
     /**
      * Saves the desired theme option.
      *
-     * @param darkTheme Enable dark theme
+     * @param mode The theme mode to save see {@link AppCompatDelegate}.
      */
-    public void saveTheme(boolean darkTheme) {
-        sharedPreferences.edit().putBoolean("DarkTheme", darkTheme).apply();
-    }
-
-    /**
-     * Checks if the dark theme is enabled
-     *
-     * @return true if the dark theme is enabled; false otherwise.
-     */
-    public boolean isDarkThemeEnabled() {
-        return sharedPreferences.getBoolean(DARK_THEME, false);
-    }
-
-    /**
-     * Saves the desired language code.
-     *
-     * @param languageCode Language code.
-     */
-    public void saveLanguage(String languageCode) {
-        sharedPreferences.edit().putString("Language", languageCode).apply();
-    }
-
-    /**
-     * Gets the current language code.
-     *
-     * @return A string with the language code; empty string otherwise.
-     */
-    public String getLanguage() {
-        return sharedPreferences.getString("Language", "");
+    public void saveTheme(int mode) {
+        sharedPreferences.edit().putInt(THEME, mode).apply();
     }
 
     /**
@@ -169,8 +138,7 @@ public class PreferencesHelper {
         sharedPreferences.edit().putString("GoogleId", "").apply();
         sharedPreferences.edit().putString("Role", "").apply();
 
-        saveLanguage("");
-        saveTheme(false);
+        saveTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
         instance = null;
     }

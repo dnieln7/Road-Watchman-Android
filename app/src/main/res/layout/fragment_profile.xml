@@ -23,7 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:src="@drawable/profile"
-                android:tint="@color/secondaryDark"
+                android:tint="@color/primary"
                 app:layout_constraintBottom_toTopOf="@id/profile_username"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

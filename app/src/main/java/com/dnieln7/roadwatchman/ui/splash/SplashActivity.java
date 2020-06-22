@@ -71,7 +71,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void loadPreferences() {
         PreferencesHelper helper = PreferencesHelper.getInstance(this);
-        LanguageHelper.loadLanguage(this);
         helper.loadTheme();
 
         appSession = helper.isUserLoggedIn();

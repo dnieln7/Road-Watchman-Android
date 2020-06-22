@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="languages">
-        <item>Seleecione</item>
-        <item>Español</item>
-        <item>English</item>
+    <string-array name="themes">
+        <item>Definido por el sistema</item>
+        <item>Definido por la batería</item>
+        <item>Oscuro</item>
+        <item>Claro</item>
     </string-array>
 </resources>

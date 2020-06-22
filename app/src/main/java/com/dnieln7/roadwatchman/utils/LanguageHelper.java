@@ -23,7 +23,7 @@ public class LanguageHelper {
      * @return The current language in a readable form; empty string otherwise.
      */
     public static String getCurrentLanguage(Activity activity) {
-        String languageCode = PreferencesHelper.getInstance(activity).getLanguage();
+        String languageCode = "en";
         String language = "";
 
         switch (languageCode) {
@@ -45,7 +45,7 @@ public class LanguageHelper {
      * @return The current language array position matching array at resources; 0 otherwise.
      */
     public static int getCurrentLanguagePosition(Activity activity) {
-        String languageCode = PreferencesHelper.getInstance(activity).getLanguage();
+        String languageCode = "en";
         int language = 0;
 
         switch (languageCode) {
@@ -66,7 +66,7 @@ public class LanguageHelper {
      * @param activity Activity to obtain an {@link PreferencesHelper} instance.
      */
     public static void loadLanguage(Activity activity) {
-        String languageCode = PreferencesHelper.getInstance(activity).getLanguage();
+        String languageCode = "en";
 
         if (!languageCode.equals("")) {
             Locale locale = new Locale(languageCode);
@@ -105,8 +105,6 @@ public class LanguageHelper {
         Locale.setDefault(locale);
         configuration.locale = locale;
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-
-        PreferencesHelper.getInstance(activity).saveLanguage(languageCode);
 
         new AlertDialog.Builder(activity).setTitle(R.string.settings_language)
                 .setMessage(R.string.settings_close_warning)
