@@ -11,6 +11,7 @@ import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.ui.app.fragment.reportes.background.ReportesService;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
+import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -49,6 +50,7 @@ public class NetworkActivity extends AppCompatActivity {
 
     private boolean checkLocation() {
         if (LocationUtils.hasGPSEnabled(Objects.requireNonNull(this))) {
+            LocationUtils.getGPS(this);
             startReportesService();
             return true;
         }
@@ -87,6 +89,7 @@ public class NetworkActivity extends AppCompatActivity {
 
     private void startReportesService() {
         Intent service = new Intent(this, ReportesService.class);
+        service.putExtra("USER_ID", PreferencesHelper.getInstance(this).isUserLoggedIn().getUser().getId());
         startService(service);
     }
 

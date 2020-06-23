@@ -106,8 +106,8 @@ public class LanguageHelper {
         configuration.locale = locale;
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
-        new AlertDialog.Builder(activity).setTitle(R.string.settings_language)
-                .setMessage(R.string.settings_close_warning)
+        new AlertDialog.Builder(activity).setTitle("Language")
+                .setMessage("Close")
                 .setPositiveButton(R.string.ok, (dialog, which) -> activity.finishAffinity())
                 .show();
     }

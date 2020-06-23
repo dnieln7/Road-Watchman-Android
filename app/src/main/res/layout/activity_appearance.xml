@@ -44,7 +44,7 @@
                 android:drawableStart="@drawable/theme"
                 android:drawablePadding="20dp"
                 android:drawableTint="@color/primary"
-                android:text="Theme"
+                android:text="@string/settings_theme"
                 android:textColor="@color/inverted100"
                 android:textSize="20sp" />
 

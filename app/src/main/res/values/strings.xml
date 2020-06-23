@@ -73,8 +73,9 @@
     <!--Create Report-->
 
     <!--Upload Report-->
-    <string name="upload_report_message">Uploading report</string>
     <string name="upload_report_description">Description</string>
+    <string name="upload_report_auto">Self Generated</string>
+    <string name="upload_report_service">Service is running…</string>
     <!--Upload Report-->
 
     <!--Report Details-->
@@ -103,10 +104,7 @@
 
     <!--Settings Appearance-->
     <string name="settings_appearance">Appearance</string>
-    <string name="settings_theme">Enable Dark Theme</string>
-    <string name="settings_close_warning">The app will close to apply the changes</string>
-    <string name="settings_dark_theme">Dark Theme</string>
-    <string name="settings_language">Language</string>
+    <string name="settings_theme">Theme</string>
     <!--Settings Appearance-->
 
     <!--Settings Network-->

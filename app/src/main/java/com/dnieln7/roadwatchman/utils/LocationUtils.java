@@ -84,6 +84,21 @@ public class LocationUtils {
         return null;
     }
 
+    public static boolean hasGPSEnabled(Activity activity) {
+        return ((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    public static void activateLocation(Activity activity) {
+        Toast.makeText(activity, "Por favor activa la ubicación", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        activity.startActivity(intent);
+    }
+
+    private static void setLocation(Location location) {
+        knownLocation = location;
+        locationListener = null;
+    }
+
     private static boolean hasPermissions(Activity activity) {
         return ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
@@ -102,21 +117,6 @@ public class LocationUtils {
 
     private static boolean hasNetworkEnabled(Activity activity) {
         return ((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    public static boolean hasGPSEnabled(Activity activity) {
-        return ((LocationManager) activity.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER);
-    }
-
-    public static void activateLocation(Activity activity) {
-        Toast.makeText(activity, "Por favor activa la ubicación", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        activity.startActivity(intent);
-    }
-
-    private static void setLocation(Location location) {
-        knownLocation = location;
-        locationListener = null;
     }
 
     private static class LocationListener implements android.location.LocationListener {

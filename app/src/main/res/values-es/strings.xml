@@ -72,8 +72,9 @@
     <!--Create Report-->
 
     <!--Upload Report-->
-    <string name="upload_report_message">Subiendo reporte</string>
     <string name="upload_report_description">Descripción</string>
+    <string name="upload_report_auto">Auto Generado</string>
+    <string name="upload_report_service">Servicio en ejecución…</string>
     <!--Upload Report-->
 
     <!--Report Details-->
@@ -102,10 +103,7 @@
 
     <!--Settings Appearance-->
     <string name="settings_appearance">Apariencia</string>
-    <string name="settings_theme">Cambiar tema</string>
-    <string name="settings_close_warning">La aplicación se cerrará para aplicar los cambios</string>
-    <string name="settings_dark_theme">Tema oscuro</string>
-    <string name="settings_language">Idioma</string>
+    <string name="settings_theme">Tema</string>
     <!--Settings Appearance-->
 
     <!--Settings Network-->

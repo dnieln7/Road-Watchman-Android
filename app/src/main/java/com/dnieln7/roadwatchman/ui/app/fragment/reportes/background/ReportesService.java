@@ -21,9 +21,10 @@ import com.dnieln7.roadwatchman.App;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.Reporte;
 import com.dnieln7.roadwatchman.task.TaskListener;
-import com.dnieln7.roadwatchman.task.reporte.PostReporte;
+import com.dnieln7.roadwatchman.ui.app.fragment.settings.network.NetworkActivity;
 import com.dnieln7.roadwatchman.ui.login.Login;
 import com.dnieln7.roadwatchman.utils.Printer;
+import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 
 import org.joda.time.LocalDateTime;
 
@@ -36,19 +37,6 @@ public class ReportesService extends Service implements SensorEventListener, Loc
     private long lastTime;
     private int UserId;
     private Location location;
-
-    // Class
-    private TaskListener<Reporte> reporteListener = new TaskListener<Reporte>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(getBaseContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 
     // Called when service is created
     @SuppressLint("MissingPermission")
@@ -78,16 +66,17 @@ public class ReportesService extends Service implements SensorEventListener, Loc
     // Called when service is started
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        UserId = intent.getIntExtra("UserId", 1);
+        UserId = intent.getIntExtra("USER_ID", 1);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            Intent app = new Intent(this, Login.class);
+            Intent app = new Intent(this, NetworkActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, app, 0);
 
             Notification notification = new Notification.Builder(this, App.ID)
-                    .setContentTitle("Reportes")
-                    .setContentText("Servicio en ejecución...")
+                    .setContentTitle(getString(R.string.app_name))
+                    .setContentIntent(pendingIntent)
+                    .setContentText(getString(R.string.upload_report_service))
                     .setSmallIcon(R.drawable.reportes)
                     .build();
 
@@ -101,9 +90,9 @@ public class ReportesService extends Service implements SensorEventListener, Loc
     @Override
     public void onDestroy() {
         super.onDestroy();
-        instance = null;
         sensorManager.unregisterListener(this);
         locationManager.removeUpdates(this);
+        instance = null;
     }
 
     @Nullable
@@ -123,16 +112,17 @@ public class ReportesService extends Service implements SensorEventListener, Loc
 
         if (actualTime - lastTime > 2000) {
             if (acceleration >= 4) {
-                lastTime = actualTime;
-                Reporte reporte = new Reporte(
-                        new LocalDateTime().toString(),
-                        new double[]{location.getLatitude(), location.getLongitude()},
-                        UserId
-                );
+                if (location != null) {
+                    lastTime = actualTime;
+                    Reporte reporte = new Reporte(
+                            new LocalDateTime().toString(),
+                            new double[]{location.getLatitude(), location.getLongitude()},
+                            UserId
+                    );
 
-                reporte.setDescription("Auto-Generado");
-
-                new PostReporte(reporteListener).execute(reporte);
+                    reporte.setDescription(getString(R.string.upload_report_auto));
+                    new ReportWorkManager().prepareAndStartUploadWork(this, reporte);
+                }
             }
         }
     }

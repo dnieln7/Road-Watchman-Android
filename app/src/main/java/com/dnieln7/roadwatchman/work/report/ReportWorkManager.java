@@ -1,7 +1,6 @@
 package com.dnieln7.roadwatchman.work.report;
 
 import android.content.Context;
-import android.net.Uri;
 
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
@@ -81,6 +80,29 @@ public class ReportWorkManager {
                 .beginWith(pictureRequest)
                 .then(reportRequest)
                 .enqueue();
+    }
+
+    public void prepareAndStartUploadWork(Context context, Reporte report) {
+        String reportJSON = new Gson().toJson(report);
+
+        Data reportData = new Data
+                .Builder()
+                .putString("REPORT", reportJSON)
+                .putString("URL", "")
+                .build();
+
+        reportRequest = new OneTimeWorkRequest
+                .Builder(UploadReportWork.class)
+                .addTag(REPORT_WORK_TAG)
+                .setInputData(reportData)
+                .setConstraints(constraints)
+                .setBackoffCriteria(
+                        BackoffPolicy.LINEAR,
+                        OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                        TimeUnit.MILLISECONDS
+                ).build();
+
+        WorkManager.getInstance(context).enqueue(reportRequest);
     }
 
     public List<WorkInfo> getWorkInfo(Context context, String tag) {
