@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.Reporte;
 import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.utils.LocationHelper;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.button.MaterialButton;
@@ -48,11 +49,11 @@ public class CreateReport extends AppCompatActivity {
         stepDescription = findViewById(R.id.create_step_description);
         nextStep = findViewById(R.id.create_next);
 
-        if (LocationUtils.hasGPSEnabled(this)) {
+        if (LocationHelper.hasGPSEnabled(this)) {
             location = LocationUtils.getGPS(this);
         }
         else {
-            LocationUtils.activateLocation(this);
+            LocationHelper.askActivateLocation(this);
             location = LocationUtils.getGPS(this);
         }
 

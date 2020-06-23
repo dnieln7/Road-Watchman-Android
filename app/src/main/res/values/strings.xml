@@ -76,6 +76,7 @@
     <string name="upload_report_description">Description</string>
     <string name="upload_report_auto">Self Generated</string>
     <string name="upload_report_service">Service is running…</string>
+    <string name="upload_report_location">Please turn on location access</string>
     <!--Upload Report-->
 
     <!--Report Details-->

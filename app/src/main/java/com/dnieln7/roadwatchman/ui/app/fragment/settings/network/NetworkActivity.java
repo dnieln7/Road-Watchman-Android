@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.ui.app.fragment.reportes.background.ReportesService;
+import com.dnieln7.roadwatchman.utils.LocationHelper;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
@@ -49,13 +50,13 @@ public class NetworkActivity extends AppCompatActivity {
     }
 
     private boolean checkLocation() {
-        if (LocationUtils.hasGPSEnabled(Objects.requireNonNull(this))) {
+        if (LocationHelper.hasGPSEnabled(Objects.requireNonNull(this))) {
             LocationUtils.getGPS(this);
             startReportesService();
             return true;
         }
 
-        LocationUtils.activateLocation(this);
+        LocationHelper.askActivateLocation(this);
         return false;
     }
 

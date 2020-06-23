@@ -75,6 +75,7 @@
     <string name="upload_report_description">Descripción</string>
     <string name="upload_report_auto">Auto Generado</string>
     <string name="upload_report_service">Servicio en ejecución…</string>
+    <string name="upload_report_location">Por favor, activa el acceso a la ubicación</string>
     <!--Upload Report-->
 
     <!--Report Details-->
