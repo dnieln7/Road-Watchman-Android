@@ -48,7 +48,7 @@
     <!--Reports-->
     <string name="reports_saved">Guardados</string>
     <string name="reports_success">Éxito</string>
-    <string name="reports_report_send">Su reporte fue enviado con éxito</string>
+    <string name="reports_report_send">Su reporte fue guardado y se enviará cuando se detecte una conexión wifi estable</string>
     <string name="reports_refresh">Refrescar</string>
     <string name="reports_warning">Se requiere conexión a internet para cargar los reportes</string>
     <string name="reports_empty">No hay reportes seleccione + para crear un nuevo reporte</string>

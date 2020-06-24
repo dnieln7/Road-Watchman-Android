@@ -49,7 +49,7 @@
     <!--Reports-->
     <string name="reports_saved">Saved</string>
     <string name="reports_success">Success</string>
-    <string name="reports_report_send">your report was successfully send</string>
+    <string name="reports_report_send">Your report was saved and it\'ll be send when a stable wifi is available</string>
     <string name="reports_refresh">Refresh</string>
     <string name="reports_warning">An stable network connection is required</string>
     <string name="reports_empty">No reports yet, select + to send a new report</string>
