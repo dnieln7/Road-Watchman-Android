@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.AppSession;
+import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
 import com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.CreateReport;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;

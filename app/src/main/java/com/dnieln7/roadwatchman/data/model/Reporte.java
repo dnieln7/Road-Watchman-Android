@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.data;
+package com.dnieln7.roadwatchman.data.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -23,7 +23,7 @@ public class Reporte implements Serializable {
     @ColumnInfo(name = "location")
     private double[] location;
     @ColumnInfo(name = "location_description")
-    private String location_description;
+    private String locationDescription;
     @ColumnInfo(name = "UserId")
     private int UserId;
 
@@ -31,14 +31,14 @@ public class Reporte implements Serializable {
     }
 
     @Ignore
-    public Reporte(String date, double[] location, int UserId) {
+    public Reporte(String date, double[] location, int userId) {
         this.description = "";
         this.date = date;
         this.fixed = false;
         this.picture = "";
         this.location = location;
-        this.location_description = "";
-        this.UserId = UserId;
+        this.locationDescription = "";
+        this.UserId = userId;
     }
 
     public int getId() {
@@ -89,12 +89,12 @@ public class Reporte implements Serializable {
         this.location = location;
     }
 
-    public String getLocation_description() {
-        return location_description;
+    public String getLocationDescription() {
+        return locationDescription;
     }
 
-    public void setLocation_description(String location_description) {
-        this.location_description = location_description;
+    public void setLocationDescription(String locationDescription) {
+        this.locationDescription = locationDescription;
     }
 
     public int getUserId() {

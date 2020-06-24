@@ -8,14 +8,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.PostUser;
 import com.dnieln7.roadwatchman.task.user.VerifyEmail;
-import com.dnieln7.roadwatchman.ui.login.Login;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.utils.TextMonitor;
-import com.dnieln7.roadwatchman.utils.Utils;
+import com.dnieln7.roadwatchman.utils.WindowController;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutionException;
@@ -77,7 +76,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void next(View view) {
-        Utils.hideKeyboard(this);
+        WindowController.hideKeyboard(this);
 
         if (verifyForm()) {
             TaskListener codeListener = new TaskListener() {

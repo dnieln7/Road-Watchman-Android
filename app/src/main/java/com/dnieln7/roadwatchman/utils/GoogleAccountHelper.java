@@ -3,8 +3,8 @@ package com.dnieln7.roadwatchman.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.dnieln7.roadwatchman.data.AppSession;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.LoginUser;
 import com.dnieln7.roadwatchman.task.user.PostUser;
@@ -23,6 +23,8 @@ import java.util.logging.Logger;
  * @author dnieln7
  */
 public class GoogleAccountHelper {
+
+    private GoogleAccountHelper(){}
 
     public static final int REQUEST_CODE = 1;
 

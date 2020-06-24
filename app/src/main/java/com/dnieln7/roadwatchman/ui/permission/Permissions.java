@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.utils.AppearanceController;
+import com.dnieln7.roadwatchman.utils.WindowController;
 import com.dnieln7.roadwatchman.utils.Printer;
 
 public class Permissions extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class Permissions extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppearanceController.goFullScreen(this);
+        WindowController.goFullScreen(this);
         setContentView(R.layout.activity_permissions);
 
         if (hasPermissions(this)) {

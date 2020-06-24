@@ -12,12 +12,28 @@ import androidx.appcompat.app.AlertDialog;
 import com.dnieln7.roadwatchman.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Helper class to print messages to the UI
  *
  * @author dnieln7
  */
 public class Printer {
+
+    private Printer() {
+    }
+
+    /**
+     * Logs an error of type {@link Throwable}.
+     *
+     * @param className The class name in which the error occurred.
+     * @param error     The error to be logged.
+     */
+    public static void logError(String className, Throwable error) {
+        Logger.getLogger(className).log(Level.SEVERE, "There was an error", error);
+    }
 
     /**
      * Displays a {@link Toast} for short period of time.

@@ -3,8 +3,8 @@ package com.dnieln7.roadwatchman.ui.app.fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dnieln7.roadwatchman.data.AppSession;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.User;
 
 public class AppViewModel extends ViewModel {
 

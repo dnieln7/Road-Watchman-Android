@@ -10,7 +10,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
-import com.dnieln7.roadwatchman.data.Reporte;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ReportWorkManager {
     public static final String PICTURE_WORK_TAG = "UPLOAD_PICTURE";
@@ -112,7 +114,7 @@ public class ReportWorkManager {
             works = WorkManager.getInstance(context).getWorkInfosByTag(tag).get();
         }
         catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            Logger.getLogger(ReportWorkManager.class.getName()).log(Level.SEVERE, "There was an error", e);
         }
 
         return works;

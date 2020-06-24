@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.utils.Utils;
+import com.dnieln7.roadwatchman.utils.WindowController;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -38,7 +38,7 @@ public class AddDescription extends Fragment {
     }
 
     void upload() {
-        Utils.hideKeyboard(getActivity());
+        WindowController.hideKeyboard(getActivity());
 
         String description = this.description.getText() != null ? this.description.getText().toString().trim() : "";
         createViewModel.getReporte().observe(getActivity(), reporte -> reporte.setDescription(description));

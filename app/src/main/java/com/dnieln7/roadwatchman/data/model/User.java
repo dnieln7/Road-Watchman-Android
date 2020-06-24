@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.data;
+package com.dnieln7.roadwatchman.data.model;
 
 import java.io.Serializable;
 

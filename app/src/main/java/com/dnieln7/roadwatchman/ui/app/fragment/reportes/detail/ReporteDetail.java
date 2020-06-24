@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.Reporte;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.squareup.picasso.Picasso;
 
@@ -74,7 +74,7 @@ public class ReporteDetail extends AppCompatActivity {
                         .toString("dd MMMM, yyyy", Locale.forLanguageTag("MX"))
         );
         description.setText(reporte.getDescription());
-        location.setText(reporte.getLocation_description());
+        location.setText(reporte.getLocationDescription());
         fixed.setActivated(reporte.isFixed());
         fixed.setText(fixed.isActivated()
                 ? getString(R.string.reports_fixed)

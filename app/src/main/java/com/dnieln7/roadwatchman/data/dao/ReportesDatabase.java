@@ -1,11 +1,10 @@
-package com.dnieln7.roadwatchman.data;
+package com.dnieln7.roadwatchman.data.dao;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.dnieln7.roadwatchman.data.dao.Converters;
-import com.dnieln7.roadwatchman.data.dao.ReporteDao;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 
 @Database(entities = Reporte.class, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})

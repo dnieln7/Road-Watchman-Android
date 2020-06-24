@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.PutUser;
 import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;

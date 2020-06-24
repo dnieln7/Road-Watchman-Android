@@ -8,7 +8,7 @@ import com.dnieln7.http.request.HttpSession;
 import com.dnieln7.http.request.exception.ResponseException;
 import com.google.gson.JsonObject;
 
-public class VerifyEmail extends AsyncTask<String, Void, TaskListener> {
+public class VerifyEmail extends AsyncTask<String, Void, TaskListener<Integer>> {
 
     private HttpSession session;
     private TaskListener<Integer> listener;
@@ -19,7 +19,7 @@ public class VerifyEmail extends AsyncTask<String, Void, TaskListener> {
     }
 
     @Override
-    protected TaskListener doInBackground(String... params) {
+    protected TaskListener<Integer> doInBackground(String... params) {
         try {
             JsonObject email = new JsonObject();
 

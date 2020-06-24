@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.Reporte;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.ui.app.fragment.reportes.detail.ReporteDetail;
 import com.squareup.picasso.Picasso;
 

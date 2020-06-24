@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.dnieln7.roadwatchman.data.AppSession;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.User;
 
 /**
  * Helper class to modify shared preferences.

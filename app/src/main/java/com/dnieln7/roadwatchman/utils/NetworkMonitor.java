@@ -8,6 +8,11 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Helper class to check network type and status.
  *
@@ -29,7 +34,8 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
             try {
                 Thread.sleep(500);
             }
-            catch (InterruptedException ignored) {
+            catch (InterruptedException e) {
+                Logger.getLogger(GoogleSignInAccount.class.getName()).log(Level.SEVERE, "There was an error", e);
             }
         }
     }
@@ -43,7 +49,7 @@ public class NetworkMonitor extends ConnectivityManager.NetworkCallback {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static NetworkMonitor getMonitor(Context context) {
         if (monitor == null) {
-            return monitor = new NetworkMonitor(context);
+            monitor = new NetworkMonitor(context);
         }
         return monitor;
     }

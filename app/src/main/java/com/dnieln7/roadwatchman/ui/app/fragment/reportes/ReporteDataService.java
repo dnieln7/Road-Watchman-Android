@@ -9,8 +9,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
-import com.dnieln7.roadwatchman.data.Reporte;
-import com.dnieln7.roadwatchman.data.ReportesDatabase;
+import com.dnieln7.roadwatchman.data.model.Reporte;
+import com.dnieln7.roadwatchman.data.dao.ReportesDatabase;
 import com.dnieln7.roadwatchman.data.dao.ReporteDao;
 import com.dnieln7.roadwatchman.task.reporte.GetAllReportes;
 

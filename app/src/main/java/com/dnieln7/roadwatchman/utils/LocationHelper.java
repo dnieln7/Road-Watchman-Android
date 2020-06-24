@@ -151,16 +151,16 @@ public class LocationHelper implements LocationListener {
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        // Not required
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        // Not required
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        // Not required
     }
 }

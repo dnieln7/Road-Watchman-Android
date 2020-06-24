@@ -5,7 +5,7 @@ import android.net.Uri;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dnieln7.roadwatchman.data.Reporte;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 
 public class CreateViewModel extends ViewModel {
 

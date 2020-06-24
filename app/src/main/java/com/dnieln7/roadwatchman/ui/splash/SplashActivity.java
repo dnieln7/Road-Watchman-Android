@@ -6,13 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dnieln7.roadwatchman.data.AppSession;
+import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.ui.app.AppActivity;
 import com.dnieln7.roadwatchman.ui.login.Login;
 import com.dnieln7.roadwatchman.ui.permission.Permissions;
 import com.dnieln7.roadwatchman.utils.GoogleAccountHelper;
-import com.dnieln7.roadwatchman.utils.LanguageHelper;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

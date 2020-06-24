@@ -19,11 +19,8 @@ import androidx.annotation.Nullable;
 
 import com.dnieln7.roadwatchman.App;
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.Reporte;
-import com.dnieln7.roadwatchman.task.TaskListener;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.ui.app.fragment.settings.network.NetworkActivity;
-import com.dnieln7.roadwatchman.ui.login.Login;
-import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 
 import org.joda.time.LocalDateTime;

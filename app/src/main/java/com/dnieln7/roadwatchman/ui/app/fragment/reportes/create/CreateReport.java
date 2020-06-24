@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.Reporte;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.Reporte;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.utils.LocationHelper;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.Printer;

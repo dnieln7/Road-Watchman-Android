@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatDelegate;
  */
 public class ThemeHelper {
 
+    private ThemeHelper() {
+    }
+
     /**
      * Applies the provided theme mode.
      *

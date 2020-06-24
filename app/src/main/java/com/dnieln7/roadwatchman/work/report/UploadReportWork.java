@@ -8,9 +8,12 @@ import androidx.work.WorkerParameters;
 
 import com.dnieln7.http.request.HttpSession;
 import com.dnieln7.http.request.exception.ResponseException;
-import com.dnieln7.roadwatchman.data.Reporte;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.task.API;
 import com.google.gson.Gson;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UploadReportWork extends Worker {
 
@@ -37,7 +40,7 @@ public class UploadReportWork extends Worker {
                 response = new Gson().fromJson(session.post(report), Reporte.class);
             }
             catch (ResponseException e) {
-                e.printStackTrace();
+                Logger.getLogger(UploadReportWork.class.getName()).log(Level.SEVERE, "There was an error", e);
             }
 
             if (response != null) {

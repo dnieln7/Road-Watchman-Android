@@ -15,6 +15,9 @@ public class LocationUtils {
     private static android.location.LocationListener locationListener;
     private static Location knownLocation;
 
+    private LocationUtils() {
+    }
+
     @SuppressLint("MissingPermission")
     public static Location getGPS(Activity activity) {
         if (LocationHelper.hasLocationPermissions(activity)) {
@@ -77,12 +80,12 @@ public class LocationUtils {
         return null;
     }
 
-    private static void setLocation(Location location) {
-        knownLocation = location;
-        locationListener = null;
-    }
-
     private static class LocationListener implements android.location.LocationListener {
+
+        private static void setLocation(Location location) {
+            knownLocation = location;
+            locationListener = null;
+        }
 
         @Override
         public void onLocationChanged(Location location) {
@@ -91,14 +94,17 @@ public class LocationUtils {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+            // Not required
         }
 
         @Override
         public void onProviderEnabled(String provider) {
+            // Not required
         }
 
         @Override
         public void onProviderDisabled(String provider) {
+            // Not required
         }
     }
 }

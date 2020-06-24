@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.AppSession;
-import com.dnieln7.roadwatchman.data.User;
+import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.LoginUser;
 import com.dnieln7.roadwatchman.ui.signup.SignUp;
@@ -17,7 +17,7 @@ import com.dnieln7.roadwatchman.utils.GoogleAccountHelper;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.utils.TextMonitor;
-import com.dnieln7.roadwatchman.utils.Utils;
+import com.dnieln7.roadwatchman.utils.WindowController;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -90,7 +90,7 @@ public class Login extends AppCompatActivity {
                 }
             }
             catch (ApiException e) {
-                Utils.logError(Login.class, e);
+                Printer.logError(Login.class.getName(), e);
                 progressDialog.dismiss();
             }
         }
@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginWithEmail(View view) {
-        Utils.hideKeyboard(this);
+        WindowController.hideKeyboard(this);
 
         if (loginEmail.getError() != null) {
             Printer.snackBar(view, getString(R.string.login_wrong_email));
@@ -135,13 +135,13 @@ public class Login extends AppCompatActivity {
             }
         }
         catch (ExecutionException | InterruptedException e) {
-            Utils.logError(Login.class, e);
+            Printer.logError(Login.class.getName(), e);
             progressDialog.dismiss();
         }
     }
 
     public void loginWithGoogle(View view) {
-        Utils.hideKeyboard(this);
+        WindowController.hideKeyboard(this);
         progressDialog.show();
 
         GoogleSignInAccount account = GoogleAccountHelper.isGoogleAccountActive(this);

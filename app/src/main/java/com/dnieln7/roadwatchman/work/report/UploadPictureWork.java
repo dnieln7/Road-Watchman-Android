@@ -39,7 +39,6 @@ public class UploadPictureWork extends Worker {
                     .addOnSuccessListener(snapshot -> reference.getDownloadUrl()
                             .addOnCompleteListener(task -> {
                                 url = task.getResult() == null ? "" : task.getResult().toString();
-                                System.out.println("Work completed, url is >>> " + url);
                                 countDown.countDown();
                             })
                     );
@@ -49,7 +48,7 @@ public class UploadPictureWork extends Worker {
             return Result.success(createOutputData(url));
         }
         catch (InterruptedException e) {
-            e.printStackTrace();
+            Logger.getLogger(UploadPictureWork.class.getName()).log(Level.SEVERE, "There was an error", e);
             return Result.failure();
         }
     }

@@ -4,6 +4,10 @@ import androidx.room.TypeConverter;
 
 public class Converters {
 
+    public Converters() {
+        // Not used
+    }
+
     @TypeConverter
     public static double[] fromLocation(String value) {
         String lat = value.split(",")[0];

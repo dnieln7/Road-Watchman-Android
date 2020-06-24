@@ -17,12 +17,12 @@ public class TextMonitor implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        // Not required
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        // Not required
     }
 
     @Override
