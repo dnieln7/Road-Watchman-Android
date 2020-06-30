@@ -23,7 +23,7 @@ public class Reporte implements Serializable {
     @ColumnInfo(name = "location")
     private double[] location;
     @ColumnInfo(name = "location_description")
-    private String locationDescription;
+    private String location_description;
     @ColumnInfo(name = "UserId")
     private int UserId;
 
@@ -37,7 +37,7 @@ public class Reporte implements Serializable {
         this.fixed = false;
         this.picture = "";
         this.location = location;
-        this.locationDescription = "";
+        this.location_description = "";
         this.UserId = userId;
     }
 
@@ -89,12 +89,12 @@ public class Reporte implements Serializable {
         this.location = location;
     }
 
-    public String getLocationDescription() {
-        return locationDescription;
+    public String getLocation_description() {
+        return location_description;
     }
 
-    public void setLocationDescription(String locationDescription) {
-        this.locationDescription = locationDescription;
+    public void setLocation_description(String location_description) {
+        this.location_description = location_description;
     }
 
     public int getUserId() {

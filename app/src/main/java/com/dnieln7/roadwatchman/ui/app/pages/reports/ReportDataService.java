@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.pages.reportes;
+package com.dnieln7.roadwatchman.ui.app.pages.reports;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,51 +9,48 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
-import com.dnieln7.roadwatchman.data.model.Reporte;
-import com.dnieln7.roadwatchman.data.dao.ReportesDatabase;
 import com.dnieln7.roadwatchman.data.dao.ReporteDao;
+import com.dnieln7.roadwatchman.data.dao.ReportesDatabase;
+import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.task.reporte.GetAllReportes;
+import com.dnieln7.roadwatchman.utils.Printer;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ReporteDataService extends AndroidViewModel {
+public class ReportDataService extends AndroidViewModel {
 
-    private ReporteDao reporteDao;
-    private LiveData<List<Reporte>> reportes;
+    private ReporteDao reportDao;
+    private LiveData<List<Reporte>> reports;
 
-    public ReporteDataService(@NonNull Application application) {
+    public ReportDataService(@NonNull Application application) {
         super(application);
 
-        reporteDao = Room.databaseBuilder(application, ReportesDatabase.class, "Reportes-Data").build().reporteDao();
-        reportes = reporteDao.get();
+        reportDao = Room.databaseBuilder(application, ReportesDatabase.class, "Reports-Data").build().reporteDao();
+        reports = reportDao.get();
     }
 
-    public LiveData<List<Reporte>> getReportes() {
-        return reportes;
+    public LiveData<List<Reporte>> getReports() {
+        return reports;
     }
 
     public void fetchFromNetwork(String userId) {
         try {
-            List<Reporte> reportes = new GetAllReportes(userId).execute().get();
-            new InsertTask(reporteDao, reportes).execute();
+            List<Reporte> fetchedReports = new GetAllReportes(userId).execute().get();
+            new InsertTask(reportDao, fetchedReports).execute();
 
         }
         catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-
+            Printer.logError(ReportDataService.class.getName(), e);
         }
     }
 
-    public Optional<Reporte> getReporteById(int id) {
-        return reporteDao.getById(id).getValue();
+    public Reporte getReportByIndex(int index) {
+        return reports.getValue().get(index);
     }
 
     public static void deleteAll(Context context) {
-        ReporteDao reporteDao = Room.databaseBuilder(context, ReportesDatabase.class, "Reportes-Data")
+        ReporteDao reporteDao = Room.databaseBuilder(context, ReportesDatabase.class, "Reports-Data")
                 .build()
                 .reporteDao();
 
@@ -61,7 +58,7 @@ public class ReporteDataService extends AndroidViewModel {
             new DeleteTask(reporteDao).execute().get();
         }
         catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(ReporteDataService.class.getName()).log(Level.SEVERE, null, e);
+            Printer.logError(ReportDataService.class.getName(), e);
         }
     }
 

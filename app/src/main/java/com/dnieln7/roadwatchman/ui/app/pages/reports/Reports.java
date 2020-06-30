@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.pages.reportes;
+package com.dnieln7.roadwatchman.ui.app.pages.reports;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
-import com.dnieln7.roadwatchman.ui.app.pages.reportes.create.CreateReport;
+import com.dnieln7.roadwatchman.ui.app.pages.reports.create.CreateReport;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
@@ -30,7 +30,7 @@ public class Reports extends Fragment {
 
     // Objects
     private boolean expanded;
-    private ReporteDataService reporteDataService;
+    private ReportDataService reportDataService;
     private AppSession appSession;
 
     // Widgets
@@ -52,7 +52,7 @@ public class Reports extends Fragment {
 
         expanded = false;
         AppViewModel appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
-        reporteDataService = new ViewModelProvider(getActivity()).get(ReporteDataService.class);
+        reportDataService = new ViewModelProvider(getActivity()).get(ReportDataService.class);
         appSession = PreferencesHelper.getInstance(getActivity()).isUserLoggedIn();
 
         appViewModel.setAppSession(appSession);
@@ -108,8 +108,8 @@ public class Reports extends Fragment {
     }
 
     private void loadData() {
-        reporteDataService.getReportes().observe(getActivity(), reportes -> {
-            listView.setAdapter(new ReporteAdapter(reportes));
+        reportDataService.getReports().observe(getActivity(), reportes -> {
+            listView.setAdapter(new ReportAdapter(reportes));
             showList(reportes.isEmpty());
         });
     }
@@ -127,7 +127,7 @@ public class Reports extends Fragment {
         }
 
         if (connected) {
-            reporteDataService.fetchFromNetwork(String.valueOf(appSession.getUser().getId()));
+            reportDataService.fetchFromNetwork(String.valueOf(appSession.getUser().getId()));
             loadData();
         }
         else {

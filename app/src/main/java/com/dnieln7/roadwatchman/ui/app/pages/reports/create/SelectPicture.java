@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.pages.reportes.create;
+package com.dnieln7.roadwatchman.ui.app.pages.reports.create;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;

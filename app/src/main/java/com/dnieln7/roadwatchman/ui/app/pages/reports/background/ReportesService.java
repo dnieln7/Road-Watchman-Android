@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.pages.reportes.background;
+package com.dnieln7.roadwatchman.ui.app.pages.reports.background;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;

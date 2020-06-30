@@ -52,15 +52,15 @@
             android:parentActivityName="com.dnieln7.roadwatchman.ui.login.Login"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.create.CreateReport"
+            android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.create.CreateReport"
             android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
-            android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.detail.ReporteDetail"
+            android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.detail.ReporteDetail"
             android:screenOrientation="fullSensor"
             android:theme="@style/MaterialTheme.NoActionBar" />
 
         <service
-            android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.background.ReportesService"
+            android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.background.ReportesService"
             android:theme="@style/MaterialTheme.NoActionBar" />
     </application>
 

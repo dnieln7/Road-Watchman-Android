@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.ui.app.pages.reportes.background.ReportesService;
+import com.dnieln7.roadwatchman.ui.app.pages.reports.background.ReportesService;
 import com.dnieln7.roadwatchman.utils.LocationHelper;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;

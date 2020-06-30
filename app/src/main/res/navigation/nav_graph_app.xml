@@ -7,9 +7,22 @@
 
     <fragment
         android:id="@+id/reports"
-        android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.Reports"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_reportes" />
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.Reports"
+        android:label="@string/reports_saved"
+        tools:layout="@layout/fragment_reportes" >
+        <action
+            android:id="@+id/action_reports_to_reportDetail"
+            app:destination="@id/reportDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportDetail"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.ReportDetail"
+        android:label="@string/report_details"
+        tools:layout="@layout/fragment_report_detail" >
+        <argument
+            android:name="reportIndex"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.dnieln7.roadwatchman.ui.app.pages.profile.Profile"
