@@ -1,7 +1,6 @@
 package com.dnieln7.roadwatchman.ui.app;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class AppActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,24 +25,23 @@ public class AppActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        View navHeader = navigationView.getHeaderView(0);
+        NavController controller = Navigation.findNavController(this, R.id.app_nav_controller);
 
         setSupportActionBar(toolbar);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_reportes,
                 R.id.nav_profile,
                 R.id.nav_settings
-        ).setDrawerLayout(drawer).build();
+        ).setOpenableLayout(drawer).build();
 
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupActionBarWithNavController(this, controller, appBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, controller);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+        NavController navController = Navigation.findNavController(this, R.id.app_nav_controller);
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 }

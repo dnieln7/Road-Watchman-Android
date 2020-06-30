@@ -4,9 +4,9 @@
     <color name="primaryDark">#002984</color>
     <color name="primaryLight">#757de8</color>
 
-    <color name="secondary">#eded8e</color>
-    <color name="secondaryDark">#b9bb5f</color>
-    <color name="secondaryLight">#ffffbf</color>
+    <color name="secondary">#ffc107</color>
+    <color name="secondaryDark">#c79100</color>
+    <color name="secondaryLight">#fff350</color>
 
     <color name="inverted100">#000000</color>
     <color name="inverted50">#80000000</color>

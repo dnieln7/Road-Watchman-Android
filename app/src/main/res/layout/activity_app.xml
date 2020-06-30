@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include layout="@layout/app_bar_reportes" />
+    <include layout="@layout/activity_body_app" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -20,6 +20,6 @@
         app:headerLayout="@layout/nav_header_reportes"
         app:itemIconTint="@color/primary"
         app:itemTextColor="@color/inverted100"
-        app:menu="@menu/activity_app_drawer" />
+        app:menu="@menu/menu_drawer_app" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
