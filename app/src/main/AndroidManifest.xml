@@ -58,12 +58,6 @@
             android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.detail.ReporteDetail"
             android:screenOrientation="fullSensor"
             android:theme="@style/MaterialTheme.NoActionBar" />
-        <activity
-            android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.appearance.AppearanceActivity"
-            android:theme="@style/MaterialTheme.NoActionBar" />
-        <activity
-            android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity"
-            android:theme="@style/MaterialTheme.NoActionBar" />
 
         <service
             android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.background.ReportesService"

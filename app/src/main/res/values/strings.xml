@@ -101,26 +101,19 @@
 
     <!--Settings-->
     <string name="settings">Settings</string>
-    <!--Settings-->
-
-    <!--Settings Appearance-->
-    <string name="settings_appearance">Appearance</string>
-    <string name="settings_theme">Theme</string>
-    <!--Settings Appearance-->
-
-    <!--Settings Network-->
-    <string name="settings_network">Network</string>
+    <string name="appearance">Appearance</string>
+    <string name="appearance_theme">Theme</string>
+    <string name="network">Network</string>
     <string name="settings_warning">To enable this option you need an stable network connection</string>
     <string name="settings_background">Send report in background</string>
     <string name="settings_background_warning">Report will be send in background when violent movements are detected</string>
     <string name="settings_continue">Continue</string>
     <string name="settings_cancel">Cancel</string>
     <string name="settings_background_reports">Send reports in background</string>
-    <!--Settings Network-->
+    <!--Settings-->
 
     <!--About-->
     <string name="about">About</string>
     <string name="about_description">Road Watchman will allow you to send reports of the damage you find on the road, these reports are reviewed by the corresponding authorities to be subsequently treated.</string>
     <!--About-->
-
 </resources>

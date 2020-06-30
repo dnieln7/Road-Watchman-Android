@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
 import com.dnieln7.roadwatchman.App;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.Reporte;
-import com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity;
+import com.dnieln7.roadwatchman.ui.app.AppActivity;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 
 import org.joda.time.LocalDateTime;
@@ -67,7 +67,7 @@ public class ReportesService extends Service implements SensorEventListener, Loc
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            Intent app = new Intent(this, NetworkActivity.class);
+            Intent app = new Intent(this, AppActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, app, 0);
 
             Notification notification = new Notification.Builder(this, App.ID)

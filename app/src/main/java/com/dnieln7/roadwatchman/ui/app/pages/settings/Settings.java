@@ -1,6 +1,5 @@
 package com.dnieln7.roadwatchman.ui.app.pages.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.ui.app.pages.settings.appearance.AppearanceActivity;
-import com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity;
+import com.dnieln7.roadwatchman.ui.app.AppActivity;
 
 public class Settings extends Fragment {
 
@@ -25,24 +23,19 @@ public class Settings extends Fragment {
         root = inflater.inflate(R.layout.fragment_settings, container, false);
 
         initWidgets();
-        initListeners();
 
         return root;
     }
 
     private void initWidgets() {
-
         appearance = root.findViewById(R.id.settings_appearance);
         network = root.findViewById(R.id.settings_network);
-    }
 
-    private void initListeners() {
         appearance.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), AppearanceActivity.class))
+                AppActivity.navTo(v, SettingsDirections.actionSettingsToAppearance())
         );
-
         network.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), NetworkActivity.class))
+                AppActivity.navTo(v, SettingsDirections.actionSettingsToNetwork())
         );
     }
 }

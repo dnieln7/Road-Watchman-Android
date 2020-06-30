@@ -1,43 +1,55 @@
-package com.dnieln7.roadwatchman.ui.app.pages.settings.appearance;
+package com.dnieln7.roadwatchman.ui.app.pages.settings;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.fragment.app.Fragment;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.ThemeHelper;
 
-public class AppearanceActivity extends AppCompatActivity {
+/**
+ * Controls app's appearance.
+ *
+ * @author dnieln7
+ */
+public class Appearance extends Fragment {
+
+    private View root;
 
     private AppCompatSpinner theme;
 
+    public Appearance() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appearance);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_appearance, container, false);
 
         initWidgets();
+
+        return root;
     }
 
     private void initWidgets() {
-        setSupportActionBar(findViewById(R.id.appearance_toolbar));
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
+                requireContext(),
                 R.array.themes, android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        theme = findViewById(R.id.appearance_theme);
+        theme = root.findViewById(R.id.appearance_theme);
         theme.setAdapter(adapter);
         theme.setSelection(ThemeHelper.getCurrentTheme());
-        theme.setOnItemSelectedListener(new ThemeListener(this));
+        theme.setOnItemSelectedListener(new ThemeListener(requireActivity()));
     }
 
     static class ThemeListener implements AdapterView.OnItemSelectedListener {
@@ -71,6 +83,7 @@ public class AppearanceActivity extends AppCompatActivity {
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
+            // Not required
         }
     }
 }

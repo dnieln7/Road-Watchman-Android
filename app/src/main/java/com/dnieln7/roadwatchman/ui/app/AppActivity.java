@@ -1,11 +1,13 @@
 package com.dnieln7.roadwatchman.ui.app;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -44,5 +46,15 @@ public class AppActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.app_nav_controller);
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+    /**
+     * Helper method to navigate to another fragment.
+     *
+     * @param view       View from witch the method is called.
+     * @param directions {@link NavDirections} instance representing the destination fragment.
+     */
+    public static void navTo(View view, NavDirections directions) {
+        Navigation.findNavController(view).navigate(directions);
     }
 }

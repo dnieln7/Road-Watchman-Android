@@ -6,29 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:fillViewport="true"
-    tools:context="com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity">
+    tools:context=".ui.app.pages.settings.Network">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/network_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/primaryDark"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:subtitle="@string/settings_network"
-                app:subtitleTextColor="@android:color/white"
-                app:title="@string/settings"
-                app:titleTextColor="@android:color/white" />
-
-        </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
