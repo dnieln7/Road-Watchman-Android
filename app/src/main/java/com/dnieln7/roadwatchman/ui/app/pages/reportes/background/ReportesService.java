@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.reportes.background;
+package com.dnieln7.roadwatchman.ui.app.pages.reportes.background;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
 import com.dnieln7.roadwatchman.App;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.Reporte;
-import com.dnieln7.roadwatchman.ui.app.fragment.settings.network.NetworkActivity;
+import com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 
 import org.joda.time.LocalDateTime;

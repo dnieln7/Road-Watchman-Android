@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.reportes.detail;
+package com.dnieln7.roadwatchman.ui.app.pages.reportes.detail;
 
 import android.os.Bundle;
 import android.view.Menu;

@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.settings.appearance;
+package com.dnieln7.roadwatchman.ui.app.pages.settings.appearance;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,13 +6,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.utils.LanguageHelper;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.ThemeHelper;
 

@@ -30,9 +30,10 @@ public class AppActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_reportes,
-                R.id.nav_profile,
-                R.id.nav_settings
+                R.id.reports,
+                R.id.profile,
+                R.id.settings,
+                R.id.about
         ).setOpenableLayout(drawer).build();
 
         NavigationUI.setupActionBarWithNavController(this, controller, appBarConfiguration);

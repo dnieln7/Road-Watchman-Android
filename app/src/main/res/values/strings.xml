@@ -118,4 +118,9 @@
     <string name="settings_background_reports">Send reports in background</string>
     <!--Settings Network-->
 
+    <!--About-->
+    <string name="about">About</string>
+    <string name="about_description">Road Watchman will allow you to send reports of the damage you find on the road, these reports are reviewed by the corresponding authorities to be subsequently treated.</string>
+    <!--About-->
+
 </resources>

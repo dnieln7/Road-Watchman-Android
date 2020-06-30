@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.settings.network;
+package com.dnieln7.roadwatchman.ui.app.pages.settings.network;
 
 import android.content.Intent;
 import android.os.Build;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.ui.app.fragment.reportes.background.ReportesService;
+import com.dnieln7.roadwatchman.ui.app.pages.reportes.background.ReportesService;
 import com.dnieln7.roadwatchman.utils.LocationHelper;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;

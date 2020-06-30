@@ -118,4 +118,9 @@
     <string name="sign_up_invalid_form">Verifica tu información</string>
     <!--Settings Network-->
 
+    <!--About-->
+    <string name="about">Acerca de</string>
+    <string name="about_description">Vigilante de Carretera le permitira enviar reportes de los daños que encuentre en la carretera, estos reportes son revisados por las autoridades correspondientes para posteriormente ser atendidos.</string>
+    <!--About-->
+
 </resources>

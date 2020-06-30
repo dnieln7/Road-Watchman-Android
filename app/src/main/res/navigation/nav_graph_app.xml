@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_reportes">
+    app:startDestination="@+id/reports">
 
     <fragment
-        android:id="@+id/nav_reportes"
-        android:name="com.dnieln7.roadwatchman.ui.app.fragment.reportes.ReportesFragment"
+        android:id="@+id/reports"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.reportes.Reports"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_reportes" />
 
     <fragment
-        android:id="@+id/nav_profile"
-        android:name="com.dnieln7.roadwatchman.ui.app.fragment.profile.ProfileFragment"
+        android:id="@+id/profile"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.profile.Profile"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.dnieln7.roadwatchman.ui.app.fragment.settings.SettingsFragment"
+        android:id="@+id/settings"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.Settings"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/about"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.about.About"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.settings;
+package com.dnieln7.roadwatchman.ui.app.pages.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.ui.app.fragment.settings.appearance.AppearanceActivity;
-import com.dnieln7.roadwatchman.ui.app.fragment.settings.network.NetworkActivity;
+import com.dnieln7.roadwatchman.ui.app.pages.settings.appearance.AppearanceActivity;
+import com.dnieln7.roadwatchman.ui.app.pages.settings.network.NetworkActivity;
 
-public class SettingsFragment extends Fragment {
+public class Settings extends Fragment {
 
     private View root;
 

@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.reportes;
+package com.dnieln7.roadwatchman.ui.app.pages.reportes;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,14 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.AppSession;
-import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
-import com.dnieln7.roadwatchman.ui.app.fragment.reportes.create.CreateReport;
+import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
+import com.dnieln7.roadwatchman.ui.app.pages.reportes.create.CreateReport;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ReportesFragment extends Fragment {
+public class Reports extends Fragment {
 
     // Objects
     private boolean expanded;

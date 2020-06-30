@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.profile;
+package com.dnieln7.roadwatchman.ui.app.pages.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +19,8 @@ import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.task.TaskListener;
 import com.dnieln7.roadwatchman.task.user.PutUser;
-import com.dnieln7.roadwatchman.ui.app.fragment.AppViewModel;
-import com.dnieln7.roadwatchman.ui.app.fragment.reportes.ReporteDataService;
+import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
+import com.dnieln7.roadwatchman.ui.app.pages.reportes.ReporteDataService;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProfileFragment extends Fragment {
+public class Profile extends Fragment {
 
     // Objects
     private AppViewModel appViewModel;
@@ -160,7 +160,7 @@ public class ProfileFragment extends Fragment {
         @Override
         public boolean success() {
             if (this.exception != null) {
-                Printer.toast(ProfileFragment.this.getContext(), this.exception.getMessage());
+                Printer.toast(Profile.this.getContext(), this.exception.getMessage());
                 return false;
             }
             return true;

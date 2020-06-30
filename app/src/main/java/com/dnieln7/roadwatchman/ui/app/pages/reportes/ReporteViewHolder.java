@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.reportes;
+package com.dnieln7.roadwatchman.ui.app.pages.reportes;
 
 import android.view.View;
 import android.widget.ImageView;

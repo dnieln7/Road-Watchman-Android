@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment;
+package com.dnieln7.roadwatchman.ui.app.pages;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

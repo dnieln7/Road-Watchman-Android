@@ -1,4 +1,4 @@
-package com.dnieln7.roadwatchman.ui.app.fragment.reportes;
+package com.dnieln7.roadwatchman.ui.app.pages.reportes;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.Reporte;
-import com.dnieln7.roadwatchman.ui.app.fragment.reportes.detail.ReporteDetail;
+import com.dnieln7.roadwatchman.ui.app.pages.reportes.detail.ReporteDetail;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
