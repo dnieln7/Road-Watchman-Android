@@ -33,7 +33,7 @@
                 android:id="@+id/profile_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Daniel Antonio Nolasco Alvarado"
+                android:text="Username"
                 android:textAlignment="center"
                 android:textColor="@color/primaryText"
                 android:textSize="20sp"
@@ -44,6 +44,7 @@
         <LinearLayout
             style="@style/Divider"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp" />
 
         <LinearLayout
@@ -105,7 +106,7 @@
                     android:id="@+id/profile_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logged as user"
+                    android:text="@string/profile_logged_user"
                     android:textColor="@color/primaryText"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -140,7 +141,7 @@
                     android:id="@+id/profile_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logged with a google account"
+                    android:text="@string/profile_logged_email"
                     android:textColor="@color/primaryText"
                     android:textSize="20sp" />
             </LinearLayout>

@@ -92,10 +92,10 @@
     <string name="profile_warning_message">Esta función no está disponible para cuentas de google</string>
     <string name="profile_save_message">Los cambios se han guardado</string>
     <string name="profile_dialog_title">Editar información del perfil</string>
-    <string name="profile_logged_google">Logged with google</string>
-    <string name="profile_logged_email">Logged with email address</string>
-    <string name="profile_logged_user">Logged as user</string>
-    <string name="profile_logged_admin">Logged as admin</string>
+    <string name="profile_logged_google">Se ingresó con una cuenta de google</string>
+    <string name="profile_logged_email">Se ingresó con correo electrónico</string>
+    <string name="profile_logged_user">Se ingresó como usuario</string>
+    <string name="profile_logged_admin">Se ingresó como administrador</string>
     <!--Profile-->
 
     <!--Settings-->
