@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Please wait..."
         android:textAlignment="textStart"
-        android:textColor="@color/inverted100"
+        android:textColor="@color/primaryText"
         android:textSize="20sp" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:text="Working..."
         android:textAlignment="textStart"
-        android:textColor="@color/inverted100"
+        android:textColor="@color/primaryText"
         android:textSize="15sp" />
 
     <ProgressBar
@@ -51,7 +51,7 @@
             android:layout_weight="0.5"
             android:text="50%"
             android:textAlignment="textStart"
-            android:textColor="@color/inverted50"
+            android:textColor="@color/secondaryText"
             android:textSize="14sp" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_weight="0.5"
             android:text="50/100"
             android:textAlignment="textEnd"
-            android:textColor="@color/inverted50"
+            android:textColor="@color/secondaryText"
             android:textSize="14sp" />
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

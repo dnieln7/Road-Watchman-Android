@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_dialog_verify_title"
-        android:textColor="@color/inverted100"
+        android:textColor="@color/primaryText"
         android:textSize="15sp" />
 
     <Space
@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:inputType="number"
             android:textAlignment="center"
-            android:textColor="@color/inverted100"
+            android:textColor="@color/primaryText"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,6 +44,7 @@
         android:id="@+id/verify_complete"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="match_parent"
+        android:textColor="@color/brightText"
         android:layout_height="wrap_content"
         android:text="@string/finish" />
 

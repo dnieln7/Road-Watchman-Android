@@ -27,7 +27,7 @@
                 android:drawablePadding="20dp"
                 android:drawableTint="@color/primary"
                 android:text="@string/appearance_theme"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatSpinner

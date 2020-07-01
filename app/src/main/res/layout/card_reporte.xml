@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -42,10 +42,9 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="10dp"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp"
                 app:buttonTint="@color/primary" />
         </LinearLayout>
-
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="Daniel Antonio Nolasco Alvarado"
                 android:textAlignment="center"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_picture" />
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="dnieln7@gmail.com"
-                    android:textColor="@color/inverted100"
+                    android:textColor="@color/primaryText"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -106,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Logged as user"
-                    android:textColor="@color/inverted100"
+                    android:textColor="@color/primaryText"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Logged with a google account"
-                    android:textColor="@color/inverted100"
+                    android:textColor="@color/primaryText"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_background_reports"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp"
                 app:thumbTint="@color/secondary" />
         </LinearLayout>

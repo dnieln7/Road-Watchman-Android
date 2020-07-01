@@ -8,9 +8,11 @@
     <color name="secondaryDark">#c79100</color>
     <color name="secondaryLight">#fff350</color>
 
-    <color name="inverted100">#000000</color>
-    <color name="inverted50">#80000000</color>
-    <color name="inverted25">#40000000</color>
+    <color name="brightText">#FFFFFF</color>
+
+    <color name="primaryText">#000000</color>
+    <color name="secondaryText">#80000000</color>
+    <color name="tertiaryText">#50000000</color>
 
     <color name="background">#FFFFFF</color>
 </resources>

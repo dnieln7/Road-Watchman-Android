@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Please wait..."
         android:textAlignment="textStart"
-        android:textColor="@color/inverted100"
+        android:textColor="@color/primaryText"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -39,7 +39,7 @@
             android:paddingTop="10dp"
             android:text="Working..."
             android:textAlignment="textStart"
-            android:textColor="@color/inverted100"
+            android:textColor="@color/primaryText"
             android:textSize="15sp" />
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

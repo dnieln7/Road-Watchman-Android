@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -23,7 +24,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
-                android:progressTint="@color/secondary"/>
+                android:progressTint="@color/secondary" />
 
             <TextView
                 android:id="@+id/create_step_description"
@@ -33,7 +34,7 @@
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -54,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="next"
-                android:text="@string/create_report_next" />
+                android:text="@string/create_report_next"
+                android:textColor="@color/brightText" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -19,7 +19,7 @@
         android:background="@color/background"
         app:headerLayout="@layout/nav_header_reportes"
         app:itemIconTint="@color/primary"
-        app:itemTextColor="@color/inverted100"
+        app:itemTextColor="@color/primaryText"
         app:menu="@menu/menu_drawer_app" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

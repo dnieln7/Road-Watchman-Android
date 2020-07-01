@@ -36,17 +36,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:textColorHint="@color/primary"
+            android:textColorHint="@color/primaryText"
             app:boxStrokeColor="@color/primary"
             app:helperText="user@example.com"
-            app:helperTextTextColor="@color/primary">
+            app:helperTextTextColor="@color/secondaryText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:textColorHint="@color/primary"
+            android:textColorHint="@color/primaryText"
             app:boxStrokeColor="@color/primary"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/primary">
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:textColor="@color/inverted100"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primary"
+            android:textColor="@color/brightText"
             android:onClick="loginWithEmail"
             android:text="@string/login_login" />
 
