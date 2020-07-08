@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
-import com.dnieln7.roadwatchman.ui.app.pages.reports.create.CreateReport;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
@@ -70,7 +69,7 @@ public class Reports extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == CreateReport.REQUEST_CODE) {
+        if (requestCode == ReportForm.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 Printer.okDialog(getContext(), getString(R.string.reports_success), getString(R.string.reports_report_send));
                 refresh();
@@ -102,9 +101,9 @@ public class Reports extends Fragment {
     private void createReporte() {
         expandMenu();
 
-        Intent creatorIntent = new Intent(getActivity(), CreateReport.class);
+        Intent creatorIntent = new Intent(getActivity(), ReportForm.class);
         creatorIntent.putExtra("user", appSession.getUser());
-        startActivityForResult(creatorIntent, CreateReport.REQUEST_CODE);
+        startActivityForResult(creatorIntent, ReportForm.REQUEST_CODE);
     }
 
     private void loadData() {

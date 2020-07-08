@@ -65,7 +65,7 @@
     <string name="create_report_next">Siguiente</string>
     <string name="create_report_photo">Toma o selecciona una foto</string>
     <string name="create_report_upload">Subir</string>
-    <string name="create_report_add_description">Agrega una breve descripción</string>
+    <string name="create_report_add_description">Agrega una breve descripción (opcional)</string>
     <string name="create_report_exit_warning">El reporte no se enviará, ¿Continuar?</string>
     <string name="create_report_yes">Sí</string>
     <string name="create_report_no">No</string>
