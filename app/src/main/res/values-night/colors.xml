@@ -10,9 +10,9 @@
 
     <color name="brightText">#FFFFFF</color>
 
-    <color name="primaryText">#87FFFFFF</color>
-    <color name="secondaryText">#60FFFFFF</color>
-    <color name="tertiaryText">#38FFFFFF</color>
+    <color name="primaryText">#FFFFFF</color>
+    <color name="secondaryText">#87FFFFFF</color>
+    <color name="tertiaryText">#60FFFFFF</color>
 
     <color name="background">#121212</color>
 </resources>

@@ -38,6 +38,7 @@ import java.util.logging.Logger;
 
 public class ReportForm extends AppCompatActivity {
 
+    public static final int REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 3;
 
     private TextInputEditText description;
