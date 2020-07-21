@@ -67,8 +67,8 @@ public class ReportDetail extends Fragment {
         );
         description.setText(reporte.getDescription());
         location.setText(reporte.getLocation_description());
-        fixed.setActivated(reporte.isFixed());
-        fixed.setText(fixed.isActivated()
+        fixed.setChecked(reporte.isFixed());
+        fixed.setText(fixed.isChecked()
                 ? getString(R.string.reports_fixed)
                 : getString(R.string.reports_awaiting)
         );

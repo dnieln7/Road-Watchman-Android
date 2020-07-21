@@ -65,8 +65,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
     @Override
     public void onBindViewHolder(@NonNull ReportViewHolder holder, int position) {
-        holder.getFixed().setActivated(data.get(position).isFixed());
-        holder.getFixed().setText(holder.getFixed().isActivated()
+        holder.getFixed().setChecked(data.get(position).isFixed());
+        holder.getFixed().setText(holder.getFixed().isChecked()
                 ? holder.itemView.getContext().getString(R.string.reports_fixed)
                 : holder.itemView.getContext().getString(R.string.reports_awaiting)
         );
