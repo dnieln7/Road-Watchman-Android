@@ -6,6 +6,7 @@ import com.dnieln7.http.request.HttpSession;
 import com.dnieln7.http.request.exception.ResponseException;
 import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.task.API;
+import com.dnieln7.roadwatchman.task.ITaskListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -15,12 +16,14 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GetAllReportes extends AsyncTask<Void, Void, List<Reporte>> {
+public class GetReportes extends AsyncTask<Void, Void, List<Reporte>> {
 
     private HttpSession session;
+    private ITaskListener<Reporte> listener;
 
-    public GetAllReportes(String id) {
+    public GetReportes(String id, ITaskListener<Reporte> listener) {
         this.session = new HttpSession(API.MAIN + "report?user=" + id);
+        this.listener = listener;
     }
 
     @Override
@@ -31,6 +34,15 @@ public class GetAllReportes extends AsyncTask<Void, Void, List<Reporte>> {
         catch (ResponseException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, String.format(Locale.ENGLISH, "%d %s", e.getCode(), e.getDescription()), e);
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    protected void onPostExecute(List<Reporte> reportes) {
+        super.onPostExecute(reportes);
+
+        if (reportes != null) {
+            listener.onSuccess(reportes);
         }
     }
 }

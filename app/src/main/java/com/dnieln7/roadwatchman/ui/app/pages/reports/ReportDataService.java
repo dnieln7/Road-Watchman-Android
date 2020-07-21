@@ -12,20 +12,24 @@ import androidx.room.Room;
 import com.dnieln7.roadwatchman.data.dao.ReporteDao;
 import com.dnieln7.roadwatchman.data.dao.ReportesDatabase;
 import com.dnieln7.roadwatchman.data.model.Reporte;
-import com.dnieln7.roadwatchman.task.reporte.GetAllReportes;
+import com.dnieln7.roadwatchman.task.ITaskListener;
+import com.dnieln7.roadwatchman.task.reporte.GetReportes;
+import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ReportDataService extends AndroidViewModel {
+public class ReportDataService extends AndroidViewModel implements ITaskListener<Reporte> {
 
+    private String id;
     private ReporteDao reportDao;
     private LiveData<List<Reporte>> reports;
 
     public ReportDataService(@NonNull Application application) {
         super(application);
 
+        id = String.valueOf(PreferencesHelper.getInstance(application).isUserLoggedIn().getUser().getId());
         reportDao = Room.databaseBuilder(application, ReportesDatabase.class, "Reports-Data").build().reporteDao();
         reports = reportDao.get();
     }
@@ -34,15 +38,8 @@ public class ReportDataService extends AndroidViewModel {
         return reports;
     }
 
-    public void fetchFromNetwork(String userId) {
-        try {
-            List<Reporte> fetchedReports = new GetAllReportes(userId).execute().get();
-            new InsertTask(reportDao, fetchedReports).execute();
-
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Printer.logError(ReportDataService.class.getName(), e);
-        }
+    public void fetchFromNetwork() {
+        new GetReportes(id, this).execute();
     }
 
     public Reporte getReportByIndex(int index) {
@@ -60,6 +57,16 @@ public class ReportDataService extends AndroidViewModel {
         catch (ExecutionException | InterruptedException e) {
             Printer.logError(ReportDataService.class.getName(), e);
         }
+    }
+
+    @Override
+    public void onSuccess() {
+        fetchFromNetwork();
+    }
+
+    @Override
+    public void onSuccess(List<Reporte> input) {
+        new InsertTask(reportDao, input).execute();
     }
 
     private static class InsertTask extends AsyncTask<Void, Void, Void> {

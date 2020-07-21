@@ -126,7 +126,7 @@ public class Reports extends Fragment {
         }
 
         if (connected) {
-            reportDataService.fetchFromNetwork(String.valueOf(appSession.getUser().getId()));
+            reportDataService.fetchFromNetwork();
             loadData();
         }
         else {

@@ -1,6 +1,7 @@
 package com.dnieln7.roadwatchman.utils;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -26,6 +27,10 @@ public class PreferencesHelper {
         sharedPreferences = activity.getSharedPreferences(NAME, Context.MODE_PRIVATE);
     }
 
+    private PreferencesHelper(Application application) {
+        sharedPreferences = application.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+    }
+
     /**
      * Creates a new instance of {@link PreferencesHelper} if there is none.
      *
@@ -35,6 +40,20 @@ public class PreferencesHelper {
     public static PreferencesHelper getInstance(Activity activity) {
         if (instance == null) {
             return instance = new PreferencesHelper(activity);
+        }
+
+        return instance;
+    }
+
+    /**
+     * Creates a new instance of {@link PreferencesHelper} if there is none.
+     *
+     * @param application {@link Application} object to crate shared preferences file.
+     * @return An instance of {@link PreferencesHelper}
+     */
+    public static PreferencesHelper getInstance(Application application) {
+        if (instance == null) {
+            return instance = new PreferencesHelper(application);
         }
 
         return instance;
