@@ -98,7 +98,7 @@ public class Network extends Fragment {
 
     private void startReportsService() {
         Intent service = new Intent(requireContext(), ReportesService.class);
-        service.putExtra("USER_ID", PreferencesHelper.getInstance(requireActivity()).isUserLoggedIn().getUser().getId());
+        service.putExtra("USER_ID", PreferencesHelper.getInstance(requireActivity()).isUserLoggedIn().getId());
         requireContext().startService(service);
     }
 

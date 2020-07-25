@@ -7,13 +7,9 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.dnieln7.http.request.HttpSession;
-import com.dnieln7.http.request.exception.ResponseException;
 import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.task.API;
 import com.google.gson.Gson;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UploadReportWork extends Worker {
 
@@ -36,12 +32,7 @@ public class UploadReportWork extends Worker {
 
             report.setPicture(pictureURL == null ? "" : pictureURL);
 
-            try {
-                response = new Gson().fromJson(session.post(report), Reporte.class);
-            }
-            catch (ResponseException e) {
-                Logger.getLogger(UploadReportWork.class.getName()).log(Level.SEVERE, "There was an error", e);
-            }
+            response = new Gson().fromJson(session.post(report, 201), Reporte.class);
 
             if (response != null) {
                 result = Result.success();

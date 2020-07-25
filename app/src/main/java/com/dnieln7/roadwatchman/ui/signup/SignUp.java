@@ -8,40 +8,27 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
+import com.dnieln7.roadwatchman.data.model.AuthResponse;
 import com.dnieln7.roadwatchman.data.model.User;
-import com.dnieln7.roadwatchman.task.TaskListener;
-import com.dnieln7.roadwatchman.task.user.PostUser;
-import com.dnieln7.roadwatchman.task.user.VerifyEmail;
+import com.dnieln7.roadwatchman.data.model.VerificationResponse;
+import com.dnieln7.roadwatchman.task.ITaskListener;
+import com.dnieln7.roadwatchman.task.user.SignUpTask;
+import com.dnieln7.roadwatchman.task.user.VerifyTask;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.utils.TextMonitor;
 import com.dnieln7.roadwatchman.utils.WindowController;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SignUp extends AppCompatActivity {
 
-    //Objects
     private int code;
+    private AlertDialog progressDialog;
 
     private TextInputEditText name;
     private TextInputEditText email;
     private TextInputEditText password;
-
-    // Class
-    private TaskListener<User> postListener = new TaskListener<User>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(getApplicationContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +48,12 @@ public class SignUp extends AppCompatActivity {
         name = findViewById(R.id.sign_up_name);
         email = findViewById(R.id.sign_up_email);
         password = findViewById(R.id.sign_up_password);
+
+        progressDialog = Printer.progressDialog(
+                this,
+                getString(R.string.please_wait),
+                getString(R.string.sign_up_loading_message)
+        );
     }
 
     private void postInit() {
@@ -79,26 +72,22 @@ public class SignUp extends AppCompatActivity {
         WindowController.hideKeyboard(this);
 
         if (verifyForm()) {
-            TaskListener codeListener = new TaskListener() {
+            ITaskListener<VerificationResponse> vListener = new ITaskListener<VerificationResponse>() {
                 @Override
-                public boolean success() {
-                    if (this.exception != null) {
-                        Printer.toast(SignUp.this, this.exception.getMessage());
-                        return false;
-                    }
-                    return true;
-                }
-            };
-
-            try {
-                if (new VerifyEmail(codeListener).execute(email.getText().toString()).get().success()) {
-                    code = (int) codeListener.getResult();
+                public void onSuccess(VerificationResponse object) {
+                    progressDialog.dismiss();
+                    code = object.getResult();
                     verifyDialog(view).show();
                 }
-            }
-            catch (ExecutionException | InterruptedException e) {
-                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, "There was an error", e);
-            }
+
+                @Override
+                public void onFail() {
+                    progressDialog.dismiss();
+                    Printer.toast(SignUp.this, "Error");
+                }
+            };
+            new VerifyTask(vListener).execute(email.getText().toString());
+            progressDialog.show();
         }
         else {
             Printer.snackBar(view, getString(R.string.sign_up_invalid_form));
@@ -123,21 +112,23 @@ public class SignUp extends AppCompatActivity {
             else {
                 User user = new User(
                         name.getText().toString(),
-                        email.getText().toString(),
                         password.getText().toString(),
+                        email.getText().toString(),
                         "",
                         "user"
                 );
 
                 try {
-                    if (new PostUser(postListener).execute(user).get().success()) {
-                        Printer.snackBar(parent, getString(R.string.sign_up_completed));
+                    AuthResponse response = new SignUpTask(null).execute(user).get();
+
+                    if (response.getCode() == 1) {
+                        Printer.toast(this, getString(R.string.sign_up_completed));
                         dialog.dismiss();
                         finish();
                     }
                 }
                 catch (ExecutionException | InterruptedException e) {
-                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+                    Printer.logError(SignUp.class.getName(), e);
                 }
             }
         });

@@ -6,31 +6,19 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dnieln7.roadwatchman.data.model.AppSession;
-import com.dnieln7.roadwatchman.task.TaskListener;
+import com.dnieln7.roadwatchman.data.model.AuthResponse;
+import com.dnieln7.roadwatchman.data.model.User;
+import com.dnieln7.roadwatchman.task.ITaskListener;
 import com.dnieln7.roadwatchman.ui.app.AppActivity;
 import com.dnieln7.roadwatchman.ui.login.Login;
 import com.dnieln7.roadwatchman.ui.permission.Permissions;
 import com.dnieln7.roadwatchman.utils.GoogleAccountHelper;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
-import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements ITaskListener<AuthResponse> {
 
-    AppSession appSession;
-
-    private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(SplashActivity.this, this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
+    User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void openApp() {
         Intent appIntent = new Intent(this, AppActivity.class);
-        appIntent.putExtra("session", appSession);
+        appIntent.putExtra("session", user);
         startActivity(appIntent);
         finish();
     }
@@ -72,9 +60,9 @@ public class SplashActivity extends AppCompatActivity {
         PreferencesHelper helper = PreferencesHelper.getInstance(this);
         helper.loadTheme();
 
-        appSession = helper.isUserLoggedIn();
+        user = helper.isUserLoggedIn();
 
-        if (appSession == null) {
+        if (user == null) {
             if (helper.isGoogleAccount()) {
                 loginWithGoogle();
             }
@@ -91,11 +79,14 @@ public class SplashActivity extends AppCompatActivity {
 
     private void loginWithGoogle() {
         GoogleSignInAccount account = GoogleAccountHelper.isGoogleAccountActive(this);
-
         if (account != null) {
-            appSession = GoogleAccountHelper.login(account, loginListener);
-            PreferencesHelper.getInstance(this).putUser(appSession.getUser(), true);
-            openApp();
+            GoogleAccountHelper.login(account, this);
         }
+    }
+
+    @Override
+    public void onSuccess(AuthResponse object) {
+        PreferencesHelper.getInstance(this).putUser(object.getResult(), true);
+        openApp();
     }
 }

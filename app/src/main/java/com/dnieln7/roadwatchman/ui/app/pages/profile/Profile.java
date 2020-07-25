@@ -17,19 +17,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.User;
-import com.dnieln7.roadwatchman.task.TaskListener;
-import com.dnieln7.roadwatchman.task.user.PutUser;
+import com.dnieln7.roadwatchman.task.ITaskListener;
+import com.dnieln7.roadwatchman.task.user.UpdateUserTask;
 import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
 import com.dnieln7.roadwatchman.ui.app.pages.reports.ReportDataService;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class Profile extends Fragment {
+public class Profile extends Fragment implements ITaskListener<User> {
 
     // Objects
     private AppViewModel appViewModel;
@@ -46,7 +42,7 @@ public class Profile extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class Profile extends Fragment {
             case R.id.profile_sign_out:
                 PreferencesHelper.getInstance(getActivity()).destroy();
                 ReportDataService.deleteAll(getContext());
-                getActivity().finish();
+                requireActivity().finish();
                 return true;
             case R.id.profile_edit:
                 if (PreferencesHelper.getInstance(getActivity()).isGoogleAccount()) {
@@ -91,12 +87,12 @@ public class Profile extends Fragment {
         google = root.findViewById(R.id.profile_google);
 
 
-        appViewModel.getAppSession().observe(getActivity(), appSession -> {
-            username.setText(appSession.getUser().getUsername());
-            email.setText(appSession.getUser().getEmail());
-            role.setText(appSession.getUser().getRole().equals("user") ? R.string.profile_logged_user : R.string.profile_logged_admin);
+        appViewModel.getUser().observe(requireActivity(), user -> {
+            username.setText(user.getUsername());
+            email.setText(user.getEmail());
+            role.setText(user.getRole().equals("user") ? R.string.profile_logged_user : R.string.profile_logged_admin);
 
-            if (appSession.getUser().getGoogleId().length() > 1) {
+            if (user.getGoogleId().length() > 1) {
                 google.setText(R.string.profile_logged_google);
                 root.findViewById(R.id.profile_google_logo).setVisibility(View.VISIBLE);
                 root.findViewById(R.id.profile_email_logo).setVisibility(View.GONE);
@@ -110,7 +106,7 @@ public class Profile extends Fragment {
     }
 
     private AlertDialog showEditModal() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_profile_edit, null);
         AlertDialog dialog = builder.setCancelable(false).setView(view).create();
@@ -133,37 +129,27 @@ public class Profile extends Fragment {
     private void save(String username, String email, String password) {
         final User user = new User();
 
-        appViewModel.getAppSession().observe(getActivity(), appSession -> {
-            user.setId(appSession.getUser().getId());
-            user.setUsername(username.equals("") ? appSession.getUser().getUsername() : username);
-            user.setEmail(email.equals("") ? appSession.getUser().getEmail() : email);
+        appViewModel.getUser().observe(requireActivity(), user1 -> {
+            user.setId(user1.getId());
+            user.setUsername(username.equals("") ? user1.getUsername() : username);
+            user.setEmail(email.equals("") ? user1.getEmail() : email);
             user.setPassword(password.equals("") ? "" : password);
-            user.setGoogleId(appSession.getUser().getGoogleId());
-            user.setRole(appSession.getUser().getRole());
+            user.setGoogleId(user1.getGoogleId());
+            user.setRole(user1.getRole());
         });
 
-        try {
-            PutListener listener = new PutListener();
-
-            if (new PutUser(String.valueOf(user.getId()), listener).execute(user).get().success()) {
-                Printer.snackBar(root, getString(R.string.profile_save_message));
-                PreferencesHelper.getInstance(getActivity()).putUser(user, false);
-            }
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-        }
+        new UpdateUserTask(String.valueOf(user.getId()), this).execute(user);
     }
 
-    private class PutListener extends TaskListener<User> {
+    @Override
+    public void onSuccess(User object) {
+        Printer.snackBar(root, getString(R.string.profile_save_message));
+        PreferencesHelper.getInstance(getActivity()).putUser(object, false);
+        appViewModel.setUser(object);
+    }
 
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(Profile.this.getContext(), this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
+    @Override
+    public void onFail() {
+        Printer.toast(getContext(), "Error");
     }
 }

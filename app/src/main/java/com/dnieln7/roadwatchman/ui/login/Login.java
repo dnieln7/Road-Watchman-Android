@@ -8,10 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.AuthResponse;
 import com.dnieln7.roadwatchman.data.model.User;
-import com.dnieln7.roadwatchman.task.TaskListener;
-import com.dnieln7.roadwatchman.task.user.LoginUser;
+import com.dnieln7.roadwatchman.task.ITaskListener;
+import com.dnieln7.roadwatchman.task.user.LoginTask;
 import com.dnieln7.roadwatchman.ui.signup.SignUp;
 import com.dnieln7.roadwatchman.utils.GoogleAccountHelper;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
@@ -24,32 +24,15 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.concurrent.ExecutionException;
-
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements ITaskListener<AuthResponse> {
 
     public static int REQUEST_CODE = 2;
 
-    //Objects
-    private AppSession appSession;
+    private User user;
     private AlertDialog progressDialog;
 
-    // Widgets
     private TextInputEditText loginEmail;
     private TextInputEditText loginPassword;
-
-    // Class
-    private TaskListener<AppSession> loginListener = new TaskListener<AppSession>() {
-
-        @Override
-        public boolean success() {
-            if (this.exception != null) {
-                Printer.toast(Login.this, this.exception.getMessage());
-                return false;
-            }
-            return true;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,25 +51,8 @@ public class Login extends AppCompatActivity {
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                TaskListener<User> userListener = new TaskListener<User>() {
-                    @Override
-                    public boolean success() {
-                        if (this.exception != null) {
-                            if (this.exception.getCode() == 409) {
-                                return true;
-                            }
-                            else {
-                                Printer.toast(Login.this, this.exception.getMessage());
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                };
-
                 if (account != null) {
-                    appSession = GoogleAccountHelper.register(account, userListener, loginListener);
-                    finishLogin(true);
+                    GoogleAccountHelper.register(account, this);
                 }
             }
             catch (ApiException e) {
@@ -120,7 +86,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        User user = new User(
+        User login = new User(
                 loginEmail.getText().toString(),
                 loginPassword.getText().toString(),
                 "user"
@@ -128,16 +94,7 @@ public class Login extends AppCompatActivity {
 
         progressDialog.show();
 
-        try {
-            if (new LoginUser("default", loginListener).execute(user).get().success()) {
-                appSession = loginListener.getResult();
-                finishLogin(false);
-            }
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Printer.logError(Login.class.getName(), e);
-            progressDialog.dismiss();
-        }
+        new LoginTask("email", this).execute(login);
     }
 
     public void loginWithGoogle(View view) {
@@ -147,7 +104,7 @@ public class Login extends AppCompatActivity {
         GoogleSignInAccount account = GoogleAccountHelper.isGoogleAccountActive(this);
 
         if (account != null) {
-            appSession = GoogleAccountHelper.login(account, loginListener);
+            GoogleAccountHelper.login(account, this);
             finishLogin(true);
         }
         else {
@@ -156,7 +113,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void finishLogin(boolean googleAccount) {
-        PreferencesHelper.getInstance(this).putUser(appSession.getUser(), googleAccount);
+        PreferencesHelper.getInstance(this).putUser(user, googleAccount);
         progressDialog.dismiss();
         setResult(RESULT_OK);
         super.onBackPressed();
@@ -166,5 +123,24 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), SignUp.class);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onSuccess(AuthResponse object) {
+        progressDialog.dismiss();
+
+        if (object.getCode() == 1) {
+            user = object.getResult();
+            finishLogin(object.getResult().getGoogleId().length() > 1);
+        }
+        else {
+            Printer.toast(this, object.getMessage());
+        }
+    }
+
+    @Override
+    public void onFail() {
+        progressDialog.dismiss();
+        Printer.toast(this, "Error");
     }
 }

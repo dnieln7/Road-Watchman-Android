@@ -42,7 +42,7 @@ dependencies {
     // Google auth
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     // Http Request
-    implementation files('C:/Users/dniel/Documents/Lib/Java/Http-Request-1.4.jar')
+    implementation files('C:/Users/dniel/.m2/repository/com/dnieln7/Http-Request/2.1/Http-Request-2.1.jar')
     // Gson
     implementation "com.google.code.gson:gson:2.8.5"
     // Email
@@ -59,6 +59,8 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.2.5"
     // Work Manager
     implementation "androidx.work:work-runtime:2.3.4"
+    // Volley
+    implementation 'com.android.volley:volley:1.1.1'
     // Other
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

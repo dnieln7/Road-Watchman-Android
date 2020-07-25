@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.data.model.User;
 
 /**
@@ -79,25 +78,21 @@ public class PreferencesHelper {
     /**
      * Checks if there is a user logged in, to get it´s data.
      *
-     * @return An {@link AppSession} instance containing the user data; null otherwise.
+     * @return An {@link User} instance containing the user data; null otherwise.
      */
-    public AppSession isUserLoggedIn() {
-        AppSession appSession = null;
+    public User isUserLoggedIn() {
+        User user = null;
 
         if (sharedPreferences.getBoolean("Logged", false)) {
-            appSession = new AppSession(
-                    "",
-                    new User(
-                            sharedPreferences.getInt("Id", 0),
-                            sharedPreferences.getString("Username", ""),
-                            sharedPreferences.getString("Email", ""),
-                            sharedPreferences.getString("GoogleId", ""),
-                            sharedPreferences.getString("Role", "")
-                    )
-            );
+            user = new User(
+                    sharedPreferences.getInt("Id", 0),
+                    sharedPreferences.getString("Username", ""),
+                    sharedPreferences.getString("Email", ""),
+                    sharedPreferences.getString("GoogleId", ""),
+                    sharedPreferences.getString("Role", ""));
         }
 
-        return appSession;
+        return user;
     }
 
     /**

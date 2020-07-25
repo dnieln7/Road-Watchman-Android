@@ -3,26 +3,21 @@ package com.dnieln7.roadwatchman.ui.app.pages;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dnieln7.roadwatchman.data.model.AppSession;
 import com.dnieln7.roadwatchman.data.model.User;
 
 public class AppViewModel extends ViewModel {
 
-    private MutableLiveData<AppSession> appSession;
+    private MutableLiveData<User> user;
 
     public AppViewModel() {
-        appSession = new MutableLiveData<>();
+        user = new MutableLiveData<>();
+    }
+
+    public MutableLiveData<User> getUser() {
+        return user;
     }
 
     public void setUser(User user) {
-        this.appSession.getValue().setUser(user);
-    }
-
-    public MutableLiveData<AppSession> getAppSession() {
-        return appSession;
-    }
-
-    public void setAppSession(AppSession appSession) {
-        this.appSession.setValue(appSession);
+        this.user.postValue(user);
     }
 }

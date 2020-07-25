@@ -32,7 +32,7 @@
     <string name="login_google_login">Ingresar con Google</string>
     <string name="login_sign_up">Registrarse</string>
     <string name="login_wrong_email">Su correo esta incorrecto</string>
-    <string name="login_loading_message">Ingresando</string>
+    <string name="login_loading_message">Ingresando…</string>
     <!--Login-->
 
     <!--Sign up-->
@@ -40,6 +40,7 @@
     <string name="sign_up_next">Siguiente</string>
     <string name="sign_up_create">Crea tu cuenta</string>
     <string name="sign_up_verify">Verificar correo</string>
+    <string name="sign_up_loading_message">Enviando código…</string>
     <string name="sign_up_wrong_code">Código incorrecto</string>
     <string name="sign_up_completed">Registro completado</string>
     <string name="sign_up_dialog_verify_title">Introduzca el código que le fue enviado a su correo</string>
@@ -55,7 +56,6 @@
     <string name="reports_fixed">Reparado</string>
     <string name="reports_awaiting">En espera de reparación</string>
     <string name="reports_new">Nuevo reporte</string>
-    <string name="reports_loading">Cargando reportes</string>
     <!--Reports-->
 
     <!--Create Report-->

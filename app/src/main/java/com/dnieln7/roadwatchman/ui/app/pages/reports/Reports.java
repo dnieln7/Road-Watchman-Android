@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dnieln7.roadwatchman.R;
-import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.ui.app.pages.AppViewModel;
 import com.dnieln7.roadwatchman.utils.NetworkMonitor;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
@@ -30,7 +30,7 @@ public class Reports extends Fragment {
     // Objects
     private boolean expanded;
     private ReportDataService reportDataService;
-    private AppSession appSession;
+    private User user;
 
     // Widgets
     private View root;
@@ -50,11 +50,11 @@ public class Reports extends Fragment {
         super.onCreate(savedInstanceState);
 
         expanded = false;
-        AppViewModel appViewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
-        reportDataService = new ViewModelProvider(getActivity()).get(ReportDataService.class);
-        appSession = PreferencesHelper.getInstance(getActivity()).isUserLoggedIn();
+        AppViewModel appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+        reportDataService = new ViewModelProvider(requireActivity()).get(ReportDataService.class);
+        user = PreferencesHelper.getInstance(getActivity()).isUserLoggedIn();
 
-        appViewModel.setAppSession(appSession);
+        appViewModel.setUser(user);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,12 +102,12 @@ public class Reports extends Fragment {
         expandMenu();
 
         Intent creatorIntent = new Intent(getActivity(), ReportForm.class);
-        creatorIntent.putExtra("user", appSession.getUser());
+        creatorIntent.putExtra("user", user);
         startActivityForResult(creatorIntent, ReportForm.REQUEST_CODE);
     }
 
     private void loadData() {
-        reportDataService.getReports().observe(getActivity(), reportes -> {
+        reportDataService.getReports().observe(requireActivity(), reportes -> {
             listView.setAdapter(new ReportAdapter(reportes));
             showList(reportes.isEmpty());
         });

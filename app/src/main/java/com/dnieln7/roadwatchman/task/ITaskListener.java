@@ -4,7 +4,19 @@ import java.util.List;
 
 public interface ITaskListener<T> {
 
-    public void onSuccess();
+    default public void onSuccess() {
+        throw new UnsupportedOperationException();
+    }
 
-    public void onSuccess(List<T> input);
+    default public void onFail() {
+        throw new UnsupportedOperationException();
+    }
+
+    default public void onSuccess(List<T> list) {
+        throw new UnsupportedOperationException();
+    }
+
+    default public void onSuccess(T object) {
+        throw new UnsupportedOperationException();
+    }
 }

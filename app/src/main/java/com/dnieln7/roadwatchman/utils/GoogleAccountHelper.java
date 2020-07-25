@@ -3,19 +3,17 @@ package com.dnieln7.roadwatchman.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.dnieln7.roadwatchman.data.model.AppSession;
+import com.dnieln7.roadwatchman.data.model.AuthResponse;
 import com.dnieln7.roadwatchman.data.model.User;
-import com.dnieln7.roadwatchman.task.TaskListener;
-import com.dnieln7.roadwatchman.task.user.LoginUser;
-import com.dnieln7.roadwatchman.task.user.PostUser;
+import com.dnieln7.roadwatchman.task.ITaskListener;
+import com.dnieln7.roadwatchman.task.user.LoginTask;
+import com.dnieln7.roadwatchman.task.user.SignUpTask;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Helper class to manage a google account.
@@ -24,7 +22,8 @@ import java.util.logging.Logger;
  */
 public class GoogleAccountHelper {
 
-    private GoogleAccountHelper(){}
+    private GoogleAccountHelper() {
+    }
 
     public static final int REQUEST_CODE = 1;
 
@@ -40,6 +39,7 @@ public class GoogleAccountHelper {
 
     /**
      * Shows signIn window to user
+     *
      * @param activity - The activity from witch the window is shown.
      */
     public static void showSignIn(Activity activity) {
@@ -57,61 +57,47 @@ public class GoogleAccountHelper {
     /**
      * Login with the provided google account.
      *
-     * @param account       - A {@link GoogleSignInAccount} instance to log in.
-     * @param loginListener - A {@link TaskListener<AppSession>} instance to listen for the results.
-     * @return An {@link AppSession} instance containing the user data.
+     * @param account  - A {@link GoogleSignInAccount} instance to log in.
+     * @param listener - A {@link ITaskListener<AuthResponse>} instance to listen for the results.
      */
-    public static AppSession login(GoogleSignInAccount account, TaskListener<AppSession> loginListener) {
-        AppSession appSession = null;
-
+    public static void login(GoogleSignInAccount account, ITaskListener<AuthResponse> listener) {
         User user = new User(
                 account.getEmail(),
                 account.getId(),
                 "user"
         );
 
-        try {
-            if (new LoginUser("google", loginListener).execute(user).get().success()) {
-                appSession = loginListener.getResult();
-            }
-        }
-        catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(GoogleSignInAccount.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return appSession;
+        new LoginTask("google", listener).execute(user);
     }
 
     /**
      * Register with the provided google account.
      *
-     * @param account       - A {@link GoogleSignInAccount} instance to register.
-     * @param userListener  - A {@link TaskListener<User>} instance to listen for the results.
-     * @param loginListener - A {@link TaskListener<AppSession>} instance to listen for the results.
-     * @return An {@link AppSession} instance containing the user data.
+     * @param account  - A {@link GoogleSignInAccount} instance to register.
+     * @param listener - A {@link ITaskListener<AuthResponse>} instance to listen for the results.
      */
-    public static AppSession register(GoogleSignInAccount account, TaskListener<User> userListener, TaskListener<AppSession> loginListener) {
-        AppSession appSession = null;
-
-        User user = new User(
+    public static void register(GoogleSignInAccount account, ITaskListener<AuthResponse> listener) {
+        User signUp = new User(
                 account.getDisplayName(),
+                "",
                 account.getEmail(),
-                account.getId(),
                 account.getId(),
                 "user"
         );
 
         try {
-            if (new PostUser(userListener).execute(user).get().success()) {
-                if (new LoginUser("google", loginListener).execute(user).get().success()) {
-                    appSession = loginListener.getResult();
-                }
+            AuthResponse response = new SignUpTask(null).execute(signUp).get();
+            if (response.getCode() == 1) {
+
+                User login = response.getResult();
+
+                login.setPassword(login.getGoogleId());
+
+                new LoginTask("google", listener).execute(login);
             }
         }
         catch (ExecutionException | InterruptedException e) {
-            Logger.getLogger(GoogleSignInAccount.class.getName()).log(Level.SEVERE, null, e);
+            Printer.logError(GoogleSignInAccount.class.getName(), e);
         }
-
-        return appSession;
     }
 }

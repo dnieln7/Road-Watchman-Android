@@ -13,7 +13,7 @@ import com.dnieln7.roadwatchman.data.dao.ReporteDao;
 import com.dnieln7.roadwatchman.data.dao.ReportesDatabase;
 import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.task.ITaskListener;
-import com.dnieln7.roadwatchman.task.reporte.GetReportes;
+import com.dnieln7.roadwatchman.task.reporte.GetReportsTask;
 import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 
@@ -29,7 +29,7 @@ public class ReportDataService extends AndroidViewModel implements ITaskListener
     public ReportDataService(@NonNull Application application) {
         super(application);
 
-        id = String.valueOf(PreferencesHelper.getInstance(application).isUserLoggedIn().getUser().getId());
+        id = String.valueOf(PreferencesHelper.getInstance(application).isUserLoggedIn().getId());
         reportDao = Room.databaseBuilder(application, ReportesDatabase.class, "Reports-Data").build().reporteDao();
         reports = reportDao.get();
     }
@@ -39,7 +39,7 @@ public class ReportDataService extends AndroidViewModel implements ITaskListener
     }
 
     public void fetchFromNetwork() {
-        new GetReportes(id, this).execute();
+        new GetReportsTask(id, this).execute();
     }
 
     public Reporte getReportByIndex(int index) {
@@ -65,8 +65,8 @@ public class ReportDataService extends AndroidViewModel implements ITaskListener
     }
 
     @Override
-    public void onSuccess(List<Reporte> input) {
-        new InsertTask(reportDao, input).execute();
+    public void onSuccess(List<Reporte> list) {
+        new InsertTask(reportDao, list).execute();
     }
 
     private static class InsertTask extends AsyncTask<Void, Void, Void> {
