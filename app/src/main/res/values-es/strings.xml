@@ -44,6 +44,7 @@
     <string name="sign_up_wrong_code">Código incorrecto</string>
     <string name="sign_up_completed">Registro completado</string>
     <string name="sign_up_dialog_verify_title">Introduzca el código que le fue enviado a su correo</string>
+    <string name="sign_up_invalid_form">Verifica tu información</string>
     <!--Sign up-->
 
     <!--Reports-->
@@ -109,7 +110,8 @@
     <string name="settings_continue">Continuar</string>
     <string name="settings_cancel">Cancelar</string>
     <string name="settings_background_reports">Enviar reportes en segundo plano</string>
-    <string name="sign_up_invalid_form">Verifica tu información</string>
+    <string name="settings_enable_data">Usar datos móviles</string>
+    <string name="settings_enable_data_warning">Esta aplicación carga y descarga las imágenes de los reportes en la máxima resolución posible, activar los datos móviles puede generar grandes cargos monetarios</string>
     <!--Settings-->
 
     <!--About-->

@@ -16,6 +16,7 @@ import com.dnieln7.roadwatchman.data.model.User;
  */
 public class PreferencesHelper {
 
+    private static final String DATA = "MobileData";
     private static final String THEME = "ThemeMode";
     private static final String NAME = "com.daniel.reportes.settings";
 
@@ -56,6 +57,24 @@ public class PreferencesHelper {
         }
 
         return instance;
+    }
+
+    /**
+     * Saves preferences for mobile data.
+     *
+     * @param enableData Whether the mobile data should be enabled or not.
+     */
+    public void saveDataSettings(boolean enableData) {
+        sharedPreferences.edit().putBoolean(DATA, enableData).apply();
+    }
+
+    /**
+     * Checks if mobile data is enabled.
+     *
+     * @return true if the mobile data option is enabled.
+     */
+    public boolean isMobileDataEnabled() {
+        return sharedPreferences.getBoolean(DATA, false);
     }
 
     /**

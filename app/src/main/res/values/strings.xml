@@ -110,6 +110,8 @@
     <string name="settings_continue">Continue</string>
     <string name="settings_cancel">Cancel</string>
     <string name="settings_background_reports">Send reports in background</string>
+    <string name="settings_enable_data">Use mobile data</string>
+    <string name="settings_enable_data_warning">This application uploads and downloads the images of the reports in the highest possible resolution, activating mobile data can generate large monetary charges</string>
     <!--Settings-->
 
     <!--About-->

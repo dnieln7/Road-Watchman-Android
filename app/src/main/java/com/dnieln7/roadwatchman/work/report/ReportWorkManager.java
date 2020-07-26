@@ -21,6 +21,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Helper class to create and start works for uploading reports.
+ *
+ * @author dnieln7
+ */
 public class ReportWorkManager {
     public static final String PICTURE_WORK_TAG = "UPLOAD_PICTURE";
     public static final String REPORT_WORK_TAG = "UPLOAD_REPORT";
@@ -29,9 +34,14 @@ public class ReportWorkManager {
     private OneTimeWorkRequest pictureRequest;
     private OneTimeWorkRequest reportRequest;
 
-    public ReportWorkManager() {
+    /**
+     * Creates a new instance of {@link ReportWorkManager}
+     *
+     * @param networkType The network connection to be required in order to start the work, see {@link NetworkType}
+     */
+    public ReportWorkManager(NetworkType networkType) {
         this.constraints = new Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.UNMETERED)
+                .setRequiredNetworkType(networkType)
                 .setRequiresBatteryNotLow(true)
                 .build();
     }

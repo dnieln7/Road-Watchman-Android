@@ -29,6 +29,7 @@ public class Network extends Fragment {
     private View root;
 
     private SwitchMaterial backgroundReports;
+    private SwitchMaterial mobileData;
 
     public Network() {
         // Required empty public constructor
@@ -46,13 +47,23 @@ public class Network extends Fragment {
     private void initWidgets() {
         backgroundReports = root.findViewById(R.id.network_background_reportes);
         backgroundReports.setChecked(ReportesService.instance != null);
-
         backgroundReports.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 showReportServiceWarning();
             }
             else {
                 stopReportesService();
+            }
+        });
+
+        mobileData = root.findViewById(R.id.network_mobile_data);
+        mobileData.setChecked(PreferencesHelper.getInstance(requireActivity()).isMobileDataEnabled());
+        mobileData.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                showMobileDataWarning();
+            }
+            else {
+                PreferencesHelper.getInstance(requireActivity()).saveDataSettings(false);
             }
         });
     }
@@ -69,21 +80,32 @@ public class Network extends Fragment {
     }
 
     private boolean checkConnection() {
+        boolean connected = false;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (NetworkMonitor.getMonitor(requireContext()).hasNetwork()) {
-                return checkLocation();
+        if (PreferencesHelper.getInstance(requireActivity()).isMobileDataEnabled()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connected = NetworkMonitor.getMonitor(requireContext()).hasNetwork();
+            }
+            else {
+                connected = NetworkMonitor.hasNetwork(requireContext());
             }
         }
         else {
-            if (NetworkMonitor.hasNetwork(requireContext())) {
-                startReportsService();
-                return checkLocation();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connected = NetworkMonitor.getMonitor(requireContext()).hasWifi();
+            }
+            else {
+                connected = NetworkMonitor.hasWifi(requireContext());
             }
         }
 
-        Printer.okDialog(requireContext(), getString(R.string.warning), getString(R.string.settings_warning));
-        return false;
+        if (connected) {
+            return checkLocation();
+        }
+        else {
+            Printer.okDialog(requireContext(), getString(R.string.warning), getString(R.string.settings_warning));
+            return false;
+        }
     }
 
     private void showReportServiceWarning() {
@@ -105,5 +127,18 @@ public class Network extends Fragment {
     private void stopReportesService() {
         Intent service = new Intent(requireContext(), ReportesService.class);
         requireContext().stopService(service);
+    }
+
+    private void showMobileDataWarning() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+
+        builder.setTitle(R.string.settings_enable_data);
+        builder.setMessage(R.string.settings_enable_data_warning);
+        builder.setPositiveButton(R.string.settings_continue, (dialog, which) -> {
+            mobileData.setChecked(true);
+            PreferencesHelper.getInstance(requireActivity()).saveDataSettings(true);
+        });
+        builder.setNegativeButton(R.string.settings_cancel, (dialog, which) -> mobileData.setChecked(false));
+        builder.show();
     }
 }

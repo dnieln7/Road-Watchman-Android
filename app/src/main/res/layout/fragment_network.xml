@@ -11,24 +11,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/network_background_reportes"
+            style="@style/Widget.MaterialComponents.CompoundButton.Switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/background"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:text="@string/settings_background_reports"
+            android:textColor="@color/primaryText"
+            android:textSize="20sp"
+            app:thumbTint="@color/secondary" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/network_background_reportes"
-                style="@style/Widget.MaterialComponents.CompoundButton.Switch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_background_reports"
-                android:textColor="@color/primaryText"
-                android:textSize="20sp"
-                app:thumbTint="@color/secondary" />
-        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/network_mobile_data"
+            style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_enable_data"
+            android:textColor="@color/primaryText"
+            android:textSize="20sp"
+            app:thumbTint="@color/secondary" />
     </LinearLayout>
 </ScrollView>

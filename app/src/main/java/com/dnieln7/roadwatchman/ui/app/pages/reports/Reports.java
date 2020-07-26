@@ -118,11 +118,21 @@ public class Reports extends Fragment {
 
         boolean connected;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connected = NetworkMonitor.getMonitor(getContext()).hasNetwork();
+        if (PreferencesHelper.getInstance(requireActivity()).isMobileDataEnabled()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connected = NetworkMonitor.getMonitor(requireContext()).hasNetwork();
+            }
+            else {
+                connected = NetworkMonitor.hasNetwork(requireContext());
+            }
         }
         else {
-            connected = NetworkMonitor.hasNetwork(getContext());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connected = NetworkMonitor.getMonitor(requireContext()).hasWifi();
+            }
+            else {
+                connected = NetworkMonitor.hasWifi(requireContext());
+            }
         }
 
         if (connected) {

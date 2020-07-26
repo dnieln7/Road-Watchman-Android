@@ -16,11 +16,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.work.NetworkType;
 
 import com.dnieln7.roadwatchman.App;
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.ui.app.AppActivity;
+import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
 
 import org.joda.time.LocalDateTime;
@@ -118,7 +120,13 @@ public class ReportesService extends Service implements SensorEventListener, Loc
                     );
 
                     reporte.setDescription(getString(R.string.upload_report_auto));
-                    new ReportWorkManager().prepareAndStartUploadWork(this, reporte);
+
+                    if (PreferencesHelper.getInstance(this.getApplication()).isMobileDataEnabled()) {
+                        new ReportWorkManager(NetworkType.CONNECTED).prepareAndStartUploadWork(this, reporte);
+                    }
+                    else {
+                        new ReportWorkManager(NetworkType.UNMETERED).prepareAndStartUploadWork(this, reporte);
+                    }
                 }
             }
         }

@@ -17,12 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.NetworkType;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.Reporte;
 import com.dnieln7.roadwatchman.data.model.User;
 import com.dnieln7.roadwatchman.ui.permission.Permissions;
 import com.dnieln7.roadwatchman.utils.LocationUtils;
+import com.dnieln7.roadwatchman.utils.PreferencesHelper;
 import com.dnieln7.roadwatchman.utils.Printer;
 import com.dnieln7.roadwatchman.utils.WindowController;
 import com.dnieln7.roadwatchman.work.report.ReportWorkManager;
@@ -180,7 +182,15 @@ public class ReportForm extends AppCompatActivity {
 
                 report.setDescription(this.description.getText() != null ? this.description.getText().toString().trim() : "");
 
-                ReportWorkManager reportWorkManager = new ReportWorkManager();
+                ReportWorkManager reportWorkManager;
+
+                if (PreferencesHelper.getInstance(this).isMobileDataEnabled()) {
+                    reportWorkManager = new ReportWorkManager(NetworkType.CONNECTED);
+                }
+                else {
+                    reportWorkManager = new ReportWorkManager(NetworkType.UNMETERED);
+                }
+
                 reportWorkManager.prepareUploadWork(report, pictureUri.toString(), pictureName);
                 reportWorkManager.startWork(this);
 
