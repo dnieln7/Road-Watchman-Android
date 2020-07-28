@@ -87,13 +87,10 @@ public class GoogleAccountHelper {
 
         try {
             AuthResponse response = new SignUpTask(null).execute(signUp).get();
-            if (response.getCode() == 1) {
+            if (response.getCode() == 1 || response.getMessage().equals("The email is already registered")) {
+                signUp.setPassword(signUp.getGoogleId());
 
-                User login = response.getResult();
-
-                login.setPassword(login.getGoogleId());
-
-                new LoginTask("google", listener).execute(login);
+                new LoginTask("google", listener).execute(signUp);
             }
         }
         catch (ExecutionException | InterruptedException e) {

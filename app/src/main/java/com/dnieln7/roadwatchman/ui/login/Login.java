@@ -105,7 +105,6 @@ public class Login extends AppCompatActivity implements ITaskListener<AuthRespon
 
         if (account != null) {
             GoogleAccountHelper.login(account, this);
-            finishLogin(true);
         }
         else {
             GoogleAccountHelper.showSignIn(this);
