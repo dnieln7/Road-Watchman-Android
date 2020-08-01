@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/reports">
+
+    <fragment
+        android:id="@+id/reports"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.Reports"
+        android:label="@string/reports_saved"
+        tools:layout="@layout/fragment_reportes" >
+        <action
+            android:id="@+id/action_reports_to_reportDetail"
+            app:destination="@id/reportDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportDetail"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.reports.ReportDetail"
+        android:label="@string/report_details"
+        tools:layout="@layout/fragment_report_detail" >
+        <argument
+            android:name="reportIndex"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.profile.Profile"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.Settings"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_appearance"
+            app:destination="@id/appearance" />
+        <action
+            android:id="@+id/action_settings_to_network"
+            app:destination="@id/network" />
+    </fragment>
+    <fragment
+        android:id="@+id/appearance"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.Appearance"
+        android:label="@string/appearance"
+        tools:layout="@layout/fragment_appearance" />
+    <fragment
+        android:id="@+id/network"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.settings.Network"
+        android:label="@string/network"
+        tools:layout="@layout/fragment_network" />
+    <fragment
+        android:id="@+id/about"
+        android:name="com.dnieln7.roadwatchman.ui.app.pages.about.About"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+</navigation>

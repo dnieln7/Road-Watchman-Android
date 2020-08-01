@@ -1,4 +1,121 @@
 <resources>
-    <string name="app_name">Reportes</string>
-    <string name="action_settings">Settings</string>
+    <!--Global-->
+    <string name="app_name">Road Watchman</string>
+    <string name="exit">Exit</string>
+    <string name="ok">OK</string>
+    <string name="warning">Warning</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="finish">Finish</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <!--Global-->
+
+    <!--Menu-->
+    <string name="menu_edit">Edit</string>
+    <string name="menu_sign_out">Sign out</string>
+    <string name="menu_back">Back</string>
+    <!--Menu-->
+
+    <!--Permissions-->
+    <string name="permissions">Permissions</string>
+    <string name="permissions_warning">You must grant all the required permissions</string>
+    <string name="welcome_message">Welcome, before starting we need your permission</string>
+    <string name="permissions_message">Storage, location and camera access permissions are required to save and send reports</string>
+    <string name="grant_permission">Grant permissions</string>
+    <!--Permissions-->
+
+    <!--Login-->
+    <string name="login_login">Login</string>
+    <string name="login_google_login">Login with Google</string>
+    <string name="login_sign_up">Sign up</string>
+    <string name="login_wrong_email">Your email is wrong</string>
+    <string name="login_loading_message">Login in…</string>
+    <!--Login-->
+
+    <!--Sign up-->
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_next">Next</string>
+    <string name="sign_up_create">Create your account</string>
+    <string name="sign_up_verify">Verify email</string>
+    <string name="sign_up_loading_message">Sending code…</string>
+    <string name="sign_up_wrong_code">Wrong code</string>
+    <string name="sign_up_completed">Sign up completed</string>
+    <string name="sign_up_invalid_form">Verify your information</string>
+    <string name="sign_up_dialog_verify_title">Enter the code that was send to your email</string>
+    <!--Sign up-->
+
+    <!--Reports-->
+    <string name="reports_saved">Uploaded reports</string>
+    <string name="reports_success">Success</string>
+    <string name="reports_report_send">Your report was saved and it\'ll be send when a stable wifi is available</string>
+    <string name="reports_refresh">Refresh</string>
+    <string name="reports_warning">An stable network connection is required</string>
+    <string name="reports_empty">No reports yet, select + to send a new report</string>
+    <string name="reports_fixed">Fixed</string>
+    <string name="reports_awaiting">Awaiting repair</string>
+    <string name="reports_new">New Report</string>
+    <!--Reports-->
+
+    <!--Create Report-->
+    <string name="create_report_select">Choose an picture</string>
+    <string name="create_report_location">Setting your location…</string>
+    <string name="create_report_no_picture">Please choose a picture</string>
+    <string name="create_report_next">Next</string>
+    <string name="create_report_photo">Take or choose a picture</string>
+    <string name="create_report_upload">Upload</string>
+    <string name="create_report_add_description">Add a short description (optional)</string>
+    <string name="create_report_exit_warning">Your report will be lost, ¿Continue?</string>
+    <string name="create_report_yes">Yes</string>
+    <string name="create_report_no">No</string>
+    <!--Create Report-->
+
+    <!--Upload Report-->
+    <string name="upload_report_description">Description</string>
+    <string name="upload_report_auto">Self Generated</string>
+    <string name="upload_report_service">Service is running…</string>
+    <string name="upload_report_location">Please turn on location access</string>
+    <!--Upload Report-->
+
+    <!--Report Details-->
+    <string name="report_details">Details</string>
+    <string name="report_details_fixed">Fixed</string>
+    <string name="report_details_location">Location</string>
+    <string name="report_details_description">Description</string>
+    <string name="report_details_date">Date</string>
+    <!--Report Details-->
+
+    <!--Profile-->
+    <string name="profile">Profile</string>
+    <string name="profile_warning">Disabled</string>
+    <string name="profile_warning_message">This option is not available on Google accounts</string>
+    <string name="profile_save_message">Changes saved</string>
+    <string name="profile_dialog_title">Edit profile info</string>
+    <string name="profile_logged_google">Logged with google</string>
+    <string name="profile_logged_email">Logged with email address</string>
+    <string name="profile_logged_user">Logged as user</string>
+    <string name="profile_logged_admin">Logged as admin</string>
+    <!--Profile-->
+
+    <!--Settings-->
+    <string name="settings">Settings</string>
+    <string name="appearance">Appearance</string>
+    <string name="appearance_theme">Theme</string>
+    <string name="network">Network</string>
+    <string name="settings_warning">To enable this option you need an stable network connection</string>
+    <string name="settings_background">Send report in background</string>
+    <string name="settings_background_warning">Report will be send in background when violent movements are detected</string>
+    <string name="settings_continue">Continue</string>
+    <string name="settings_cancel">Cancel</string>
+    <string name="settings_background_reports">Send reports in background</string>
+    <string name="settings_enable_data">Use mobile data</string>
+    <string name="settings_enable_data_warning">This application uploads and downloads the images of the reports in the highest possible resolution, activating mobile data can generate large monetary charges</string>
+    <!--Settings-->
+
+    <!--About-->
+    <string name="about">About</string>
+    <string name="about_description">Road Watchman will allow you to send reports of the damage you find on the road, these reports are reviewed by the corresponding authorities to be subsequently treated.</string>
+    <!--About-->
 </resources>

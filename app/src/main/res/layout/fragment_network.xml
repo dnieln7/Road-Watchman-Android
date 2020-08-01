@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    tools:context=".ui.app.pages.settings.Network">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/network_background_reportes"
+            style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_background_reports"
+            android:textColor="@color/primaryText"
+            android:textSize="20sp"
+            app:thumbTint="@color/secondary" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/network_mobile_data"
+            style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_enable_data"
+            android:textColor="@color/primaryText"
+            android:textSize="20sp"
+            app:thumbTint="@color/secondary" />
+    </LinearLayout>
+</ScrollView>
