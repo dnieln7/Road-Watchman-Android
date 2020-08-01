@@ -42,7 +42,7 @@ dependencies {
     // Google auth
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     // Http Request
-    implementation files('C:/Users/dniel/.m2/repository/com/dnieln7/Http-Request/2.1/Http-Request-2.1.jar')
+    implementation files('C:/Users/daniel/.m2/repository/com/dnieln7/Http-Request/2.1/Http-Request-2.1.jar')
     // Gson
     implementation "com.google.code.gson:gson:2.8.5"
     // Email
