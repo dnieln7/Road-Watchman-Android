@@ -98,7 +98,7 @@ public class SignUp extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_verify, null);
-        AlertDialog dialog = builder.setTitle(R.string.sign_up_verify).setCancelable(false).setView(view).create();
+        AlertDialog dialog = builder.setCancelable(false).setView(view).create();
 
         view.findViewById(R.id.verify_cancel).setOnClickListener(v -> dialog.cancel());
         view.findViewById(R.id.verify_complete).setOnClickListener(v -> {
