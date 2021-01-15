@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dnieln7.roadwatchman.R;
 import com.dnieln7.roadwatchman.data.model.User;
@@ -35,6 +36,7 @@ public class Reports extends Fragment {
     // Widgets
     private View root;
 
+    private SwipeRefreshLayout swipe;
     private RecyclerView listView;
 
     private TextView listMessage;
@@ -78,6 +80,7 @@ public class Reports extends Fragment {
     }
 
     private void initWidgets() {
+        swipe = root.findViewById(R.id.reportes_swipe);
         listView = root.findViewById(R.id.reportes_view);
         listMessage = root.findViewById(R.id.reportesListMessage);
 
@@ -96,6 +99,7 @@ public class Reports extends Fragment {
         menu.setOnClickListener(v -> expandMenu());
         create.setOnClickListener(v -> createReporte());
         refresh.setOnClickListener(v -> refresh());
+        swipe.setOnRefreshListener(this::refresh);
     }
 
     private void createReporte() {
@@ -141,6 +145,8 @@ public class Reports extends Fragment {
         }
         else {
             Printer.okDialog(getContext(), getString(R.string.warning), getString(R.string.reports_warning));
+
+            swipe.setRefreshing(false);
         }
     }
 
@@ -153,6 +159,8 @@ public class Reports extends Fragment {
             listMessage.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
         }
+
+        swipe.setRefreshing(false);
     }
 
     private void expandMenu() {

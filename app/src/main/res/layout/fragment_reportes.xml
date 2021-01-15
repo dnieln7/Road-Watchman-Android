@@ -16,14 +16,19 @@
         android:textSize="20sp"
         android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reportes_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/reportes_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="top|center"
-        android:layout_marginTop="10dp"
-        android:scrollbars="vertical"
-        android:visibility="gone" />
+        android:layout_gravity="top|center">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reportes_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
         layout="@layout/fab_reportes"
